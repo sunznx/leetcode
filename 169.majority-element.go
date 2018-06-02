@@ -5,26 +5,14 @@ func swap(nums [] int, i int, j int) {
 }
 
 func partition(nums []int, l int, r int) int {
-	if l == r {
-		return l
-	}
-
-	if l+1 == r {
-		if nums[l] > nums[r] {
-			swap(nums, l, r)
-		}
-
-		return l
-	}
-
 	x := nums[r]
 	i := l
-	j := r
-	for i <= j-1 {
-		if nums[i] < x {
+	j := r - 1
+	for i <= j {
+		if nums[i] <= x {
 			i++
 		} else {
-			swap(nums, i, j-1)
+			swap(nums, i, j)
 			j--
 		}
 	}
