@@ -22,11 +22,10 @@ func findSecondMinimumValueHelper(root *TreeNode, l int, r int) int {
 		return r
 	}
 
+	r = findSecondMinimumValueHelper(root.Left, l, r)
 	if l < root.Val && root.Val < r {
 		r = root.Val
 	}
-
-	r = findSecondMinimumValueHelper(root.Left, l, r)
 	r = findSecondMinimumValueHelper(root.Right, l, r)
 	return r
 }
