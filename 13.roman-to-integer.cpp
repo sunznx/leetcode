@@ -1,16 +1,5 @@
 class Solution {
 public:
-    int checkIfNeedSub(string s, vector<int> strmap, int l, int r) {
-        int res = l;
-        for (int i = l+1; i <= r; i++) {
-            if (strmap[s[i] - 'A'] > strmap[s[i-1] - 'A']) {
-                return i-1;
-            }
-        }
-
-        return res;
-    }
-
     int romanToInt(string s) {
         int len = s.size();
         if (len == 0) {
