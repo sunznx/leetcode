@@ -12,25 +12,22 @@ func pathSum(root *TreeNode, sum int) int {
 	}
 
 	cnt := 0
+	pathSumHelp(root, sum, &cnt)
+	return cnt + pathSum(root.Left, sum) + pathSum(root.Right, sum)
+}
 
-	var dfs func(*TreeNode, int)
-	dfs = func(node *TreeNode, sum int) {
-		if node == nil {
-			return
-		}
-
-		sum -= node.Val
-		if sum == 0 {
-			cnt++
-		}
-
-		dfs(node.Left, sum)
-		dfs(node.Right, sum)
+func pathSumHelp(root *TreeNode, sum int, cnt *int) {
+	if root == nil {
+		return
 	}
 
-	dfs(root, sum)
+	if sum == root.Val {
+		*cnt = *cnt + 1
+	}
 
-	return cnt +
-		pathSum(root.Left, sum) +
-		pathSum(root.Right, sum)
+	pathSumHelp(root.Left, sum-root.Val, cnt)
+	pathSumHelp(root.Right, sum-root.Val, cnt)
 }
+
+
+
