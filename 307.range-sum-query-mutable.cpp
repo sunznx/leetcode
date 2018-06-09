@@ -65,6 +65,7 @@ public:
                 lazy[right(root)] += lazy[root];
             }
             lazy[root] = 0;
+            return;
         }
 
         /* 完全不包含 */
