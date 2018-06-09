@@ -3,128 +3,66 @@ public:
     vector<int> data;
     vector<int> tree;
     vector<int> lazy;
-    int n;
 
     NumArray(vector<int> nums) {
-        n = nums.size();
-        data = nums;
-        for (int i = 0; i < n; i++) {
-            data.push_back(0);
+        for (int i = 0; i < nums.size(); i++) {
+            data.push_back(nums[i]);
         }
-        for (int i = 0; i < 3*n; i++) {
+        for (int i = 0; i <= 2*data.size()+2; i++) {
             tree.push_back(0);
         }
-        for (int i = 0; i < 3*n; i++) {
+        for (int i = 0; i <= 2*data.size()+2; i++) {
             lazy.push_back(0);
         }
 
-        buildWrap(0, 0, n-1);
+        build(0, 0, nums.size()-1);
     }
 
-    int left(int x) {
-        return x * 2 + 1;
+    void update(int i, int val) {
+        data[i] = val;
+        build(0, 0, data.size()-1);
     }
 
-    int right(int x) {
-        return x * 2 + 2;
+    int sumRange(int i, int j) {
+        return sumRange(i, j, 0, 0, data.size()-1);
     }
 
-    int mid(int l, int r) {
-        int m = (l + r) / 2;
-        return m;
-    }
-
-
-    void buildWrap(int root, int l, int r) {
-        if (l > r) {
-            return;
+    int sumRange(int i, int j, int root, int L, int R) {
+        if (i <= L && j >= R) {
+            return tree[root];
+        }
+        if (i > R || j < L) {
+            return 0;
         }
 
+        return sumRange(i, j, left(root), L, mid(L, R))
+            + sumRange(i, j, right(root), mid(L, R)+1, R);
+    }
+
+    void build(int root, int l, int r) {
         if (l == r) {
             tree[root] = data[l];
             return;
         }
 
-        int m = mid(l, r);
-
-        buildWrap(left(root), l,    m);
-        buildWrap(right(root), m+1, r);
-
-        tree[root] = tree[left(root)] + tree[right(root)];
-    }
-
-    void update(int index, int val) {
-        int diff = val - data[index];
-        data[index] = val;
-        updateWrap(index, diff, 0, 0, n-1);
-    }
-
-    void updateWrap(int index, int val, int root, int l, int r) {
-        if (lazy[root] != 0) {
-            tree[root] += lazy[root];
-
-            if (l != r) {
-                lazy[left(root)]  += lazy[root];
-                lazy[right(root)] += lazy[root];
-            }
-
-            lazy[root] = 0;
-        }
-
-        /* 完全不包含 */
-        if (l > r || l > index || r < index) {
+        if (l > r) {
             return;
         }
 
-        /* 全部包含 */
-        if (index <= l && r <= index) {
-            tree[root] += val;
-
-            if (l != r) {
-                lazy[left(root)]  = val;
-                lazy[right(root)] = val;
-            }
-
-            return;
-        }
-
-        /* 一部分包含 */
-        int m = mid(l, r);
-
-        updateWrap(index, val, left(root),  l,   m);
-        updateWrap(index, val, right(root), m+1, r);
-
+        build(left(root), l, mid(l, r));
+        build(right(root), mid(l, r)+1, r);
         tree[root] = tree[left(root)] + tree[right(root)];
     }
 
-    int sumRange(int query_min, int query_max) {
-        return sumRangeWrap(query_min, query_max, 0, 0, n-1);
+    int left(int x) {
+        return 2*x + 1;
     }
-    int sumRangeWrap(int query_min, int query_max, int root, int l, int r) {
-        if (lazy[root] != 0) {
-            tree[root] += lazy[root];
 
-            if (l != r) {
-                lazy[left(root)]  += lazy[root];
-                lazy[right(root)] += lazy[root];
-            }
+    int right(int x) {
+        return 2*x + 2;
+    }
 
-            lazy[root] = 0;
-        }
-
-        if (query_min <= l && r <= query_max) {
-            return tree[root];
-        }
-
-        if (query_min > r || query_max < l || l > r) {
-            return 0;
-        }
-
-        int m = mid(l, r);
-
-        int lsum = sumRangeWrap(query_min, query_max, left(root),  l,   m);
-        int rsum = sumRangeWrap(query_min, query_max, right(root), m+1, r);
-
-        return lsum + rsum;
+    int mid(int l, int r) {
+        return (l+r)/2;
     }
 };
