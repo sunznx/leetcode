@@ -51,9 +51,18 @@ func uf_add(parent []int, size []int, i int, j int, res *int) {
 }
 
 func uf_find(parent []int, x int) int {
+	saveX := x
+
 	for x != parent[x] {
 		x = parent[x]
 	}
 
-	return x
+	res := x
+
+	for saveX != res {
+		parent[saveX] = res
+		saveX = res
+	}
+
+	return res
 }
