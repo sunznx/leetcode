@@ -60,8 +60,9 @@ func uf_find(parent []int, x int) int {
 	res := x
 
 	for saveX != res {
+		oldParent := parent[saveX]
 		parent[saveX] = res
-		saveX = res
+		saveX = oldParent
 	}
 
 	return res
