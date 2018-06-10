@@ -35,7 +35,6 @@ public:
         vector<int> res;
         for (int i = 0; i < k; i++) {
             auto item = pq.top();
-            cout << item.k << endl;
             res.insert(res.begin(), item.k);
             pq.pop();
         }
