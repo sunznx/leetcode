@@ -12,7 +12,7 @@ public:
         }
 
         bool operator< (const kv &b) const {
-            return v < b.v;
+            return v > b.v;
         }
     };
 
@@ -27,13 +27,16 @@ public:
         for (auto iter = m.begin(); iter != m.end(); iter++) {
             kv item(iter->first, iter->second);
             pq.push(item);
+            if (pq.size() > k) {
+                pq.pop();
+            }
         }
 
         vector<int> res;
         for (int i = 0; i < k; i++) {
             auto item = pq.top();
             cout << item.k << endl;
-            res.push_back(item.k);
+            res.insert(res.begin(), item.k);
             pq.pop();
         }
 
