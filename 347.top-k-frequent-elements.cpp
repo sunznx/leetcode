@@ -1,4 +1,3 @@
-// CreateTime: 2018-06-10 17:24:13
 class Solution {
 public:
 
