@@ -24,7 +24,6 @@ func mostCommonWord(paragraph string, banned []string) string {
 		}
 
 		m[str] += 1
-		// fmt.Printf("%v = %v\n", str, m[str])
 
 		if m[str] > maxn {
 			maxn = m[str]
