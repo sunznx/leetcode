@@ -29,11 +29,11 @@ public:
     }
 
     bool findValue(TreeNode *root, TreeNode *cur, int v) {
-        if (root == NULL) {
+        if (root == NULL || root == cur) {
             return false;
         }
 
-        if (root->val == v && root != cur) {
+        if (root->val == v) {
             return true;
         }
 
