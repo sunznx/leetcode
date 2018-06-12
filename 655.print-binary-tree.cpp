@@ -39,12 +39,6 @@ public:
     }
 
     int getCol(int h) {
-        int res = 0;
-
-        for (int i = 1; i <= h; i++) {
-            res += (int)pow(2, i-1);
-        }
-
-        return res;
+        return (int)pow(2, h) - 1;
     }
 };
