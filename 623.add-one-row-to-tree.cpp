@@ -13,13 +13,8 @@ public:
         if (d == 1) {
             TreeNode *n = (TreeNode *) malloc (sizeof(TreeNode));
             n->val = v;
-            n->left = NULL;
+            n->left = root;
             n->right = NULL;
-
-            if (root) {
-                n->left = root;
-            }
-
             return n;
         }
 
