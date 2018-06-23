@@ -21,7 +21,7 @@ public:
             int size = q.size();
             ans = max(ans, size);
 
-            while(size--) {
+            for (int i = 0; i < size; i++) {
                 auto t = q.front();
                 q.pop_front();
 
