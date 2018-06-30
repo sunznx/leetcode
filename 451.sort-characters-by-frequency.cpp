@@ -1,9 +1,9 @@
 class Solution {
 public:
-    string frequencySort(string s) {
-        unordered_map<char, int> m;
-        priority_queue<pair<int, char>> q;
+    unordered_map<char, int> m;
+    priority_queue<pair<int, char>> q;
 
+    string frequencySort(string s) {
         for (int i = 0; i < s.size(); i++) {
             m[s[i]]++;
         }
