@@ -7,10 +7,8 @@ public:
     vector<string> res;
 
     vector<string> readBinaryWatch(int num) {
-
         for (int i = 0; i <= 10; i++) {
             v.push_back(0);
-
         }
 
         for (int i = 0; i < num; i++) {
