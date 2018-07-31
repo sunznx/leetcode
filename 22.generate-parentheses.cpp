@@ -31,25 +31,5 @@ public:
         v = tmp;
         v = v + ")";
         dfs(n, v, l, r+1);
-
-        // if (l == n) {
-        //     v = v + ")";
-        //     dfs(n, v, l, r + 1);
-        // } else if (r == n) {
-        //     return;
-        // } else if (l == r) {
-        //     v = v + "(";
-        //     dfs(n, v, l+1, r);
-        // } else {
-        //     auto tmp = v;
-
-        //     v = tmp;
-        //     v = v + "(";
-        //     dfs(n, v, l+1, r);
-
-        //     v = tmp;
-        //     v = v + ")";
-        //     dfs(n, v, l, r+1);
-        // }
     }
 };
