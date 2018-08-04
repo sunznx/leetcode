@@ -19,22 +19,32 @@ public:
 
         int i = m;
         int j = m+1;
+        vector<int> ll;
+        vector<int> rr;
         for (int t = 0; t < k; t++) {
             if (i < 0) {
-                res[t] = arr[j++];
+                rr.push_back(arr[j++]);
             } else if (j == arr.size()) {
-                res[t] = arr[i--];
+                ll.push_back(arr[i--]);
             } else {
                 int diff1 = abs(arr[i] - x);
                 int diff2 = abs(arr[j] - x);
                 if (diff1 <= diff2) {
-                    res[t] = arr[i--];
+                    ll.push_back(arr[i--]);
                 } else {
-                    res[t] = arr[j++];
+                    rr.push_back(arr[j++]);
                 }
             }
         }
-        sort(res.begin(), res.end());
+
+        int idx = 0;
+
+        for (int i = ll.size()-1; i >= 0; i--) {
+            res[idx++] = ll[i];
+        }
+        for (int i = 0; i < rr.size(); i++) {
+            res[idx++] = rr[i];
+        }
 
         return res;
     }
