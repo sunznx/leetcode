@@ -63,7 +63,6 @@ public:
     }
 
     vector<string> split(char delim, const string& s) {
-        cout << s << endl;
         stringstream ss(s);
         string item;
         vector<string> elems;
