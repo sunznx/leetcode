@@ -38,15 +38,11 @@ public:
     }
 
     bool search(string word, struct node *root, int index) {
-        if (root == NULL) {
-            return false;
-        }
-
         struct node *tmp = root;
         for (int i = index; i < word.size(); i++) {
             if (word[i] == '.') {
                 for (int k = 0; k < 26; k++) {
-                    if (search(word, tmp->children[k], i+1)) {
+                    if (tmp->children[k] != NULL && search(word, tmp->children[k], i+1)) {
                         return true;
                     }
                 }
