@@ -12,7 +12,6 @@ public:
                 if (num_5 == 0) {
                     return false;
                 }
-                
                 num_5 -= 1;
                 num_10 += 1;
             } else if (bills[i] == 20) {
