@@ -15,7 +15,7 @@ public:
             }
         }
         
-        if (len-ans > 0) {
+        if (len - ans > 0) {
             ans += 1;
         }
         
