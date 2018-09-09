@@ -32,7 +32,7 @@ public:
         v[x][y] = '.';
     }
 
-    void dfs(vector<vector<string>> &res, vector<int> &arr1, vector<int> &arr2, vector<int> &arr3, vector<int> &arr4, vector<string> v, int n, int x, int y) {
+    void dfs(vector<vector<string>> &res, vector<int> &arr1, vector<int> &arr2, vector<int> &arr3, vector<int> &arr4, vector<string> &v, int n, int x, int y) {
         if (x == n) {
             res.push_back(v);
             return;
