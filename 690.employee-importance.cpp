@@ -14,7 +14,6 @@ public:
 class Solution {
 public:
     map<int, Employee*> m;
-    map<int, int> counted;
     int res = 0;
     int getImportance(vector<Employee*> employees, int id) {
         for (int i = 0; i < employees.size(); i++) {
@@ -27,10 +26,6 @@ public:
     }
     
     void dfs(int id) {
-        if (counted[id]) {
-            return;
-        }
-        
         res += m[id]->importance;
         
         for (int i = 0; i < m[id]->subordinates.size(); i++) {
