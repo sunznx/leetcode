@@ -27,21 +27,19 @@ public:
         int l = postOrder(left);
         int r = postOrder(right);
 
-        if (left && root->val == left->val || right && root->val == right->val) {
-            int cnt = 0;
-            if (left && root->val == left->val) {
-                cnt += l;
-            } else {
-                l = 1;
-            }
-            if (right && root->val == right->val) {
-                cnt += r;
-            } else {
-                r = 1;
-            }
-            
-            res = max(res, cnt);
+        if (left && root->val == left->val && right && root->val == right->val) {
+            res = max(res, l+r);
             return max(l, r) + 1;
+        }
+        
+        if (left && root->val == left->val) {
+            res = max(res, l);
+            return l + 1;
+        }
+        
+        if (right && root->val == right->val) {
+            res = max(res, r);
+            return r + 1;
         }
         
         return 1;
