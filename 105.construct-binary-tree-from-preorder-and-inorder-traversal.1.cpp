@@ -10,10 +10,10 @@
 class Solution {
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        return buildTree(preorder, 0, inorder, 0, inorder.size()-1);
+        return buildTree(preorder, inorder, 0, 0, inorder.size()-1);
     }
     
-    TreeNode* buildTree(vector<int>& preorder, int index, vector<int>& inorder, int l, int r) {
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder, int index, int l, int r) {
         if (l > r) {
             return NULL;
         }
@@ -31,8 +31,8 @@ public:
             }
         }
         
-        root->left = buildTree(preorder, index+1, inorder, l, l+llen-1);
-        root->right = buildTree(preorder, index+1+llen, inorder, r-rlen+1, r);
+        root->left = buildTree(preorder, inorder, index+1, l, l+llen-1);
+        root->right = buildTree(preorder, inorder, index+1+llen, r-rlen+1, r);
         return root;
     }
 };
