@@ -10,11 +10,6 @@ public:
     vector<vector<string>> res;
 
     void init(int num) {
-        c1.clear();
-        c2.clear();
-        c3.clear();
-        c4.clear();
-        q.clear();
         n = num;
         marked = 0;
 
