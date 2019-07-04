@@ -47,18 +47,16 @@ class Solution {
         $x = $nums[$r];
         $i = $l;
         $j = $r-1;
-        $idx = $l - 1;
         while ($i <= $j) {
             if ($nums[$i] < $x) {
                 $i += 1;
-                $idx += 1;
             } else {
                 $this->swap($nums, $i, $j);
                 $j -= 1;
             }
         }
-        $this->swap($nums, $idx+1, $r);
-        return $idx+1;
+        $this->swap($nums, $i, $r);
+        return $i;
     }
 
     function swap(&$nums, $i, $j)
