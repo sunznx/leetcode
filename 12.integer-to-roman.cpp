@@ -1,77 +1,56 @@
-// CreateTime: 2019-10-28 14:51:38
 class Solution {
 public:
-    map<int, string> m;
-
-    void init() {
-        m[0]  = "";
-        m[1]  = "I";
-        m[2]  = "II";
-        m[3]  = "III";
-        m[4]  = "IV";
-        m[5]  = "V";
-        m[6]  = "VI";
-        m[7]  = "VII";
-        m[8]  = "VIII";
-        m[9]  = "IX";
-        m[10] = "X";
-        m[40] = "XL";
-        m[50] = "L";
-        m[90] = "XC";
-        m[100] = "C";
-        m[400] = "CD";
-        m[500] = "D";
-        m[900] = "CM";
-        m[1000] = "M";
-    }
-
     string intToRoman(int num) {
-        init();
+        auto m = vector<vector<string>> (4, vector<string> (10));
+
+        m[0][0] = "";
+        m[0][1] = "I";
+        m[0][2] = "II";
+        m[0][3] = "III";
+        m[0][4] = "IV";
+        m[0][5] = "V";
+        m[0][6] = "VI";
+        m[0][7] = "VII";
+        m[0][8] = "VIII";
+        m[0][9] = "IX";
+
+        m[1][0] = "";
+        m[1][1] = "X";
+        m[1][2] = "XX";
+        m[1][3] = "XXX";
+        m[1][4] = "XL";
+        m[1][5] = "L";
+        m[1][6] = "LX";
+        m[1][7] = "LXX";
+        m[1][8] = "LXXX";
+        m[1][9] = "XC";
+
+        m[2][0] = "";
+        m[2][1] = "C";
+        m[2][2] = "CC";
+        m[2][3] = "CCC";
+        m[2][4] = "CD";
+        m[2][5] = "D";
+        m[2][6] = "DC";
+        m[2][7] = "DCC";
+        m[2][8] = "DCCC";
+        m[2][9] = "CM";
+
+        m[3][0] = "";
+        m[3][1] = "M";
+        m[3][2] = "MM";
+        m[3][3] = "MMM";
 
         int thousand = num / 1000;
-        int hundred = (num - thousand * 1000) / 100;
-        int ten = (num - thousand * 1000 - 100 * hundred) / 10;
+        int hundred = num / 100 % 10;
+        int ten = num / 10 % 10;
         int digit = num % 10;
 
         string res = "";
-        if (thousand) {
-            res += repeatStr(m[1000], thousand);
-        }
-
-        if (1 <= hundred && hundred <= 3) {
-            res += repeatStr(m[100], hundred);
-        } else if (hundred == 4) {
-            res += repeatStr(m[400], 1);
-        } else if (hundred == 5) {
-            res += repeatStr(m[500], 1);
-        } else if (hundred == 9) {
-            res += repeatStr(m[900], 1);
-        } else if (6 <= hundred && hundred <= 8) {
-            res += repeatStr(m[500], 1) + repeatStr(m[100], hundred-5);
-        }
-
-        if (1 <= ten && ten <= 3) {
-            res += repeatStr(m[10], ten);
-        } else if (ten == 4) {
-            res += repeatStr(m[40], 1);
-        } else if (ten == 5) {
-            res += repeatStr(m[50], 1);
-        } else if (ten == 9) {
-            res += repeatStr(m[90], 1);
-        } else if (6 <= ten && ten <= 8) {
-            res += repeatStr(m[50], 1) + repeatStr(m[10], ten-5);
-        }
-
-        res += m[digit];
-
+        res += m[3][thousand];
+        res += m[2][hundred];
+        res += m[1][ten];
+        res += m[0][digit];
         return res;
-    }
-
-    inline string repeatStr(string s, int times) {
-        string t = s;
-        for (int i = 1; i < times; i++) {
-            s += t;
-        }
-        return s;
     }
 };
