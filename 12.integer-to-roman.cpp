@@ -2,7 +2,6 @@ class Solution {
 public:
     string intToRoman(int num) {
         auto m = vector<vector<string>> (4, vector<string> (10));
-
         m[0][0] = "";
         m[0][1] = "I";
         m[0][2] = "II";
