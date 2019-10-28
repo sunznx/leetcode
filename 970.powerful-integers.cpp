@@ -2,10 +2,9 @@
 class Solution {
 public:
     vector<int> powerfulIntegers(int x, int y, int bound) {
-        // if (x > y) {
-        //     return powerfulIntegers(y, x, bound);
-        // }
-
+        if (x > y) {
+            return powerfulIntegers(y, x, bound);
+        }
         if (x == 1 && y == 1) {
             vector<int> res;
             if (bound >= 2) {
