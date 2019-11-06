@@ -9,7 +9,7 @@ public:
             long long v = mid * mid;
             if (v <= x) {
                 l = mid;
-            } else {
+            } else if (v > x) {
                 r = mid-1;
             }
         }
