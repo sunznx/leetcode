@@ -30,6 +30,10 @@ public:
             s.insert(wordList[i]);
         }
 
+        if (s.find(endWord) == s.end()) {
+            return 0;
+        }
+
         q.push(beginWord);
         m[beginWord] = 1;
 
