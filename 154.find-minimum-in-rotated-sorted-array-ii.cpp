@@ -4,18 +4,18 @@ public:
     int res;
     int findMin(vector<int>& nums) {
         res = nums[0];
-        findMinHelper(nums, 0, nums.size()-1);
+        findMin(nums, 0, nums.size()-1);
         return res;
     }
 
-    void findMinHelper(vector<int>& nums, int l, int r) {
+    void findMin(vector<int>& nums, int l, int r) {
         res = min(res, nums[l]);
         while (l < r) {
             int m = (l+r+1) / 2;
 
             if (nums[l] == nums[r]) {
-                findMinHelper(nums, l, m-1);
-                findMinHelper(nums, m, r);
+                findMin(nums, l, m-1);
+                findMin(nums, m, r);
                 return;
             }
 
