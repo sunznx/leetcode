@@ -12,7 +12,7 @@ public:
             for (int j = forward[i]; j <= i+nums[i] && j <= W; j++) {
                 dp[j] = min(dp[j], dp[i] + 1);
             }
-            forward[i+1] = min(i+nums[i], W);
+            forward[i+1] = max(min(i+nums[i], W), forward[i]);
         }
         return dp[W];
     }
