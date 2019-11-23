@@ -5,14 +5,14 @@ public:
         int W = nums.size()-1;
 
         vector<int> dp(W+1, W+1);
-        vector<int> forward(W+1, 0);
 
         dp[0] = 0;
+        int w = 0;
         for (int i = 0; i < nums.size()-1; i++) {
-            for (int j = forward[i]; j <= i+nums[i] && j <= W; j++) {
+            for (int j = w; j <= i+nums[i] && j <= W; j++) {
                 dp[j] = min(dp[j], dp[i] + 1);
             }
-            forward[i+1] = max(min(i+nums[i], W), forward[i]);
+            w = nums[i] + i;
         }
         return dp[W];
     }
