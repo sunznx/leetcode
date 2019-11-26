@@ -6,7 +6,7 @@ public:
         m[1] = 0;
         
         int v = 1;
-        for (int i = 1; i <= 19; i++) {
+        for (int i = 1; i <= 19 && v*3 <= n; i++) {
             m[v*3] = i;
             v = v * 3;
         }
