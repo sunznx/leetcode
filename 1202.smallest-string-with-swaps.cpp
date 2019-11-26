@@ -1,24 +1,3 @@
-// // CreateTime: 2019-11-26 11:42:40
-// #include <iostream>
-// #include <cstdio>
-// #include <cstdlib>
-// #include <cstring>
-// #include <string>
-// #include <sstream>
-// #include <cmath>
-// #include <algorithm>
-// #include <queue>
-// #include <deque>
-// #include <vector>
-// #include <list>
-// #include <stack>
-// #include <map>
-// #include <set>
-// #include <unordered_set>
-// #include <unordered_map>
-
-// using namespace std;
-
 // CreateTime: 2019-11-26 03:20:43
 class Solution {
 public:
@@ -79,23 +58,3 @@ public:
         return res;
     }
 };
-
-
-// int main(void) {
-//     string str = "vbjjxgdfnru";
-//     vector<vector<int>> p = {{8,6},{3,4},{5,2},{5,5},{3,5},{7,10},{6,0},{10,0},{7,1},{4,8},{6,2}};
-
-//     // string str = "cba";
-//     // vector<vector<int>> p = {{0, 1}, {1, 2}};
-
-//     // string str = "dcab";
-//     // vector<vector<int>> p = {{0, 3}, {1, 2}};
-    
-//     // string str = "";
-//     // vector<vector<int>> p = {};
-
-//     Solution s;
-//     cout << s.smallestStringWithSwaps(str, p) << endl;
-
-//     return 0;
-// }
