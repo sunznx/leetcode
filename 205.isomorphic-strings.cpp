@@ -8,8 +8,8 @@ public:
         unordered_map<int, int> m2;
 
         for (int i = 0; i < len; i++) {
-            int idx1 = s[i] - 'a' + 1;
-            int idx2 = t[i] - 'a' + 1;
+            int idx1 = s[i];
+            int idx2 = t[i];
             if (m1[idx1] == 0 && m2[idx2] == 0) {
                 m1[idx1] = idx2;
                 m2[idx2] = idx1;
