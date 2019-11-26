@@ -3,7 +3,7 @@ class Solution {
 public:
     bool wordPattern(string pattern, string str) {
         unordered_map<string, int> m;
-        unordered_map<int, int> c;
+        unordered_map<int, string> c;
 
         string s;
 
@@ -15,14 +15,15 @@ public:
             }
 
             if (str[i] == ' ' || i == len-1) {
-                if (m[s] == 0 && c[pattern[p]] == 0) {
-                    m[s] = pattern[p];
-                    c[pattern[p]] += 1;
-                } else if (c[pattern[p]] == 0 && m[s] != 0) {
+                auto idx = pattern[p];
+                if (m[s] == 0 && c[idx] == "") {
+                    m[s] = idx;
+                    c[idx] = s;
+                } else if (c[idx] == "" && m[s] != 0) {
                     return false;
-                } else if (m[s] == 0 && c[pattern[p]] != 0) {
+                } else if (m[s] == 0 && c[idx] != "") {
                     return false;
-                } else if (c[pattern[p]] != 0 && m[s] != pattern[p]) {
+                } else if (c[idx] != s && m[s] != idx) {
                     return false;
                 }
 
