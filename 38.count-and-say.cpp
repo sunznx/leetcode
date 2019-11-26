@@ -5,7 +5,7 @@ public:
         vector<string> res(31);
         
         res[1] = "1";
-        for (int i = 2; i <= 30; i++) {
+        for (int i = 2; i <= n; i++) {
             int j = 0;
             int len = res[i-1].size();
 
