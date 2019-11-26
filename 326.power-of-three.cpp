@@ -2,13 +2,13 @@
 class Solution {
 public:
     bool isPowerOfThree(int n) {
-        unordered_map<int, int> m;
-        m[1] = 0;
+        unordered_set<int> m;
+        m.insert(1);
         
         int v = 1;
         for (int i = 1; i <= 19 && v*3 <= n; i++) {
-            m[v*3] = i;
             v = v * 3;
+            m.insert(v);
         }
         
         return m.find(n) != m.end();
