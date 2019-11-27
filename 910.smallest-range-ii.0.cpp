@@ -15,13 +15,6 @@ public:
 
         sort(a.begin(), a.end());
 
-
-        for (auto item: a) {
-            cout << item.first << " " << item.second << endl;
-        }
-        cout << endl;
-
-
         int res = a[2*len-1].first - a[0].first;
 
         deque<pair<int, int>> q;
