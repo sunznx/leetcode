@@ -2,7 +2,7 @@
 class MyHashSet {
 public:
     vector<list<int>> h;
-    const int MOD = 0x3fffff;
+    const int MOD = 0x3fff;
 
     /** Initialize your data structure here. */
     MyHashSet() {
