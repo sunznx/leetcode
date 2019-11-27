@@ -1,24 +1,3 @@
-// // CreateTime: 2019-11-27 17:00:35
-// #include <iostream>
-// #include <cstdio>
-// #include <cstdlib>
-// #include <cstring>
-// #include <string>
-// #include <sstream>
-// #include <cmath>
-// #include <algorithm>
-// #include <queue>
-// #include <deque>
-// #include <vector>
-// #include <list>
-// #include <stack>
-// #include <map>
-// #include <set>
-// #include <unordered_set>
-// #include <unordered_map>
-
-// using namespace std;
-
 // CreateTime: 2019-11-27 12:48:44
 class Solution {
 public:
@@ -77,16 +56,3 @@ public:
         return res;
     }
 };
-
-
-// int main(void) {
-//     vector<int> v = {1, 3, 6};
-//     int K = 3;
-
-//     Solution s;
-//     cout << s.smallestRangeII(v, K) << endl;
-
-//     return 0;
-// }
-
-
