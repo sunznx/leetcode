@@ -15,9 +15,6 @@ public:
 
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
-                if (i == j) {
-                    continue;
-                }
                 int x = (p[i].first - p[j].first);
                 int y = (p[i].second - p[j].second);
                 int d = x*x+y*y;
