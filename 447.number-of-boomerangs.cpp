@@ -33,7 +33,6 @@ public:
         int ans = 0;
         for (int i = 0; i < len; i++) {
             for (auto &item: distance[i]) {
-                auto d = item.first;
                 auto size = item.second;
                 ans +=  size * (size-1);
             }
