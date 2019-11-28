@@ -16,7 +16,7 @@ public:
 
         vector<Point> p(len);
 
-        vector<unordered_map<int, unordered_set<int>>> distance(len);
+        vector<unordered_map<int, vector<int>>> distance(len);
 
         for (int i = 0; i < len; i++) {
             p[i].x = points[i][0];
@@ -26,7 +26,7 @@ public:
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
                 int d = p[i].distance(p[j]);
-                distance[i][d].insert(j);
+                distance[i][d].push_back(j);
             }
         }
 
