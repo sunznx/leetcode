@@ -1,24 +1,3 @@
-// // CreateTime: 2019-11-28 10:55:35
-// #include <iostream>
-// #include <cstdio>
-// #include <cstdlib>
-// #include <cstring>
-// #include <string>
-// #include <sstream>
-// #include <cmath>
-// #include <algorithm>
-// #include <queue>
-// #include <deque>
-// #include <vector>
-// #include <list>
-// #include <stack>
-// #include <map>
-// #include <set>
-// #include <unordered_set>
-// #include <unordered_map>
-
-// using namespace std;
-
 // CreateTime: 2019-11-28 10:18:13
 class Solution {
 public:
@@ -63,11 +42,3 @@ public:
         return ans;
     }
 };
-
-// int main(void) {
-//     vector<vector<int>> p = {{0,0},{1,0},{2,0}};
-//     Solution s;
-//     cout << s.numberOfBoomerangs(p) << endl;
-
-//     return 0;
-// }
