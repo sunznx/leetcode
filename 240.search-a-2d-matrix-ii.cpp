@@ -14,37 +14,6 @@ public:
 
         int maxl = 0;
         int maxr = col-1;
-
-        for (int j = 0; j < col; j++) {
-            int l = maxl;
-            int r = maxr;
-
-            while (l < r) {
-                int mid = (l+r) / 2;
-                if (matrix[0][mid] < target) {
-                    l = mid+1;
-                } else {
-                    r = mid;
-                    maxr = min(maxr, mid);
-                }
-            }
-        }
-
-        for (int j = 0; j < col; j++) {
-            int l = maxl;
-            int r = maxr;
-
-            while (l < r) {
-                int mid = (l+r) / 2;
-                if (matrix[row-1][mid] < target) {
-                    l = mid+1;
-                    maxl = max(maxl, mid);
-                } else {
-                    r = mid;
-                }
-            }
-        }
-
         for (int i = 0; i < row; i++) {
             int l = maxl;
             int r = maxr;
