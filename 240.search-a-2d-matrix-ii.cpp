@@ -18,10 +18,6 @@ public:
             int l = maxl;
             int r = maxr;
 
-            if (matrix[i][l] > target) {
-                return false;
-            }
-
             while (l < r) {
                 int mid = (l+r) / 2;
                 if (matrix[i][mid] < target) {
