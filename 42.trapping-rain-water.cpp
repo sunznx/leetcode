@@ -1,5 +1,6 @@
 class Solution {
 public:
+
     struct node {
         int maxL = 0;
         int maxR = 0;
