@@ -1,21 +1,21 @@
+// CreateTime: 2019-11-30 15:46:16
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> res = {0, 1};
+        unordered_map<int, int> m;
 
-        int tot = nums.size();
-
-        for (int i = 0; i < tot-1; i++) {
-            for (int j = i+1; j < tot; j++) {
-                if (nums[i] + nums[j] == target) {
-                    res[0] = i;
-                    res[1] = j;
-                    return res;
-                }
-            }
+        int len = nums.size();
+        for (int i = 0; i < len; i++) {
+            m[nums[i]] = i+1;
         }
 
-        return res;
-
+        for (int i = 0; i < len; i++) {
+            int k = target-nums[i];
+            if (m[k] != 0 && m[k]-1 != i) {
+                return {i, m[k]-1};
+            }
+        }
+        return {-1, -1};
     }
 };
+
