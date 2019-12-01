@@ -4,12 +4,27 @@ public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         int len = nums.size();
 
-        unordered_map<int, vector<pair<int, int>>> m1;
-        unordered_map<int, vector<pair<int, int>>> m2;
+        unordered_map<int, vector<pair<int, int>>> m;
 
         sort(nums.begin(), nums.end());
 
         vector<vector<int>> res;
+        for (int j = len-1; j >= 0; j--) {
+            if (j < len-1 && nums[j] == nums[j+1]) {
+                continue;
+            }
+
+            for (int i = j-1; i >= 0; i--) {
+                if (i < j-1 && nums[i] == nums[i+1]) {
+                    continue;
+                }
+
+                int a = nums[i];
+                int b = nums[j];
+                m[a+b].push_back({i, j});
+            }
+        }
+
         for (int i = 0; i < len; i++) {
             if (i > 0 && nums[i] == nums[i-1]) {
                 continue;
@@ -20,28 +35,20 @@ public:
                     continue;
                 }
 
-                for (int k = j+1; k < len; k++) {
-                    if (k > j+1 && nums[k] == nums[k-1]) {
-                        continue;
-                    }
+                int a = nums[i];
+                int b = nums[j];
+                for (auto item: m[target-(a+b)]) {
+                    int k = item.first;
+                    int l = item.second;
 
-                    for (int l = k+1; l < len; l++) {
-                        if (l > k+1 && nums[l] == nums[l-1]) {
-                            continue;
-                        }
-
-                        int a = nums[i];
-                        int b = nums[j];
-                        int c = nums[k];
-                        int d = nums[l];
-
-                        if (a+b+c == target-d) {
-                            res.push_back({a, b, c, d});
-                        }
+                    if (k > j) {
+                        res.push_back({nums[i], nums[j], nums[k], nums[l]});
                     }
                 }
+
             }
         }
+
         return res;
     }
 };
