@@ -25,7 +25,7 @@ public:
         
         auto l = traversal(root->left);
         auto r = traversal(root->right);
-        string s = to_string(root->val) + "," + l + "," + r;
+        string s = "[" + to_string(root->val) + "," + l + "," + r + "]";
         if (m[s] == 1) {
             res.push_back(root);
         }
