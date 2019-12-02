@@ -31,5 +31,6 @@ public:
         if (v1 <= root->val && root->val <= v2) {
             return root;
         }
+        return NULL;
     }
 };
