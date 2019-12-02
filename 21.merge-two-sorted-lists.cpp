@@ -11,26 +11,22 @@ public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         ListNode *last = NULL;
         ListNode *head = NULL;
-        while (l1 != NULL || l2 != NULL) {
-            ListNode *p = (ListNode *) malloc (sizeof(ListNode));
+        ListNode *p = NULL;
 
-            int val;
+        while (l1 != NULL || l2 != NULL) {
             if (l2 == NULL) {
-                val = l1->val;
+                p = l1;
                 l1 = l1->next;
             } else if (l1 == NULL) {
-                val = l2->val;
+                p = l2;
                 l2 = l2->next;
             } else if (l1->val < l2->val) {
-                val = l1->val;
+                p = l1;
                 l1 = l1->next;
             } else {
-                val = l2->val;
+                p = l2;
                 l2 = l2->next;
             }
-            
-            p->val = val;
-            p->next = NULL;
 
             if (head == NULL) {
                 head = last = p;
