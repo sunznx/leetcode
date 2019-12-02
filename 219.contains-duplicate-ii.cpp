@@ -6,14 +6,14 @@ public:
 
         int len = nums.size();
         for (int i = 0; i < len; i++) {
-            if (m[nums[i]] == 0) {
-                m[nums[i]] = i + 1;
+            if (m.find(nums[i]) == m.end()) {
+                m[nums[i]] = i;
             } else {
-                if (i+1 - m[nums[i]] <= k) {
+                if (i - m[nums[i]] <= k) {
                     return true;
                 }
-                if (i+1 - m[nums[i]] > k) {
-                    m[nums[i]] = i+1;
+                if (i - m[nums[i]] > k) {
+                    m[nums[i]] = i;
                 }
             }
         }
