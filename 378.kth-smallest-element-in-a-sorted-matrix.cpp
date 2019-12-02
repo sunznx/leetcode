@@ -1,31 +1,34 @@
 class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
-        int raw = matrix.size();
+        int row = matrix.size();
         int col = matrix[0].size();
+        const int inf = 0x3fffffff;
 
-        vector<int> mark(raw+1, 0);
-        int res;
-        for (int n = 0; n < k; n++) {
-            int min_idx;
-            int cur_min;
-            bool is_first = true;
-            for (int i = 0; i < raw; i++) {
-                if (mark[i] == col) {
-                    continue;
-                }
+        vector<int> used(row);
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
-                if (is_first || matrix[i][mark[i]] < cur_min) {
-                    is_first = false;
-                    cur_min = matrix[i][mark[i]];
-                    min_idx = i;
-                    res = cur_min;
-                }
-            }
-
-            mark[min_idx]++;
+        for (int i = 0; i < row; i++) {
+            pq.push({matrix[i][used[i]++], i});
         }
 
-        return res;
+        int ans = 0;
+        for (int t = 0; t < k; t++) {
+            auto top = pq.top();
+            pq.pop();
+
+            ans = top.first;
+            auto x = top.second;
+
+            if (used[x] == col) {
+                pq.push({inf, x});
+            } else {
+                auto y = used[x]++;
+                auto val = matrix[x][y];
+                pq.push({val, x});
+            }
+        }
+
+        return ans;
     }
 };
