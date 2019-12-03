@@ -1,3 +1,4 @@
+// CreateTime: 2019-11-22 00:30:25
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
@@ -6,7 +7,7 @@ public:
         vector<unsigned int> p(27);
         init(p);
 
-        map<unsigned int, vector<string>> m;
+        unordered_map<unsigned int, vector<string>> m;
 
         for (int i = 0; i < len; i++) {
             auto h = calcHash(p, strs[i]);
