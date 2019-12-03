@@ -18,7 +18,6 @@ public:
                 res2[s2[j]-'a'] += 1;
             }
 
-
             bool ok = true;
             for (int x = 0; x < 26; x++) {
                 if (res1[x] > res2[x]) {
