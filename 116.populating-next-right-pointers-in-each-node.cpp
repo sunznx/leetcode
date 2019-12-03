@@ -18,7 +18,7 @@ public:
 */
 class Solution {
 public:
-    Node *connect(Node *root) {
+    Node* connect(Node *root) {
         connect(NULL, root);
         return root;
     }
