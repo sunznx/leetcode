@@ -1,3 +1,4 @@
+// CreateTime: 2018-06-09 19:45:14
 class NumArray {
 public:
     vector<int> data;
