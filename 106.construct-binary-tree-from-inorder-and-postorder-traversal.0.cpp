@@ -12,12 +12,12 @@ public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
         return buildTreeHelp(inorder, 0, inorder.size()-1, postorder, inorder.size()-1);
     }
-    
+
     TreeNode* buildTreeHelp(vector<int>& inorder, int l, int r, vector<int>& postorder, int idx) {
         if (l > r) {
             return NULL;
         }
-        
+
         int llen = 0;
         int rlen = r-l;
         for (int i = l; i <= r; i++) {
@@ -26,8 +26,8 @@ public:
             }
             llen++;
             rlen--;
-        }        
-        
+        }
+
         TreeNode *root = new TreeNode(postorder[idx]);
         root->left = buildTreeHelp(inorder, l, l+llen-1, postorder, idx-1-rlen);
         root->right = buildTreeHelp(inorder, r-rlen+1, r, postorder, idx-1);
