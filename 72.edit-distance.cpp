@@ -18,7 +18,7 @@ public:
             for (int j = 0; j < len2; j++) {
                 auto &x = dp[i+1][j+1];
                 if (word1[i] == word2[j]) {
-                    x = dp[i][j];
+                    x = min(x, dp[i][j]);
                 } else {
                     x = min(x, dp[i][j]+1);
                     x = min(x, dp[i+1][j]+1);
