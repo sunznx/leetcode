@@ -25,11 +25,6 @@ public:
             slow = slow->next;
         }
 
-        // split list
-        // fast = slow;
-        // slow = slow->next;
-        // fast->next = NULL;
-
         ListNode *mid = slow->next;
         slow->next = NULL;
 
