@@ -18,7 +18,7 @@ public:
             ans += m[target];
             m[sum[i]] += 1;
         }
-        
+
         return ans;
     }
 };
