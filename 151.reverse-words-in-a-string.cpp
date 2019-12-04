@@ -2,17 +2,6 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        while (s.size() && s[0] == ' ') {
-            s.erase(s.begin());
-        }
-        while (s.size() && s[s.size()-1] == ' ') {
-            s.erase(s.end()-1);
-        }
-
-        if (s.size() == 0) {
-            return s;
-        }
-
         auto arr = split(' ', s);
 
         auto iter = arr.begin();
