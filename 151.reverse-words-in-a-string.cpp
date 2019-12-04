@@ -1,6 +1,7 @@
+// CreateTime: 2019-12-04 11:20:17
 class Solution {
 public:
-    void reverseWords(string &s) {
+    string reverseWords(string s) {
         while (s.size() && s[0] == ' ') {
             s.erase(s.begin());
         }
@@ -9,7 +10,7 @@ public:
         }
 
         if (s.size() == 0) {
-            return;
+            return s;
         }
 
         auto arr = split(' ', s);
@@ -25,6 +26,7 @@ public:
 
         reverse(arr.begin(), arr.end());
         s = join(arr);
+        return s;
     }
 
     vector<string> split(char delim, const string& s) {
