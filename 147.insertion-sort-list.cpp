@@ -14,11 +14,8 @@ public:
             return head;
         }
 
-        int step = 0;
-
         auto prev = head;
         while (prev->next != NULL) {
-            step ++;
             auto last = prev->next;
 
             ListNode *pp = NULL;
