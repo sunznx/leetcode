@@ -9,8 +9,8 @@ public:
         int s2 = 0;
 
         while (s1 < len1 || s2 < len2) {
-            long long res1 = 0;
-            long long res2 = 0;
+            int res1 = 0;
+            int res2 = 0;
             
             while (s1 < len1) {
                 char c = version1[s1++];
