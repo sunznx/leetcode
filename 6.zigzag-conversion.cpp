@@ -7,9 +7,9 @@ class Solution {
 public:
     string convert(string s, int numRows) {
         vector<string> v(numRows);
-        int len = s.size();
 
         int k = 0;
+        int len = s.size();
         int dir = 0;
 
         while (k < len) {
