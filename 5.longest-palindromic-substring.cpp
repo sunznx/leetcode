@@ -1,39 +1,33 @@
+// CreateTime: 2019-12-04 12:47:08
 class Solution {
 public:
     string longestPalindrome(string s) {
+        int len = s.size();
+
         string res = "";
-        int maxn = 0;
-        
-        int len = s.size();
-        for (int i = 0; i < len; i++) {
-            if (len-i <= maxn) {
-                break;
+
+        for (int k = 0; k < len; k++) {
+            int l;
+
+            l = 0;
+            while (k-l >= 0 && k+l <= len-1 && s[k-l] == s[k+l]) {
+                auto sz = (k+l) - (k-l) + 1;
+                if (sz > res.size()) {
+                    res = s.substr(k-l, sz);
+                }
+                l++;
             }
-            for (int j = len-1; j >= i; j--) {
-                int sublen = j-i+1;
-                if (sublen <= maxn) {
-                    break;
+
+            l = 0;
+            while (k-l >= 0 && k+1+l <= len-1 && s[k-l] == s[k+1+l]) {
+                auto sz = (k+1+l) - (k-l) + 1;
+                if (sz > res.size()) {
+                    res = s.substr(k-l, sz);
                 }
-                string substr = s.substr(i, sublen);
-                if (sublen > maxn && isPalindrome(substr)) {
-                    maxn = sublen;
-                    res = substr;
-                    break;
-                }
+                l++;
             }
         }
-        
+
         return res;
-    }
-    
-    bool isPalindrome(string s) {
-        int len = s.size();
-        for (int i = 0; i <= len/2; i++) {
-            if (s[i] != s[len-1-i]) {
-                return false;
-            }
-        }
-        
-        return true;
     }
 };
