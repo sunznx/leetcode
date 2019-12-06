@@ -10,10 +10,9 @@
  */
 class Solution {
 public:
-    int res;
+    int res = 0;
 
     int rangeSumBST(TreeNode* root, int L, int R) {
-        res = 0;
         dfs(root, L, R);
         return res;
     }
