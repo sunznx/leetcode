@@ -1,7 +1,7 @@
 class MinStack {
 public:
-    stack<int> minStack;
-    stack<int> helpStack;
+    stack<int> m;
+    stack<int> s;
 
     /** initialize your data structure here. */
     MinStack() {
@@ -9,34 +9,27 @@ public:
     }
 
     void push(int x) {
-        if (minStack.empty()) {
-            minStack.push(x);
-            helpStack.push(x);
-        } else {
-            helpStack.push(x);
-            int minX = minStack.top();
-            if (x <= minX) {
-                minStack.push(x);
-            }
+        s.push(x);
+        if (m.empty() || x <= m.top()) {
+            m.push(x);
         }
     }
 
     void pop() {
-        int minX = minStack.top();
-        int x = helpStack.top();
+        int minX = m.top();
+        int x = s.top();
 
         if (x <= minX) {
-            minStack.pop();
+            m.pop();
         }
-
-        helpStack.pop();
+        s.pop();
     }
 
     int top() {
-        return helpStack.top();
+        return s.top();
     }
 
     int getMin() {
-        return minStack.top();
+        return m.top();
     }
 };
