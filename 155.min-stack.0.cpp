@@ -9,17 +9,11 @@ public:
     }
 
     void push(int x) {
-        if (s.size() == 0) {
-            s.push(x);
+        s.push(x);
+        if (m.empty() || x < m.top()) {
             m.push(x);
         } else {
-            s.push(x);
-            int top = m.top();
-            if (x < top) {
-                m.push(x);
-            } else {
-                m.push(top);
-            }
+            m.push(m.top());
         }
     }
 
