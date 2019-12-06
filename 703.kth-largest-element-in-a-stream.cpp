@@ -9,14 +9,7 @@ public:
 
         int len = nums.size();
         for (int i = 0; i < len; i++) {
-            if (q.size() == k) {
-                if (nums[i] > q.top()) {
-                    q.pop();
-                    q.push(nums[i]);
-                }
-            } else {
-                q.push(nums[i]);
-            }
+            add(nums[i]);
         }
     }
 
