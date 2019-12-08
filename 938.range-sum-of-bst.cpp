@@ -22,10 +22,14 @@ public:
             return;
         }
 
-        if (l <= root->val && root->val <= r) {
+        if (root->val < l) {
+            dfs(root->right, l, r);
+        } else if (root->val > r) {
+            dfs(root->left, l, r);
+        } else {
             res += root->val;
+            dfs(root->left, l, r);
+            dfs(root->right, l, r);
         }
-        dfs(root->left, l, r);
-        dfs(root->right, l, r);
     }
 };
