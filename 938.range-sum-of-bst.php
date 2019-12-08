@@ -17,33 +17,23 @@ class Solution {
      * @return Integer
      */
     function rangeSumBST($root, $L, $R) {
-        $this->rangeSumBSTHelp($root, $L, $R);
+        $this->dfs($root, $L, $R);
         return $this->res;
     }
     
-    function rangeSumBSTHelp($root, $L, $R) {
+    function dfs($root, $l, $r) {
         if (empty($root)) {
             return;
         }
         
-        if ($root->val < $L && empty($root->right)) {
-            return;
-        }
-        
-        if ($root->val > $R && empty($root->left)) {
-            return;
-        }
-        
-        if (!empty($root->left)) {
-            $this->rangeSumBSTHelp($root->left, $L, $R);
-        }
-        
-        if ($L <= $root->val && $root->val <= $R) {
+        if ($root->val < $l) {
+            $this->dfs($root->right, $l, $r);
+        } else if ($root->val > $r) {
+            $this->dfs($root->left, $l, $r);
+        } else {
             $this->res += $root->val;
-        }
-
-        if (!empty($root->right)) {
-            $this->rangeSumBSTHelp($root->right, $L, $R);
+            $this->dfs($root->left, $l, $r);
+            $this->dfs($root->right, $l, $r);
         }
     }
 }
