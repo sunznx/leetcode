@@ -8,9 +8,6 @@
  * }
  */
 class Solution {
-
-    public $v;
-
     /**
      * @param TreeNode $root
      * @return Boolean
@@ -19,19 +16,18 @@ class Solution {
         if (empty($root)) {
             return true;
         }
-        $this->v = $root->val;
-        return $this->isUnivalTreeHelp($root);
+        return $this->isUnivalTreeHelp($root, $root->val);
     }
-    
-    function isUnivalTreeHelp($root) {
+
+    function isUnivalTreeHelp($root, $val) {
         if (empty($root)) {
             return true;
         }
-        
-        if ($root->val != $this->v) {
+
+        if ($root->val != $val) {
             return false;
         }
 
-        return $this->isUnivalTreeHelp($root->left) && $this->isUnivalTreeHelp($root->right);
+        return $this->isUnivalTreeHelp($root->left, $val) && $this->isUnivalTreeHelp($root->right, $val);
     }
 }
