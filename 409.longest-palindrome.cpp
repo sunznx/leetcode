@@ -1,9 +1,9 @@
 class Solution {
 public:
     int longestPalindrome(string s) {
-        int len = s.size();
         vector<int> m(52);
 
+        int len = s.size();
         for (int i = 0; i < len; i++) {
             if ('a' <= s[i] && s[i] <= 'z') {
                 m[s[i]-'a'] += 1;
