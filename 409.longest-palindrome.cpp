@@ -2,17 +2,18 @@ class Solution {
 public:
     int longestPalindrome(string s) {
         int len = s.size();
-        sort(s.begin(), s.end());
+        vector<int> m(256);
+
+        for (int i = 0; i < len; i++) {
+            m[s[i]] += 1;
+        }
         
-        bool ok = true;
         int res = 0;
-        for (int i = 1; i < len; i++) {
-            if (s[i] == s[i-1] && ok) {
-                ok = false;
-                res += 2;
-            } else {
-                ok = true;
-            }
+        for (int i = 'A'; i <= 'Z'; i++) {
+            res += m[i] / 2 * 2;
+        }
+        for (int i = 'a'; i <= 'z'; i++) {
+            res += m[i] / 2 * 2;
         }
         
         return min(res+1, len);        
