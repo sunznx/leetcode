@@ -11,9 +11,7 @@ public:
 
     void dfs(string &s, int step) {
         if (step == s.size()) {
-            if (isPalindrome(v[v.size()-1])) {
-                res.push_back(v);
-            }
+            res.push_back(v);
             return;
         }
 
@@ -26,7 +24,9 @@ public:
 
         if (v.size()) {
             v[v.size()-1].push_back(s[step]);
-            dfs(s, step+1);
+            if (step+1 != s.size() || isPalindrome(v[v.size()-1])) {
+                dfs(s, step+1);
+            }
             v[v.size()-1].pop_back();
         }
     }
