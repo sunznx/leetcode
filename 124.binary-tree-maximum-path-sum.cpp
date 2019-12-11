@@ -14,18 +14,18 @@ public:
 
     int maxPathSum(TreeNode* root) {
         ans = root->val;
-        pathSum(root);
+        maxPathSumHelper(root);
         return ans;
     }
 
-    int pathSum(TreeNode *root) {
+    int maxPathSumHelper(TreeNode *root) {
         auto l = 0;
         auto r = 0;
         if (root->left) {
-            l = pathSum(root->left);
+            l = maxPathSumHelper(root->left);
         }
         if (root->right) {
-            r = pathSum(root->right);
+            r = maxPathSumHelper(root->right);
         }
 
         ans = max(ans, root->val);
