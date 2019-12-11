@@ -5,12 +5,21 @@ public:
 
     bool isValidSerialization(string preorder) {
         auto arr = split(',', preorder);
-        return walk(0, arr) == arr.size();
+        auto tot = walk(0, arr);
+        if (ok) {
+            return tot == arr.size();
+        }
+        return ok;
     }
 
     int walk(int idx, vector<string> &arr) {
+        if (!ok) {
+            return 0;
+        }
+
         if (idx == arr.size()-2 || idx == arr.size()-1) {
             if (arr[idx] != "#") {
+                ok = false;
                 return 0;
             } else {
                 return 1;
@@ -18,6 +27,7 @@ public:
         }
 
         if (arr[idx] != "#" && !(idx+2 <= arr.size()-1)) {
+            ok = false;
             return 0;
         }
 
