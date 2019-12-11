@@ -2,14 +2,10 @@
 class Solution {
 public:
     bool ok = true;
-
     bool isValidSerialization(string preorder) {
         auto arr = split(',', preorder);
         auto tot = walk(0, arr);
-        if (ok) {
-            return tot == arr.size();
-        }
-        return ok;
+        return ok && tot == arr.size();
     }
 
     int walk(int idx, vector<string> &arr) {
