@@ -1,8 +1,6 @@
 // CreateTime: 2019-12-11 11:15:35
 class Solution {
 public:
-    unordered_set<string> se;
-
     vector<int> findSubstring(string s, vector<string>& words) {
         vector<int> res;
         if (words.size() == 0 || words[0].size() == 0) {
@@ -32,9 +30,17 @@ public:
 
         for (int i = 0; i < k; i++) {
             string sub = s.substr(idx+i*e, e);
-
             c[sub] += 1;
-            if (m.find(sub) != m.end() && c[sub] == m[sub]) {
+
+            if (m.find(sub) == m.end()) {
+                return false;
+            }
+
+            if (c[sub] > m[sub]) {
+                return false;
+            }
+
+            if (c[sub] == m[sub]) {
                 eq += 1;
             }
         }
