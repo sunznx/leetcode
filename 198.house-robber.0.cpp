@@ -14,6 +14,6 @@ public:
             dp[i+1] = max(dp[i], nums[i] + dp[i-1]);
         }
 
-        return max(dp[len-1], dp[len]);
+        return dp[len];
     }
 };
