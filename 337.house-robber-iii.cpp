@@ -10,7 +10,14 @@
  */
 class Solution {
 public:
+
+    unordered_map<TreeNode *, int> m;
+
     int rob(TreeNode* root) {
+        if (m.find(root) != m.end()) {
+            return m[root];
+        }
+
         if (root == NULL) {
             return 0;
         }
@@ -32,6 +39,7 @@ public:
             l2 = rob(root->right->left);
             r2 = rob(root->right->right);
         }
-        return max(root->val+l1+r1+l2+r2, l+r);
+
+        return m[root] = max(root->val+l1+r1+l2+r2, l+r);
     }
 };
