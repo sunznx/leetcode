@@ -7,19 +7,19 @@ public:
             return 0;
         }
 
-        vector<vector<int>> minCosts(len+1, vector<int>(3, 0x7fffffff));
+        vector<vector<int>> minCosts(2, vector<int>(3, 0x7fffffff));
         
         minCosts[0][0] = 0;
         minCosts[0][1] = 0;
         minCosts[0][2] = 0;
 
         for (int i = 0; i < len; i++) {
-            minCosts[i+1][0] = costs[i][0] + min(minCosts[i][1], minCosts[i][2]);
-            minCosts[i+1][1] = costs[i][1] + min(minCosts[i][0], minCosts[i][2]);
-            minCosts[i+1][2] = costs[i][2] + min(minCosts[i][0], minCosts[i][1]);
+            minCosts[(i+1)%2][0] = costs[i][0] + min(minCosts[i%2][1], minCosts[i%2][2]);
+            minCosts[(i+1)%2][1] = costs[i][1] + min(minCosts[i%2][0], minCosts[i%2][2]);
+            minCosts[(i+1)%2][2] = costs[i][2] + min(minCosts[i%2][0], minCosts[i%2][1]);
         }
         
-        auto x = minCosts[len];
+        auto x = minCosts[(len)%2];
         return min(min(x[0], x[1]), x[2]);
     }
 };
