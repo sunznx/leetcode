@@ -7,13 +7,18 @@ public:
             return 0;
         }
 
-        vector<int> dp(len+1);
-
-        dp[1] = nums[0];
-        for (int i = 1; i < len; i++) {
-            dp[i+1] = max(dp[i], nums[i] + dp[i-1]);
+        if (len == 1) {
+            return nums[0];
         }
 
-        return dp[len];
+        vector<int> dp(len+1);
+
+        dp[0] = nums[0];
+        dp[1] = max(nums[0], nums[1]);
+        for (int i = 2; i < len; i++) {
+            dp[i] = max(dp[i-1], nums[i] + dp[i-2]);
+        }
+
+        return dp[len-1];
     }
 };
