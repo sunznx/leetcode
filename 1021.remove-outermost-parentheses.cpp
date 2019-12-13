@@ -15,7 +15,7 @@ public:
             } else if (S[k] == ')' && left) {
                 k++;
                 left--;
-            } else if (S[k] == ')' && left == 0 && removed) {
+            } else if (S[k] == ')' && removed) {
                 S.erase(S.begin() + k);
                 removed--;
             } else {
