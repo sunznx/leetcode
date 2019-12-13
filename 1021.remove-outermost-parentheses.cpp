@@ -11,7 +11,7 @@ public:
                 removed++;
             } else if (S[k] == '(') {
                 k++;
-                left += 1;
+                left++;
             } else if (S[k] == ')' && left) {
                 k++;
                 left--;
