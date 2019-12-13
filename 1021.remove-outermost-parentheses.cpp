@@ -5,10 +5,12 @@ public:
         int k = 0;
         int removed = 0;
         int left = 0;
-        while (k < S.size()) {
+        int len = S.size();
+        while (k < len) {
             if (S[k] == '(' && removed == 0) {
                 S.erase(S.begin() + k);
                 removed++;
+                len--;
             } else if (S[k] == '(') {
                 k++;
                 left++;
@@ -18,6 +20,7 @@ public:
             } else if (S[k] == ')' && removed) {
                 S.erase(S.begin() + k);
                 removed--;
+                len--;
             } else {
                 k++;
             }
