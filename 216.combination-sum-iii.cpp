@@ -1,31 +1,29 @@
+// CreateTime: 2019-12-13 09:00:00
 class Solution {
 public:
     vector<vector<int>> res;
+    vector<int> arr;
 
     vector<vector<int>> combinationSum3(int k, int n) {
-        vector<int> v(k, 0);
-        vector<int> arr(k, 0);
-        dfs(v, arr, n, k, 0, 1);
         return res;
     }
-
-    void dfs(vector<int> &v, vector<int> &arr, int n, int k, int step, int index) {
+    
+    void dfs(int k, int n, int from = 1, int step = 0) {
         if (step == k) {
-            auto total = 0;
-            for (int i = 0; i < k; i++) {
-                if (arr[i]) {
-                    total += arr[i];
-                }
-            }
-            if (total == n) {
-                res.push_back(arr);
+            if (n == 0) {
+                res.push_back(arr);    
             }
             return;
         }
-
-        for (int i = index; i <= 9; i++) {
-            arr[step] = i;
-            dfs(v, arr, n, k, step+1, i+1);
+        
+        if (n <= 0) {
+            return;
+        }
+        
+        for (int i = from; i <= 9; i++) {
+            arr.push_back(i);
+            dfs(k, n-i, i+1, step+1);
+            arr.pop_back();
         }
     }
 };
