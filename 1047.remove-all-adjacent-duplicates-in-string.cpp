@@ -3,7 +3,7 @@ class Solution {
 public:
     string removeDuplicates(string S) {
         int k = 0;
-        while (k < S.size()) {
+        while (k+1 < S.size()) {
             if (k+1 < S.size() && S[k] == S[k+1]) {
                 S.erase(S.begin()+k+1);
                 S.erase(S.begin()+k);
