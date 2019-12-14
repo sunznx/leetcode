@@ -35,7 +35,7 @@ public:
         return ans;
     }
 
-    int isLeapYear(int year) {
+    inline int isLeapYear(int year) {
         return year > 1900 && year % 4 == 0;
     }
 };
