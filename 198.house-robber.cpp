@@ -9,7 +9,6 @@ public:
             return nums[0];
         }
 
-        int maxValue;
         vector<int> dp(len+1, 0);
 
         dp[0] = nums[0];
