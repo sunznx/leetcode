@@ -9,34 +9,30 @@ public:
         int ab = stoi(AB, nullptr, 0);
         int cd = stoi(CD, nullptr, 0);
         int ef = stoi(EF, nullptr, 0);
-        
+
         int x = search(ab);
         int y = search(cd);
         int z = search(ef);
-        
+
         char res[8];
         sprintf(res, "#%02x%02x%02x", x, y, z);
 
         return string(res);
     }
-    
+
     inline int search(int n) {
-        int l = 0x0;
-        int r = 0xf;
-        
-        while (l < r) {
-            int mid = (l+r) / 2;
-            if (n <= mid * 17) {
-                r = mid;
-            } else {
-                l = mid+1;
-            }
+        int m = n/17;
+        int m1 = m-1;
+        int m2 = m+1;
+
+        int minv = m;
+        if (m1 >= 0 && abs(n-m1*17) < abs(n-minv*17)) {
+            minv = m1;
         }
-        
-        if (abs(n-(l-1)*17) < abs(n-(l)*17)) {
-            return (l-1) * 17;
+        if (m2 <= 15 && abs(n-m2*17) < abs(n-minv*17)) {
+            minv = m2;
         }
-        return l * 17;
+        return minv * 17;
     }
-    
+
 };
