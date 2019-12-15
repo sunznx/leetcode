@@ -1,24 +1,15 @@
+// CreateTime: 2019-12-15 10:03:40
 class Solution {
 public:
+
     int maxProfit(vector<int>& prices) {
+        int ans = 0;
         int len = prices.size();
-
-        if (len == 0) {
-            return 0;
-        } else if (len == 1) {
-            return 0;
+        int minv = 0x7fffffff;
+        for (int i = 0; i < len; i++) {
+            ans = max(ans, prices[i] - minv);
+            minv = min(minv, prices[i]);
         }
-
-        vector<int> dp(len+1, 0);
-        int maxValue = 0;
-
-        int Buy = prices[0];
-
-        for (int i = 1; i < len; i++) {
-            Buy = min(Buy, prices[i]);
-            maxValue = max(maxValue, prices[i] - Buy);
-        }
-
-        return maxValue;
+        return ans;
     }
 };
