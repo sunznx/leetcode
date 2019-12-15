@@ -7,7 +7,7 @@ public:
             return 0;
         }
 
-        vector<int> dp(len, 0);
+        vector<int> dp(len);
         
         for (int i = 1; i < len; i++) {
             if (prices[i] > prices[i-1]) {
