@@ -8,7 +8,7 @@ public:
         for (int i = 0; i <= len-3; i++) {
             auto j = i+1;
             auto k = j+1;
-            if (ok(A[i], A[j], A[k])) {
+            if (A[j]+A[k] > A[i] && A[i]-A[k] < A[j]) {
                 return A[i] + A[j] + A[k];
             }
         }
