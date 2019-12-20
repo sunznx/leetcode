@@ -14,16 +14,4 @@ public:
         }
         return 0;
     }
-
-    inline bool ok(int k1, int k2, int k3) {
-        if (! (k1+k2 > k3 && k1+k3 > k2 && k2+k3 > k1)) {
-            return false;
-        }
-
-        if (! (abs(k1-k2) < k3 && abs(k1-k3) < k2 && abs(k2-k3) < k1)) {
-            return false;
-        }
-
-        return true;
-    }
 };
