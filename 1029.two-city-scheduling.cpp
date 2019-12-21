@@ -3,8 +3,8 @@ class Solution {
 public:
     int twoCitySchedCost(vector<vector<int>>& costs) {
         sort(costs.begin(), costs.end(), [](auto cost1, auto cost2) {
-                                             return abs(cost1[0]-cost1[1]) > abs(cost2[0]-cost2[1]);
-                                         });
+                 return abs(cost1[0]-cost1[1]) > abs(cost2[0]-cost2[1]);
+             });
 
         int ans = 0;
         int len = costs.size();
