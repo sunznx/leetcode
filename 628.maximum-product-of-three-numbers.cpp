@@ -30,6 +30,11 @@ public:
             }
         }
 
-        return max(max1 * max2 * max3, max1 * min1 * min2);
+        int ans = max1 * max2 * max3;
+        if (min1 < 0 && min2 < 0) {
+            ans = max(ans, max1 * min1 * min2);
+        }
+
+        return ans;
     }
 };
