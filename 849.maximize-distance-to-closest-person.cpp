@@ -13,9 +13,7 @@ public:
                 if (i == len-1) {
                     ans = max(ans, k);
                 }
-            }
-
-            if (seats[i] != 0) {
+            } else {
                 if (seats[0] == 0 && isFirst) {
                     isFirst = false;
                     ans = max(ans, k);
