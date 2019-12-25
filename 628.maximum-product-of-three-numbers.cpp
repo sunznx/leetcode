@@ -34,7 +34,6 @@ public:
         if (min1 < 0 && min2 < 0) {
             ans = max(ans, max1 * min1 * min2);
         }
-
         return ans;
     }
 };
