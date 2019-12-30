@@ -26,7 +26,7 @@ public:
         v = v * 2 + root->val;
         
         if (root->left == NULL && root->right == NULL) {
-            res = ((long long)res + (long long)v) % MOD;
+            res = (res + v) % MOD;
             return;
         }
 
