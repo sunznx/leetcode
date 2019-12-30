@@ -6,7 +6,8 @@ public:
     
     bool canReach(vector<int>& arr, int start) {
         v.resize(arr.size());
-        return dfs(arr, start);
+        dfs(arr, start);
+        return ok;
     }
     
     bool dfs(vector<int> &arr, int start) {
@@ -24,7 +25,8 @@ public:
         
         v[start] = true;
         if (arr[start] == 0) {
-            return true;
+            ok = true;
+            return ok;
         }
         
         auto v1 = dfs(arr, start+arr[start]);
