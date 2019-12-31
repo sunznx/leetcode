@@ -26,6 +26,7 @@ public:
             } else {
                 A[A.size()-k-1] = n%10;
             }
+
             k++;
         }
         return A;
