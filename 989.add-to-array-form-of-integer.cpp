@@ -8,8 +8,6 @@ public:
             K = K / 10;
         }
 
-        vector<int> res;
-
         int cur = 0;
         int k = 0;
         while (cur || k < v.size() || k < A.size()) {
@@ -22,9 +20,14 @@ public:
             }
 
             cur = n/10;
-            res.insert(res.begin(), n%10);
+
+            if (k >= A.size()) {
+                A.insert(A.begin(), n%10);
+            } else {
+                A[A.size()-k-1] = n%10;
+            }
             k++;
         }
-        return res;
+        return A;
     }
 };
