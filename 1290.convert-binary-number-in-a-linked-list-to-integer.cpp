@@ -12,10 +12,9 @@ public:
     int getDecimalValue(ListNode* head) {
         int res = 0;
         
-        auto p = head;
-        while (p) {
-            res = res * 2 + p->val;
-            p = p->next;
+        while (head) {
+            res = res*2 + head->val;
+            head = head->next;
         }
 
         return res;
