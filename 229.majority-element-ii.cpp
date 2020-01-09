@@ -11,26 +11,18 @@ public:
         for (int i = 0; i < len; i++) {
             if (times1 != 0 && res1 == nums[i]) {
                 times1++;
-                continue;
-            }
-            if (times2 != 0 && res2 == nums[i]) {
+            } else if (times2 != 0 && res2 == nums[i]) {
                 times2++;
-                continue;
-            }
-
-            if (times1 == 0) {
+            } else if (times1 == 0) {
                 res1 = nums[i];
                 times1++;
-                continue;
-            }
-
-            if (times2 == 0) {
+            } else if (times2 == 0) {
                 res2 = nums[i];
                 times2++;
-                continue;
+            } else {
+                times1--;
+                times2--;
             }
-            times1--;
-            times2--;
         }
 
         int k1 = 0;
