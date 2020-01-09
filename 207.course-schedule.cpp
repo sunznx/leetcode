@@ -1,15 +1,16 @@
 // CreateTime: 2020-01-06 23:50:29
 class Solution {
 public:
-    vector<vector<bool>> g;
     vector<int> d;
     vector<bool> v;
     queue<int> q;
+    vector<unordered_set<int>> g;
+
     bool ok = true;
     int leaves;
 
     void add(int x, int y) {
-        g[x][y] = true;
+        g[x].insert(y);
         d[y] += 1;
     }
 
@@ -28,14 +29,10 @@ public:
             auto top = q.front();
             q.pop();
 
-            for (int k = 0; k < d.size(); k++) {
-                if (v[k] && g[top][k] == true) {
+            for (auto &k: g[top]) {
+                if (v[k]) {
                     ok = false;
                     break;
-                }
-
-                if (v[k] || g[top][k] == false) {
-                    continue;
                 }
 
                 d[k]--;
@@ -52,7 +49,7 @@ public:
         leaves = numCourses;
         v.resize(numCourses);
         d.resize(numCourses);
-        g.resize(numCourses, vector<bool>(numCourses));
+        g.resize(numCourses);
 
         for (int i = 0; i < prerequisites.size(); i++) {
             auto x = prerequisites[i][0];
