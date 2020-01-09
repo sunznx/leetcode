@@ -4,13 +4,13 @@ public:
     vector<int> d;
     vector<bool> v;
     queue<int> q;
-    vector<unordered_set<int>> g;
+    vector<vector<int>> g;
 
     bool ok = true;
     int leaves;
 
     void add(int x, int y) {
-        g[x].insert(y);
+        g[x].push_back(y);
         d[y] += 1;
     }
 
