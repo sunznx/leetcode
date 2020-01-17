@@ -1,30 +1,27 @@
+// CreateTime: 2020-01-18 02:10:44
 class Solution {
-public:
-    vector<int> nextGreaterElement(vector<int>& findNums, vector<int>& nums) {
-        vector<int> res;
+  public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        int len1 = nums1.size();
+        int len2 = nums2.size();
 
-        vector<int> v(nums.size(), -1);
-        for (int i = 0; i < nums.size(); i++) {
-            for (int j = i+1; j < nums.size(); j++) {
-                if (nums[j] > nums[i]) {
-                    v[i] = nums[j];
+        vector<int> res(len1, -1);
+        for (int i = 0; i < len1; i++) {
+            int found = -1;
+            for (int j = 0; j < len2; j++) {
+                if (nums1[i] == nums2[j]) {
+                    found = j;
                     break;
                 }
             }
-        }
-        
 
-        for (int i = 0; i < findNums.size(); i++) {
-            bool found = false;
-            for (int j = 0; j < nums.size(); j++) {
-                if (nums[j] == findNums[i]) {
-                    found = true;
-                    res.push_back(v[j]);
-                    break;
+            if (found != -1) {
+                for (int j = found+1; j < len2; j++) {
+                    if (nums2[j] > nums1[i]) {
+                        res[i] = nums2[j];
+                        break;
+                    }
                 }
-            }
-            if (!found) {
-                res.push_back(-1);
             }
         }
 
