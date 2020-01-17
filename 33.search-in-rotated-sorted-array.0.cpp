@@ -20,17 +20,14 @@ class Solution {
         if (nums[l] > nums[r]) {
             int m = (l+r) / 2;
             auto ll = search(nums, l, m, target);
-            auto rr = search(nums, m+1, r, target);
-
-            if (ll == -1 && rr == -1) {
-                return -1;
-            } else if (ll == -1) {
-                return rr;
-            } else if (rr == -1) {
+            if (ll != -1) {
                 return ll;
-            } else {
-                return -1;
             }
+            auto rr = search(nums, m+1, r, target);
+            if (rr != -1) {
+                return rr;
+            }
+            return -1;
         } else {
             while (l < r) {
                 int m = (l+r) / 2;
@@ -40,9 +37,11 @@ class Solution {
                     r = m;
                 }
             }
+
             if (nums[l] == target) {
                 return l;
             }
+
             return -1;
         }
 
