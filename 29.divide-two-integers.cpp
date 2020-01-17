@@ -28,11 +28,14 @@ class Solution {
             sign = true;
         }
 
+        long a = abs((long)dividend);
+        long b = abs((long)divisor);
+
         if (sign) {
-            return -divide(abs((long)dividend), abs((long)divisor));
+            return -divide(a, b);
         }
 
-        return divide(abs((long)dividend), abs((long)divisor));
+        return divide(a, b);
     }
 
     int divide(long dividend, long divisor) {
