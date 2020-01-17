@@ -5,7 +5,6 @@ class Solution {
 
     int numTrees(int n) {
         m.resize(max(3, n+1));
-
         m[0] = 1;
         m[1] = 1;
         m[2] = 2;
