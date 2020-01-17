@@ -28,28 +28,32 @@ class Solution {
             sign = true;
         }
 
-        long d1 = abs((long)dividend);
-        long d2 = abs((long)divisor);
-
-        int res = 0;
-        int b = 1;
-        while (d1 && d2) {
-            if (d1 >= (d2 << 1)) {
-                d1 -= (d2 << 1);
-                d2 = (d2 << 1);
-                res += (b << 1);
-                b = (b << 1);
-            } else if (d1 >= d2) {
-                d1 -= d2;
-                res += b;
-            } else {
-                d2 = (d2 >> 1);
-                b = (b >> 1);
-            }
-        }
+        long a = abs((long)dividend);
+        long b = abs((long)divisor);
 
         if (sign) {
-            return -res;
+            return -divide(a, b);
+        }
+
+        return divide(a, b);
+    }
+
+    int divide(long dividend, long divisor) {
+        int res = 0;
+        int b = 1;
+        while (dividend && divisor) {
+            if (dividend >= (divisor << 1)) {
+                dividend -= (divisor << 1);
+                divisor = (divisor << 1);
+                res += (b << 1);
+                b = (b << 1);
+            } else if (dividend >= divisor) {
+                dividend -= divisor;
+                res += b;
+            } else {
+                divisor = (divisor >> 1);
+                b = (b >> 1);
+            }
         }
         return res;
     }
