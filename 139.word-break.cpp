@@ -3,10 +3,7 @@ class Solution {
 public:
     vector<int> m;
     bool wordBreak(string s, vector<string>& wordDict) {
-        sort(wordDict.begin(), wordDict.end(), [](const auto &a, const auto &b){
-            return a.size() > b.size();
-        });
-        m.resize(s.size(), -1);
+        m.resize(s.size()+1, -1);
         return wordBreak(s, 0, wordDict) == 1;
     }
 
