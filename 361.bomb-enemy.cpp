@@ -10,7 +10,6 @@ public:
         int col = grid[0].size();
 
         int res = 0;
-        vector<vector<bool>> v(row, vector<bool>(col));
         for (int x = 0; x < row; x++) {
             for (int y = 0; y < col; y++) {
                 if (grid[x][y] == '0') {
