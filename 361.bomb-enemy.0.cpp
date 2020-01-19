@@ -18,25 +18,25 @@ public:
         const int RIGHT = 3;
 
         // up
-        for (int x = row-2; x >= 0; x--) {
+        for (int x = 1; x < row; x++) {
             for (int y = 0; y < col; y++) {
-                if (grid[x+1][y] == 'E') {
-                    c[x][y][UP] = c[x+1][y][UP] + 1;
+                if (grid[x-1][y] == 'E') {
+                    c[x][y][UP] = c[x-1][y][UP] + 1;
                 }
-                if (grid[x+1][y] == '0') {
-                    c[x][y][UP] = c[x+1][y][UP];
+                if (grid[x-1][y] == '0') {
+                    c[x][y][UP] = c[x-1][y][UP];
                 }
             }
         }
 
         // down
-        for (int x = 1; x < row; x++) {
+        for (int x = row-2; x >= 0; x--) {
             for (int y = 0; y < col; y++) {
-                if (grid[x-1][y] == 'E') {
-                    c[x][y][DOWN] = c[x-1][y][DOWN] + 1;
+                if (grid[x+1][y] == 'E') {
+                    c[x][y][DOWN] = c[x+1][y][DOWN] + 1;
                 }
-                if (grid[x-1][y] == '0') {
-                    c[x][y][DOWN] = c[x-1][y][DOWN];
+                if (grid[x+1][y] == '0') {
+                    c[x][y][DOWN] = c[x+1][y][DOWN];
                 }
             }
         }
