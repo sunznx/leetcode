@@ -15,15 +15,13 @@ public:
             return root;
         }
         
-        root->left = removeLeafNodes(root->left, target);
-        root->right = removeLeafNodes(root->right, target);
+        auto &l = root->left;
+        auto &r = root->right;
 
-        if (root->left == NULL && root->right == NULL) {
-            if (root->val == target) {
-                return NULL;
-            } else {
-                return root;
-            }
+        l = removeLeafNodes(l, target);
+        r = removeLeafNodes(r, target);
+        if (l == NULL && r == NULL && root->val == target) {
+            return NULL;
         }
         
         return root;
