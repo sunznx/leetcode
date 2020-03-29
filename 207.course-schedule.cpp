@@ -6,7 +6,6 @@ public:
     queue<int> q;
     vector<vector<int>> g;
 
-    bool ok = true;
     int leaves;
 
     void add(int x, int y) {
@@ -25,6 +24,7 @@ public:
     }
 
     void bfs() {
+        bool ok = true;
         while (q.size() && ok) {
             auto top = q.front();
             q.pop();

@@ -4,12 +4,10 @@ public:
     vector<int> root;
 
     NumArray(vector<int> nums) {
+        int len = nums.size();
         data = nums;
-        for (int i = 0; i < 3 * nums.size(); i++) {
-            root.push_back(0);
-        }
-
-        build(0, 0, data.size()-1);
+        root.resize(3*len);
+        build(0, 0, len-1);
     }
 
     int left(int idx) {
