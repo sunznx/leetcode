@@ -3,7 +3,6 @@ class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         unordered_map<int, int> m;
-        vector<int> aux(nums2.size(), -1);
         stack<int> s;
 
         for (int i = nums2.size()-1; i >= 0; i--) {
@@ -14,20 +13,17 @@ public:
             }
 
             if (s.size() && num < s.top()) {
-                aux[i] = s.top();
+                m[num] = s.top();
             } else {
-                aux[i] = -1;
+                m[num] = -1;
             }
 
             s.push(num);
-
-            m[num] = i;
         }
 
-        vector<int> ans(nums1.size(), -1);
+        vector<int> ans;
         for (int i = 0; i < nums1.size(); i++) {
-            auto k = m[nums1[i]];
-            ans[i] = aux[k];
+            ans.push_back(m[nums1[i]]);
         }
 
         return ans;
