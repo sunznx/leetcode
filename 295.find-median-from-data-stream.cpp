@@ -14,12 +14,6 @@ public:
             maxQueue.push(num);
             return;
         }
-        
-        while (minQueue.size() > maxQueue.size()) {
-            auto x = minQueue.top();
-            minQueue.pop();
-            maxQueue.push(x);
-        }
 
         if (maxQueue.size() == minQueue.size()) {
             if (num > minQueue.top()) {
