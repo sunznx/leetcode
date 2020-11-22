@@ -6,16 +6,15 @@ public:
 
     /** initialize your data structure here. */
     MedianFinder() {
-        
+
     }
-    
+
     void addNum(int num) {
         if (maxQueue.size() == 0) {
             maxQueue.push(num);
-            return;
         }
 
-        if (maxQueue.size() == minQueue.size()) {
+        else if (maxQueue.size() == minQueue.size()) {
             if (num > minQueue.top()) {
                 auto x = minQueue.top();
                 minQueue.pop();
@@ -25,21 +24,19 @@ public:
             } else {
                 maxQueue.push(num);
             }
-            return;
         }
-        
+
         // maxQueue.size() > minQueue.size()
-        if (num >= maxQueue.top()) {
+        else if (num >= maxQueue.top()) {
             minQueue.push(num);
-            return;
+        } else {
+            auto x = maxQueue.top();
+            maxQueue.pop();
+            maxQueue.push(num);
+            minQueue.push(x);
         }
-        
-        auto x = maxQueue.top();
-        maxQueue.pop();
-        maxQueue.push(num);
-        minQueue.push(x);
     }
-    
+
     double findMedian() {
         if (maxQueue.size() == minQueue.size()) {
             return (maxQueue.top() + minQueue.top()) / 2.0;
