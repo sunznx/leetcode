@@ -23,8 +23,6 @@ public:
             }
 
             ans += sub;
-
-            cout << sub << endl;
         }
 
         return ans;
