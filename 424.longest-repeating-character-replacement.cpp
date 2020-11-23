@@ -12,7 +12,7 @@ public:
             int left = 0;
             int right = 0;
 
-            unordered_map<char, int> m;
+            vector<int> m(256);
             int maxCharCount = 0;
 
             int ans = 0;
