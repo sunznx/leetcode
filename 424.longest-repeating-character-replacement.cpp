@@ -20,6 +20,7 @@ public:
             while (right < len) {
                 char c = s[right++];
                 m[c]++;
+
                 maxCharCount = max(maxCharCount, m[c]);
 
                 if (right-left - maxCharCount > k) {
