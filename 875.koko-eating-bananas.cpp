@@ -18,7 +18,7 @@ public:
     }
     
     int getMax(vector<int>& piles) {
-        int ans = 0;
+        int ans = 1;
         int len = piles.size();
         for (int i = 0; i < len; i++) {
             ans = max(ans, piles[i]);
