@@ -1,15 +1,12 @@
+// CreateTime: 2020-12-01 03:26:12
 class Solution {
 public:
-    string reverseString(string s) {
-        if (s.size() <= 1) {
-            return s;
+    void reverseString(vector<char>& s) {
+        int l = 0;
+        int r = s.size()-1;
+        
+        while (l < r) {
+            swap(s[l++], s[r--]);
         }
-
-        for (int i = 0; i < s.size()/2; i++) {
-            char c = s[i];
-            s[i]= s[s.size()-1-i];
-            s[s.size()-1-i] = c;
-        }
-        return s;
     }
 };
