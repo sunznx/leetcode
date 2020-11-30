@@ -2,6 +2,10 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
+        if (nums.size() == 0) {
+            return {-1, -1};
+        }
+
         vector<int> ans(2, -1);
         ans[0] = findL(nums, target);
         ans[1] = findR(nums, target);
@@ -9,10 +13,6 @@ public:
     }
 
     int findL(vector<int>& nums, int target) {
-        if (nums.size() == 0) {
-            return -1;
-        }
-
         int l = 0;
         int r = nums.size()-1;
 
@@ -33,10 +33,6 @@ public:
     }
 
     int findR(vector<int>& nums, int target) {
-        if (nums.size() == 0) {
-            return -1;
-        }
-
         int l = 0;
         int r = nums.size()-1;
 
