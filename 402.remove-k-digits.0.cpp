@@ -21,7 +21,7 @@ public:
 
         string ans;
         while (q.size()) {
-            ans.insert(ans.begin(), q.top());
+            ans = string(1, q.top()) + ans;
             q.pop();
         }
 
