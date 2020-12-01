@@ -2,35 +2,29 @@
 class Solution {
 public:
     string removeKdigits(string num, int k) {
-        stack<char> q;
+        deque<char> q;
 
         int removed = 0;
 
         for (int i = 0; i < num.size(); i++) {
-            while (removed < k && !q.empty() && q.top() > num[i]) {
-                q.pop();
+            while (removed < k && !q.empty() && q.back() > num[i]) {
+                q.pop_back();
                 removed++;
             }
-            q.push(num[i]);
-        }
-
-        // 移除多余的数字
-        while (q.size() > num.size()-k) {
-            q.pop();
+            q.push_back(num[i]);
         }
 
         string ans;
-        while (q.size()) {
-            ans.insert(ans.begin(), q.top());
-            q.pop();
+        for (int i = 0; i < num.size()-k; i++) {
+            if (q.front() == '0' && ans.size() == 0) {
+                q.pop_front();
+                continue;
+            }
+
+            ans.push_back(q.front());
+            q.pop_front();
         }
 
-        // 去掉前导 0
-        while (ans.size() && ans[0] == '0') {
-            ans = ans.substr(1);
-        }
-
-        // 空字符串变成 0
         if (ans.size() == 0) {
             ans = "0";
         }
