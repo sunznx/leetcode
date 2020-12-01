@@ -1,4 +1,4 @@
-// CreateTime: 2019-11-29 11:52:58
+// CreateTime: 2020-12-01 23:45:57
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
@@ -12,23 +12,17 @@ public:
             return false;
         }
 
-        int maxl = 0;
-        int maxr = col-1;
-        for (int i = 0; i < row; i++) {
-            int l = maxl;
-            int r = maxr;
+        int x = row-1;
+        int y = 0;
 
-            while (l < r) {
-                int mid = (l+r) / 2;
-                if (matrix[i][mid] < target) {
-                    l = mid+1;
-                } else {
-                    r = mid;
-                    maxr = min(maxr, mid);
-                }
-            }
+        while (y <= col-1 && x >= 0) {
+            auto num = matrix[x][y];
 
-            if (matrix[i][l] == target) {
+            if (target > num) {
+                y++;
+            } else if (target < num) {
+                x--;
+            } else if (num == target) {
                 return true;
             }
         }
