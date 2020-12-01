@@ -29,6 +29,7 @@ public:
                 continue;
             }
 
+            // 相交
             ans.push_back({max(s1, s2), min(e1, e2)});
             if (e1 == e2) {
                 k1++;
