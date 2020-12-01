@@ -17,34 +17,26 @@ public:
             int s2 = B[k2][0];
             int e2 = B[k2][1];
 
+            // 不相交
             if (s2 > e1) {
                 k1++;
-            } else if (s1 > e2) {
+                continue;
+            }
+
+            // 不相交
+            if (s1 > e2) {
                 k2++;
-            } else if (s1 <= s2 && s2 <= e1) {
-                if (e1 == e2) {
-                    k1++;
-                    k2++;
-                    ans.push_back({s2, e1});
-                } else if (e1 < e2) {
-                    k1++;
-                    ans.push_back({s2, e1});
-                } else if (e1 > e2) {
-                    k2++;
-                    ans.push_back({s2, e2});
-                }
-            } else if (s2 <= s1 && s1 <= e2) {
-                if (e1 == e2) {
-                    k1++;
-                    k2++;
-                    ans.push_back({s1, e1});
-                } else if (e1 < e2) {
-                    k1++;
-                    ans.push_back({s1, e1});
-                } else if (e1 > e2) {
-                    k2++;
-                    ans.push_back({s1, e2});
-                }
+                continue;
+            }
+
+            ans.push_back({max(s1, s2), min(e1, e2)});
+            if (e1 == e2) {
+                k1++;
+                k2++;
+            } else if (e1 < e2) {
+                k1++;
+            } else if (e1 > e2) {
+                k2++;
             }
         }
 
