@@ -15,8 +15,6 @@ public:
 
         unordered_map<int, int> window;
 
-        int prefix = 0;
-
         while (r < len) {
             int x = A[r++];
             window[x]++;
@@ -29,7 +27,7 @@ public:
                 }
             }
 
-            ans += r-l+1;
+            ans += r-l;
         }
 
         return ans;
