@@ -14,7 +14,7 @@ public:
             int m = (l+r+1) / 2;
             if (citations[len-1-m] >= m+1) {
                 l = m;
-            } else if (citations[len-1-m] <= m) {
+            } else if (citations[len-1-m] < m+1) {
                 r = m-1;
             }
         }
