@@ -22,6 +22,16 @@ public:
     }
 
     void merge(vector<int> &nums1, vector<int> &nums2, vector<int> &m) {
+        if (nums1.size() == 0) {
+            m = nums2;
+            return;
+        }
+
+        if (nums2.size() == 0) {
+            m = nums1;
+            return;
+        }
+
         int k = 0;
         int s1 = 0;
         int s2 = 0;
