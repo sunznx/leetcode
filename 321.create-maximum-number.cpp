@@ -41,21 +41,20 @@ public:
         int maxRemove = len - k;
         int removed = 0;
 
-        deque<int> q;
+        vector<int> ans;
 
         for (int i = 0; i < len; i++) {
-            while (removed < maxRemove && q.size() && nums[i] > q.back()) {
+            while (removed < maxRemove && ans.size() && nums[i] > ans.back()) {
                 removed++;
-                q.pop_back();
+                ans.pop_back();
             }
-            q.push_back(nums[i]);
+            ans.push_back(nums[i]);
         }
 
-        vector<int> ans(k);
-        for (int i = 0; i < k; i++) {
-            ans[i] = q.front();
-            q.pop_front();
+        while (ans.size() > k) {
+            ans.pop_back();
         }
+
         return ans;
     }
 };
