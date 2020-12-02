@@ -2,24 +2,26 @@
 class Solution {
 public:
     string simplifyPath(string path) {
-        stack<string> s;
-
         int len = path.size();
-        string v = "";
+
+        stack<string> s;
+        string sub = "";
+
         for (int i = 0; i < len; i++) {
-            if (path[i] != '/') {
-                v = v + path[i];
+            char c = path[i];
+            if (c != '/') {
+                sub = sub + c;
             }
 
-            if (path[i] == '/' || i == len-1) {
-                if (v == "..") {
+            if (c == '/' || i == len-1) {
+                if (sub == "..") {
                     if (s.size()) {
                         s.pop();
                     }
-                } else if (v != "" && v != ".") {
-                    s.push("/" + v);
+                } else if (sub != "" && sub != ".") {
+                    s.push("/" + sub);
                 }
-                v = "";
+                sub = "";
             }
         }
 
