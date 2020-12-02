@@ -7,7 +7,9 @@ public:
         vector<int> ans(k, -1);
         vector<int> m(k, -1);
 
-        for (int i = 0; i <= k; i++) {
+        int s = k-nums2.size();
+        int e = nums1.size();
+        for (int i = max(0, s); i <= min(k, e); i++) {
             auto l1 = i;
             auto l2 = k - i;
             if (nums1.size() >= l1 && nums2.size() >= l2) {
