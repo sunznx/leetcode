@@ -12,7 +12,6 @@ public:
 
         while (l < r) {
             int m = (l+r+1) / 2;
-
             if (citations[len-1-m] >= m) {
                 l = m;
             } else if (citations[len-1-m] < m) {
