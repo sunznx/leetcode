@@ -23,12 +23,7 @@ public:
         return ans;
     }
 
-    int parse() {
-        stack<string> op;
-        return parse(op);
-    }
-
-    int parse(stack<string> &op) {
+    int parse(bool isAdd = true) {
         int ans = 0;
         while (pos != exp.size()) {
             auto sub = read();
@@ -39,7 +34,7 @@ public:
 
             else if (isLeft(sub)) {
                 auto v = parse();
-                ans += calc(v, op);
+                ans += calc(v, isAdd);
             }
 
             else if (isRight(sub)) {
@@ -47,25 +42,26 @@ public:
             }
 
             else if (isOp(sub)) {
-                op.push(sub);
+                if (sub == "+") {
+                    isAdd = true;
+                } else {
+                    isAdd = false;
+                }
             }
             else {
                 auto v = stoi(sub);
-                ans += calc(v, op);
+                ans += calc(v, isAdd);
             }
         }
 
         return ans;
     }
 
-    int calc(int &v, stack<string> &op) {
-        if (op.size() == 0) {
+    int calc(int &v, bool isAdd) {
+        if (isAdd) {
             return v;
         }
-
-        auto ans = op1(op.top(), v);
-        op.pop();
-        return ans;
+        return -v;
     }
 
     bool isOp(string &s) {
