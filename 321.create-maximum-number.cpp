@@ -24,7 +24,13 @@ public:
     {
         int k = 0;
         while (nums1.size() != 0 || nums2.size() != 0) {
-            if (nums1 > nums2) {
+            if (nums1.size() == 0) {
+                m[k++] = nums2[0];
+                nums2.erase(nums2.begin());
+            } else if (nums2.size() == 0) {
+                m[k++] = nums1[0];
+                nums1.erase(nums1.begin());
+            } else if (nums1 > nums2) {
                 m[k++] = nums1[0];
                 nums1.erase(nums1.begin());
             } else {
@@ -41,20 +47,21 @@ public:
         int maxRemove = len - k;
         int removed = 0;
 
-        vector<int> ans;
+        deque<int> q;
 
         for (int i = 0; i < len; i++) {
-            while (removed < maxRemove && ans.size() && nums[i] > ans.back()) {
+            while (removed < maxRemove && q.size() && nums[i] > q.back()) {
                 removed++;
-                ans.pop_back();
+                q.pop_back();
             }
-            ans.push_back(nums[i]);
+            q.push_back(nums[i]);
         }
 
-        while (ans.size() > k) {
-            ans.pop_back();
+        vector<int> ans(k);
+        for (int i = 0; i < k; i++) {
+            ans[i] = q.front();
+            q.pop_front();
         }
-
         return ans;
     }
 };
