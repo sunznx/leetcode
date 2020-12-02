@@ -1,41 +1,54 @@
+// CreateTime: 2020-12-02 23:40:21
 class Solution {
 public:
-    bool isValid(string str) {
-        int len = str.size();
-
-        stack<char> s;
-
-        for (int i = 0; i < len; i++) {
-            // push
-            if (str[i] == '(' || str[i] == '{' || str[i] == '[') {
-                s.push(str[i]);
-            } else {
-                if (s.size() == 0) {
-                    return false;
-                }
-                
-                char c = s.top();
-
-                if (str[i] == ')') {
-                    if (c != '(') {
-                        return false;
-                    }
-                } else if (str[i] == '}') {
-                    if (c != '{') {
-                        return false;
-                    }
-                } else if (str[i] == ']') {
-                    if (c != '[') {
-                        return false;
-                    }
-                }
-
-                s.pop();
-            }
-        }
-        if (s.size() != 0) {
+    bool isValid(string s) {
+        if (s.size() % 2 == 1) {
             return false;
         }
-        return true;
+
+        stack<char> stk;
+
+        for (int i = 0; i < s.size(); i++) {
+            char c = s[i];
+
+            if (isLeft(c)) {
+                stk.push(c);
+                continue;
+            }
+
+            // isRight
+            if (stk.empty()) {
+                return false;
+            }
+
+            char top = stk.top();
+            stk.pop();
+
+            if (!match(top, c)) {
+                return false;
+            }
+        }
+
+        while (stk.size()) {
+            auto c1 = stk.top();
+            stk.pop();
+
+            auto c2 = stk.top();
+            stk.pop();
+
+            if (!match(c2, c1)) {
+                return false;
+            }
+        }
+
+        return stk.empty();
+    }
+
+    bool isLeft(char c) {
+        return c == '(' || c == '{' || c == '[';
+    }
+
+    bool match(char l, char r) {
+        return (l == '(' && r == ')') || (l == '{' && r == '}') || (l == '[' && r == ']');
     }
 };
