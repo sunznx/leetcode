@@ -7,7 +7,7 @@ public:
 
         int ans = 0;
         for (int i = 0; i < len; i++) {
-            if (citations[len-1-i] > ans) {
+            if (citations[len-1-i] >= ans+1) {
                 ans++;
             } else {
                 break;
