@@ -15,14 +15,14 @@ public:
         }
         
         auto slow = head;
-        auto fast = head->next;
+        auto fast = head;
         
         while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
             if (slow == fast) {
                 return true;
             }
-            slow = slow->next;
-            fast = fast->next->next;
         }
         return false;
     }

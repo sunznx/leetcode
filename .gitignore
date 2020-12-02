@@ -5,3 +5,13 @@ middle
 simple
 .tmp*
 a.out
+.vscode
+index
+*test*
+ListNode.cpp
+merge.cpp
+quick.cpp
+sort.go
+template.go
+TreeNode.cpp
+cmake-build-debug
