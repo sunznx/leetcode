@@ -20,28 +20,24 @@ public:
         return ans;
     }
 
-    void merge(vector<int> &nums1, vector<int> &nums2, vector<int> &m, int k = 0)
+    void merge(vector<int> &nums1, vector<int> &nums2, vector<int> &m)
     {
-        if (nums1.size() == 0 && nums2.size() == 0) {
-            return;
+        int k = 0;
+        while (nums1.size() != 0 || nums2.size() != 0) {
+            if (nums1.size() == 0) {
+                m[k++] = nums2[0];
+                nums2.erase(nums2.begin());
+            } else if (nums2.size() == 0) {
+                m[k++] = nums1[0];
+                nums1.erase(nums1.begin());
+            } else if (nums1 > nums2) {
+                m[k++] = nums1[0];
+                nums1.erase(nums1.begin());
+            } else {
+                m[k++] = nums2[0];
+                nums2.erase(nums2.begin());
+            }
         }
-
-        int l1 = 0;
-        int l2 = 0;
-
-        if (nums1.size() == 0) {
-            m[k++] = nums2[l2++];
-        } else if (nums2.size() == 0) {
-            m[k++] = nums1[l1++];
-        } else if (nums1 > nums2) {
-            m[k++] = nums1[l1++];
-        } else {
-            m[k++] = nums2[l2++];
-        }
-
-        auto newNums1 = vector<int>(nums1.begin()+l1, nums1.end());
-        auto newNums2 = vector<int>(nums2.begin()+l2, nums2.end());
-        merge(newNums1, newNums2, m, k);
     }
 
     vector<int> maxK(vector<int> &nums, int k)
