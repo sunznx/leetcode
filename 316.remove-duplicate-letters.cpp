@@ -4,6 +4,7 @@ public:
     string removeDuplicateLetters(string s) {
         int len = s.size();
 
+        // m[x] > 0 表示当前位置后面还有为 x 的元素
         vector<int> m(256);
         vector<bool> in(256);
 

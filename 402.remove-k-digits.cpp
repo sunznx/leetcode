@@ -16,6 +16,7 @@ public:
 
         string ans;
         for (int i = 0; i < num.size()-k; i++) {
+            // 去掉前导 0
             if (q.front() == '0' && ans.size() == 0) {
                 q.pop_front();
                 continue;
@@ -25,6 +26,7 @@ public:
             q.pop_front();
         }
 
+        // 空字符串变成 0
         if (ans.size() == 0) {
             ans = "0";
         }
