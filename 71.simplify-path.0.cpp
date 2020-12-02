@@ -28,13 +28,9 @@ public:
         string res = "";
         while (stk.size()) {
             auto sub = getTop(stk);
-            if (sub == "/") {
-                if (res.size() != 0) {
-                    continue;
-                } else {
-                    res = "/";
-                }
-            } else {
+            if (sub == "/" && res.size() == 0) {
+                res = "/";
+            } else if (sub != "/") {
                 res = sub + res;
             }
         }
