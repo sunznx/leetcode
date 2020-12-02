@@ -12,14 +12,14 @@ public:
 
         while (l < r) {
             int m = (l+r+1) / 2;
-            if (citations[len-1-m] > m) {
+            if (citations[len-1-m] >= m+1) {
                 l = m;
             } else if (citations[len-1-m] <= m) {
                 r = m-1;
             }
         }
 
-        if (citations[len-1-l] > l) {
+        if (citations[len-1-l] >= l+1) {
             return l+1;
         }
         return 0;
