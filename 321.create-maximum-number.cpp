@@ -58,16 +58,24 @@ public:
         return ans;
     }
 
-    int compare(vector<int>& subsequence1, vector<int>& subsequence2, int index1 = 0, int index2 = 0) {
-        int x = subsequence1.size(), y = subsequence2.size();
-        while (index1 < x && index2 < y) {
-            int difference = subsequence1[index1] - subsequence2[index2];
-            if (difference != 0) {
-                return difference;
+    int compare(vector<int>& nums1, vector<int>& nums2, int s1 = 0, int s2 = 0) {
+        int len1 = nums1.size();
+        int len2 = nums2.size();
+        while (s1 < len1 && s2 < len2) {
+            int diff = nums1[s1] - nums2[s2];
+            if (diff != 0) {
+                return diff;
             }
-            index1++;
-            index2++;
+            s1++;
+            s2++;
         }
-        return (x - index1) - (y - index2);
+
+        if (s2 == len2) {
+            return 1;
+        }
+        if (s1 == len1) {
+            return -1;
+        }
+        return 0;
     }
 };
