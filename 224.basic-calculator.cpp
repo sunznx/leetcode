@@ -41,13 +41,14 @@ public:
                 break;
             }
 
-            else if (isOp(sub)) {
-                if (sub == "+") {
-                    isAdd = true;
-                } else {
-                    isAdd = false;
-                }
+            else if (isAddOp(sub)) {
+                isAdd = true;
             }
+
+            else if (isSubOp(sub)) {
+                isAdd = false;
+            }
+
             else {
                 auto v = stoi(sub);
                 ans += calc(v, isAdd);
@@ -64,8 +65,12 @@ public:
         return -v;
     }
 
-    bool isOp(string &s) {
-        return s == "-" || s == "+";
+    bool isAddOp(string &s) {
+        return s == "+";
+    }
+
+    bool isSubOp(string &s) {
+        return s == "-";
     }
 
     bool isLeft(string &s) {
