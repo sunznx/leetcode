@@ -2,8 +2,7 @@
 class Solution
 {
 public:
-    vector<int> maxNumber(vector<int> &nums1, vector<int> &nums2, int k)
-    {
+    vector<int> maxNumber(vector<int> &nums1, vector<int> &nums2, int k) {
         vector<int> ans(k, -1);
         vector<int> m(k, -1);
 
@@ -22,28 +21,20 @@ public:
         return ans;
     }
 
-    void merge(vector<int> &nums1, vector<int> &nums2, vector<int> &m)
-    {
+    void merge(vector<int> &nums1, vector<int> &nums2, vector<int> &m) {
         int k = 0;
-        while (nums1.size() != 0 || nums2.size() != 0) {
-            if (nums1.size() == 0) {
-                m[k++] = nums2[0];
-                nums2.erase(nums2.begin());
-            } else if (nums2.size() == 0) {
-                m[k++] = nums1[0];
-                nums1.erase(nums1.begin());
-            } else if (nums1 > nums2) {
-                m[k++] = nums1[0];
-                nums1.erase(nums1.begin());
+        int s1 = 0;
+        int s2 = 0;
+        while (s1 != nums1.size() || s2 != nums2.size()) {
+            if (compare(nums1, nums2, s1, s2) > 0) {
+                m[k++] = nums1[s1++];
             } else {
-                m[k++] = nums2[0];
-                nums2.erase(nums2.begin());
+                m[k++] = nums2[s2++];
             }
         }
     }
 
-    vector<int> maxK(vector<int> &nums, int k)
-    {
+    vector<int> maxK(vector<int> &nums, int k) {
         int len = nums.size();
 
         int maxRemove = len - k;
