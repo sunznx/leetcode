@@ -6,13 +6,7 @@ public:
         vector<int> ans(k, -1);
         vector<int> m(k, -1);
 
-        // int start = 0;
-        // int end = k;
-
-        int start = max(0, (int)(k - nums2.size()));
-        int end = min(k, (int)(nums1.size()));
-
-        for (int i = start; i <= end; i++) {
+        for (int i = 0; i <= k; i++) {
             auto l1 = i;
             auto l2 = k - i;
             if (nums1.size() >= l1 && nums2.size() >= l2) {
