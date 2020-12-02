@@ -24,13 +24,7 @@ public:
     {
         int k = 0;
         while (nums1.size() != 0 || nums2.size() != 0) {
-            if (nums1.size() == 0) {
-                m[k++] = nums2[0];
-                nums2.erase(nums2.begin());
-            } else if (nums2.size() == 0) {
-                m[k++] = nums1[0];
-                nums1.erase(nums1.begin());
-            } else if (nums1 > nums2) {
+            if (nums1 > nums2) {
                 m[k++] = nums1[0];
                 nums1.erase(nums1.begin());
             } else {
