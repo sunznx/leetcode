@@ -2,12 +2,12 @@
 class Solution {
 public:
     int hIndex(vector<int>& citations) {
-        sort(citations.rbegin(), citations.rend());
+        sort(citations.begin(), citations.end());
+        int len = citations.size();
 
         int ans = 0;
-        for (int i = 0; i < citations.size(); i++) {
-            auto x = citations[i];
-            if (x > ans) {
+        for (int i = len-1; i >= 0; i--) {
+            if (citations[i] > ans) {
                 ans++;
             }
         }
