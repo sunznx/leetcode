@@ -14,7 +14,9 @@ public:
                 auto max1 = maxK(nums1, l1);
                 auto max2 = maxK(nums2, l2);
                 merge(max1, max2, m);
-                ans = max(ans, m);
+                if (compare(ans, m) < 0) {
+                    ans = m;
+                }
             }
         }
         return ans;
@@ -63,5 +65,18 @@ public:
             q.pop_front();
         }
         return ans;
+    }
+
+    int compare(vector<int>& subsequence1, vector<int>& subsequence2, int index1 = 0, int index2 = 0) {
+        int x = subsequence1.size(), y = subsequence2.size();
+        while (index1 < x && index2 < y) {
+            int difference = subsequence1[index1] - subsequence2[index2];
+            if (difference != 0) {
+                return difference;
+            }
+            index1++;
+            index2++;
+        }
+        return (x - index1) - (y - index2);
     }
 };
