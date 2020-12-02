@@ -22,6 +22,6 @@ public:
         if (citations[len-1-l] > l) {
             return l+1;
         }
-        return l;
+        return 0;
     }
 };
