@@ -6,12 +6,13 @@ public:
         int len = citations.size();
 
         int ans = 0;
-        for (int i = len-1; i >= 0; i--) {
-            if (citations[i] > ans) {
+        for (int i = 0; i < len; i++) {
+            if (citations[len-1-i] > ans) {
                 ans++;
+            } else {
+                break;
             }
         }
-
         return ans;
     }
 };
