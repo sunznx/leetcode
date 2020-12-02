@@ -25,7 +25,7 @@ public:
 
     int parse(bool isAdd = true) {
         int ans = 0;
-        while (pos != exp.size()) {
+        while (!isEnd()) {
             auto sub = read();
 
             if (sub == " ") {
@@ -58,6 +58,10 @@ public:
         return ans;
     }
 
+    bool isEnd() {
+        return pos == exp.size();
+    }
+
     int calc(int &v, bool isAdd) {
         if (isAdd) {
             return v;
@@ -83,27 +87,5 @@ public:
 
     bool isNum(char c) {
         return '0' <= c && c <= '9';
-    }
-
-    int op1(string &s, int &num) {
-        if (s == "+") {
-            return num;
-        }
-
-        if (s == "-") {
-            return -num;
-        }
-        return 0;
-    }
-
-    int op2(string &s, int &num1, int &num2) {
-        if (s == "+") {
-            return num1 + num2;
-        }
-
-        if (s == "-") {
-            return num1 - num2;
-        }
-        return 0;
     }
 };
