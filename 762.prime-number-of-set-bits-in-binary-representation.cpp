@@ -1,6 +1,17 @@
 // CreateTime: 2020-12-03 15:46:06
 class Solution {
 public:
+    int countPrimeSetBits(int l, int r) {
+        int ans = 0;
+        for (int i = l; i <= r; i++) {
+            if (isPrime(countBit(i))) {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
     bool isPrime(int n) {
         if (n <= 1) {
             return false;
@@ -19,29 +30,18 @@ public:
                 return false;
             }
         }
-        
+
         return true;
     }
 
     int countBit(int n) {
         int ans = 0;
-        
+
         while (n != 0) {
             n = (n & (n-1));
             ans += 1;
         }
 
-        return ans;
-    }
-
-    int countPrimeSetBits(int l, int r) {
-        int ans = 0;
-        for (int i = l; i <= r; i++) {
-            if (isPrime(countBit(i))) {
-                ans++;
-            }
-        }
-        
         return ans;
     }
 };
