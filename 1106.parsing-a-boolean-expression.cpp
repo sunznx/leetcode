@@ -20,38 +20,33 @@ public:
         bool v = true;
 
         while (!isEnd()) {
-            char r = exp[pos];
+            char r = exp[pos++];
 
             if (r == ')') {
-                pos++;
                 break;
             }
 
-            if (r == '(' || r == ',' || r == ' ' || r == '\t') {
-                pos++;
+            else if (r == '(' || r == ',' || r == ' ' || r == '\t') {
                 continue;
             }
 
-            if (r == 't') {
-                pos++;
+            else if (r == 't') {
                 v = true;
             }
 
-            if (r == 'f') {
-                pos++;
+            else if (r == 'f') {
                 v = false;
             }
 
-            if (r == '&') {
-                pos++;
+            else if (r == '&') {
                 v = parseBracket(true);
             }
-            if (r == '|') {
-                pos++;
+
+            else if (r == '|') {
                 v = parseBracket(false);
             }
-            if (r == '!') {
-                pos++;
+
+            else if (r == '!') {
                 v = !parseBracket(true);
             }
 
