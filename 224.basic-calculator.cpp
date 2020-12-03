@@ -85,7 +85,7 @@ public:
         return s == ")";
     }
 
-    bool isNum(char c) {
+    bool isNum(char &c) {
         return '0' <= c && c <= '9';
     }
 };
