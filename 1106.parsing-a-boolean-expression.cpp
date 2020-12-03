@@ -1,57 +1,57 @@
 // CreateTime: 2019-12-25 10:38:01
 class Solution {
 public:
-    int read = 0;
-    string expression;
+    int pos;
+    string exp;
 
     bool isEnd() {
-        return read == expression.size();
+        return pos == exp.size();
     }
 
     bool parseBoolExpr(string expression) {
-        this->expression = expression;
-        return parseBracket(true);
+        pos = 0;
+        exp = expression;
+        return parseBracket();
     }
 
-    bool parseBracket(bool AND) {
+    bool parseBracket(bool AND = true) {
         bool isFirst = true;
         bool res = true;
-        bool v;
-        char r;
+        bool v = true;
 
         while (!isEnd()) {
-            r = expression[read];
+            char r = exp[pos];
 
             if (r == ')') {
-                read++;
+                pos++;
                 break;
             }
 
             if (r == '(' || r == ',' || r == ' ' || r == '\t') {
-                read++;
+                pos++;
                 continue;
             }
 
             if (r == 't') {
-                read++;
+                pos++;
                 v = true;
             }
 
             if (r == 'f') {
-                read++;
+                pos++;
                 v = false;
             }
 
             if (r == '&') {
-                read++;
+                pos++;
                 v = parseBracket(true);
             }
             if (r == '|') {
-                read++;
+                pos++;
                 v = parseBracket(false);
             }
             if (r == '!') {
-                read++;
+                pos++;
                 v = !parseBracket(true);
             }
 
