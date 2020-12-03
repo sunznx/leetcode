@@ -15,7 +15,7 @@ public:
                 continue;
             }
 
-            // 寻找是否有 x-1 作为结尾的序列
+            // 寻找是否有 x-1 作为结尾的队列
             if (endMap[x-1] > 0) {
                 countMap[x]--;
                 endMap[x-1]--;
@@ -23,7 +23,7 @@ public:
                 continue;
             }
 
-            // 没有找到 x-1 作为结尾的队列
+            // 没有找到 x-1 作为结尾的队列，将 x 作为新的队列
             auto x1 = countMap[x+1];
             auto x2 = countMap[x+2];
 
