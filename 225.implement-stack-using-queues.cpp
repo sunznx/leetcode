@@ -1,7 +1,7 @@
 class MyStack {
 public:
-    queue<int> q;
-    queue<int> helpq;
+    queue<int> que;
+    queue<int> aux;
 
     /** Initialize your data structure here. */
     MyStack() {
@@ -10,39 +10,42 @@ public:
 
     /** Push element x onto stack. */
     void push(int x) {
-        if (q.size() == 0) {
-            q.push(x);
-        } else {
-            helpq.push(x);
-            while (q.size() > 0) {
-                int v = q.front();
-                q.pop();
-                helpq.push(v);
-            }
-
-            while (helpq.size() > 0) {
-                int v = helpq.front();
-                helpq.pop();
-                q.push(v);
-            }
-        }
+        swapOut();
+        que.push(x);
+        swapIn();
     }
 
     /** Removes the element on top of the stack and returns that element. */
     int pop() {
-        int v = q.front();
-        q.pop();
-        return v;
+        auto ans = que.front();
+        que.pop();
+        return ans;
+    }
+
+    void swapOut() {
+        while (que.size()) {
+            auto front = que.front();
+            que.pop();
+            aux.push(front);
+        }
+    }
+
+    void swapIn() {
+        while (aux.size()) {
+            auto front = aux.front();
+            aux.pop();
+            que.push(front);
+        }
     }
 
     /** Get the top element. */
     int top() {
-        return q.front();
+        return que.front();
     }
 
     /** Returns whether the stack is empty. */
     bool empty() {
-        return q.size() == 0;
+        return que.size() == 0;
     }
 };
 
