@@ -1,7 +1,8 @@
+// CreateTime: 2020-12-03 08:50:01
 class MyQueue {
 public:
-    stack<int> s;
-    stack<int> helps;
+    stack<int> stk;
+    stack<int> aux;
 
     /** Initialize your data structure here. */
     MyQueue() {
@@ -10,39 +11,51 @@ public:
 
     /** Push element x to the back of queue. */
     void push(int x) {
-        if (s.size() == 0) {
-            s.push(x);
-        } else {
-            while (s.size()) {
-                int v = s.top();
-                s.pop();
-                helps.push(v);
-            }
-            helps.push(x);
-            while (helps.size()) {
-                int v = helps.top();
-                helps.pop();
-                s.push(v);
-            }
-        }
+        stk.push(x);
     }
 
     /** Removes the element from in front of queue and returns that element. */
     int pop() {
-        int v = s.top();
-        s.pop();
-        return v;
+        swapOut();
+
+        auto ans = aux.top();
+        aux.pop();
+
+        swapIn();
+
+        return ans;
     }
 
     /** Get the front element. */
     int peek() {
-        int v = s.top();
-        return v;
+        swapOut();
+
+        auto ans = aux.top();
+
+        swapIn();
+
+        return ans;
+    }
+
+    void swapOut() {
+        while (stk.size()) {
+            auto top = stk.top();
+            stk.pop();
+            aux.push(top);
+        }
+    }
+
+    void swapIn() {
+        while (aux.size()) {
+            auto top = aux.top();
+            aux.pop();
+            stk.push(top);
+        }
     }
 
     /** Returns whether the queue is empty. */
     bool empty() {
-        return s.size() == 0;
+        return stk.size() == 0;
     }
 };
 
