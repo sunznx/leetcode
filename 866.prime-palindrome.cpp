@@ -50,6 +50,7 @@ public:
         return true;
     }
 
+    // 只根据前半段，生成数字的回文数
     int generateFromBits(vector<int> &bits) {
         int len = bits.size();
         if (len % 2 == 0) {
