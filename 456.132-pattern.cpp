@@ -19,11 +19,11 @@ public:
             auto x = nums[i];
             
             maxR[i] = x;
-            while (que.size() && que.front() < x) {
-                maxR[i] = que.front();
-                que.pop_front();
+            while (que.size() && que.back() < x) {
+                maxR[i] = que.back();
+                que.pop_back();
             }
-            que.push_front(x);
+            que.push_back(x);
         }
 
         for (int i = 0; i < len; i++) {
