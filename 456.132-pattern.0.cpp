@@ -2,15 +2,10 @@
 class Solution {
 public:
     bool find132pattern(vector<int>& nums) {
-        int len = nums.size();
-        if (len == 0) {
-            return false;
-        }
-        
         int k = -0x7fffffff;
         deque<int> que;
 
-        for (int i = len-1; i >= 0; i--) {
+        for (int i = nums.size()-1; i >= 0; i--) {
             if (nums[i] < k) {
                 return true;
             }
