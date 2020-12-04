@@ -1,30 +1,30 @@
-// CreateTime: 2020-01-18 02:10:44
+// CreateTime: 2020-12-05 02:08:20
 class Solution {
-  public:
+public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        int len1 = nums1.size();
-        int len2 = nums2.size();
+        deque<int> que;
+        unordered_map<int, int> m;
 
-        vector<int> res(len1, -1);
-        for (int i = 0; i < len1; i++) {
-            int found = -1;
-            for (int j = 0; j < len2; j++) {
-                if (nums1[i] == nums2[j]) {
-                    found = j;
-                    break;
-                }
+        for (int i = nums2.size()-1; i >= 0; i--) {
+            auto x = nums2[i];
+
+            m[x] = -1;
+            while (que.size() && x > que.back()) {
+                que.pop_back();
             }
 
-            if (found != -1) {
-                for (int j = found+1; j < len2; j++) {
-                    if (nums2[j] > nums1[i]) {
-                        res[i] = nums2[j];
-                        break;
-                    }
-                }
+            if (que.size()) {
+                m[x] = que.back();
             }
+
+            que.push_back(x);
         }
 
-        return res;
+        vector<int> ans(nums1.size(), -1);
+        for (int i = 0; i < ans.size(); i++) {
+            auto x = nums1[i];
+            ans[i] = m[x];
+        }
+        return ans;
     }
 };
