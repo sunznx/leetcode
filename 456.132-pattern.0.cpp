@@ -8,18 +8,18 @@ public:
         }
         
         int k = -0x7fffffff;
-        stack<int> stk;
+        deque<int> que;
 
         for (int i = len-1; i >= 0; i--) {
             if (nums[i] < k) {
                 return true;
             }
 
-            while (!stk.empty() && nums[i] > stk.top()) {
-                k = stk.top();
-                stk.pop();
+            while (!que.empty() && nums[i] > que.back()) {
+                k = que.back();
+                que.pop_back();
             }
-            stk.push(nums[i]);
+            que.push_back(nums[i]);
         }
         
         return false;
