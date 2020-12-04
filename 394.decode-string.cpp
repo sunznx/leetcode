@@ -1,10 +1,11 @@
 // CreateTime: 2020-01-03 10:15:57
 class Solution {
 public:
-    int k = 0;
+    int k;
     string expression;
 
     string decodeString(string s) {
+        k = 0;
         expression = s;
         string res = "";
         while (!isEnd()) {
