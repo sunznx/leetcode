@@ -1,36 +1,33 @@
-// CreateTime: 2020-01-18 01:28:59
+// CreateTime: 2020-12-05 02:18:51
 class Solution {
-  public:
+public:
     vector<int> nextGreaterElements(vector<int>& nums) {
         int len = nums.size();
-        if (len == 0) {
-            return {};
-        }
-
         for (int i = 0; i < len; i++) {
             nums.push_back(nums[i]);
         }
 
-        stack<int> s;
-        vector<int> res(len);
-        for (int i = 0; i < 2*len; i++) {
-            while (s.size() != 0 && nums[i] > nums[s.top()]) {
-                if (nums[i] > nums[s.top()]) {
-                    res[s.top()] = nums[i];
-                    s.pop();
-                }
+        typedef pair<int, int> PII;
+        deque<PII> que;
+
+        vector<int> ans(len);
+
+        for (int i = 2*len-1; i >= 0; i--) {
+            auto x = nums[i];
+
+            while (que.size() && (que.back().first-i+1 > len || x >= que.back().second)) {
+                que.pop_back();
             }
 
-            if (i < len) {
-                s.push(i);
+            if (que.size() && i <= len-1) {
+                ans[i] = que.back().second;
+            } else if (i <= len-1) {
+                ans[i] = -1;
             }
+
+            que.push_back({i, x});
         }
 
-        while (s.size()) {
-            res[s.top()] = -1;
-            s.pop();
-        }
-
-        return res;
+        return ans;
     }
 };
