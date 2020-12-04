@@ -1,34 +1,26 @@
-// CreateTime: 2019-12-24 14:58:20
+// CreateTime: 2020-12-04 08:23:30
 class Solution {
 public:
-    bool validMountainArray(vector<int>& A) {
-        int len = A.size();
+    bool validMountainArray(vector<int>& arr) {
+        bool foundUp = false;
+        bool foundDown = false;
 
-        if (len <= 2) {
-            return false;
-        }
-
-        bool down = false;
-        bool isFirst = true;
-        for (int i = 1; i < len; i++) {
-            if (A[i] == A[i-1]) {
-                return false;
-            }
-
-            if (!down && A[i-1] > A[i]) {
-                if (isFirst && i != 1) {
-                    isFirst = false;
-                    down = true;
-                } else {
+        for (int i = 1; i < arr.size(); i++) {
+            if (arr[i] > arr[i-1]) {
+                if (foundDown) {
                     return false;
                 }
-            }
-
-            if (down && A[i-1] < A[i]) {
+                foundUp = true;
+            } else if (arr[i] < arr[i-1]) {
+                if (!foundUp) {
+                    return false;
+                }
+                foundDown = true;
+            } else {
                 return false;
             }
         }
 
-        return down == true;
+        return foundUp && foundDown;
     }
 };
