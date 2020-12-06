@@ -1,14 +1,6 @@
 // CreateTime: 2020-12-07 07:25:50
 class Solution {
 public:
-    typedef pair<int, int> PII;
-
-    void safePush(vector<PII> &item, PII x) {
-        if (x.first > 0) {
-            item.push_back(x);
-        }
-    }
-
     int leastInterval(vector<char>& tasks, int n) {
         int ans = 0;
 
@@ -18,6 +10,7 @@ public:
             m[x]++;
         }
 
+        typedef pair<int, int> PII;
         priority_queue<PII, vector<PII>, less<PII>> pq;
         for (int i = 0; i < m.size(); i++) {
             if (m[i] > 0) {
@@ -29,14 +22,18 @@ public:
             vector<PII> item;
 
             auto top = pq.top();
-            safePush(item, {top.first-1, top.second});
+            if (top.first-1 > 0) {
+                item.push_back({top.first-1, top.second});
+            }
             pq.pop();
             ans++;
 
             for (int k = 0; k < n; k++) {
                 if (pq.size()) {
                     auto top = pq.top();
-                    safePush(item, {top.first-1, top.second});
+                    if (top.first-1 > 0) {
+                        item.push_back({top.first-1, top.second});
+                    }
                     pq.pop();
                 } else if (pq.size() == 0 && item.size() == 0) {
                     break;
