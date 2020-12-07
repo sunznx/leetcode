@@ -1,27 +1,35 @@
+// CreateTime: 2020-12-08 00:41:35
 class FreqStack {
 public:
-    unordered_map<int, int> m;
-    unordered_map<int, stack<int>> aux;
-    int maxn = 0;
+    typedef pair<int, pair<int, int>> PIII;
+
+    priority_queue<PIII, vector<PIII>, less<PIII>> pq;
+    unordered_map<int, int> freq;
+    int idx = 0;
 
     FreqStack() {
+
     }
 
     void push(int x) {
-        int v = m[x] + 1;
-        m[x] = v;
-        aux[v].push(x);
-        maxn = max(maxn, v);
+        freq[x]++;
+        idx++;
+        pq.push({freq[x], {idx, x}});
     }
 
     int pop() {
-        int x = aux[maxn].top();
-        aux[maxn].pop();
-        if (aux[maxn].size() == 0) {
-            maxn -= 1;
-        }
-        m[x] = m[x] - 1;
+        auto top = pq.top();
+        pq.pop();
 
+        auto x = top.second.second;
+        freq[x]--;
         return x;
     }
 };
+
+/**
+ * Your FreqStack object will be instantiated and called as such:
+ * FreqStack* obj = new FreqStack();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ */
