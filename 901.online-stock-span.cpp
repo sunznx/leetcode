@@ -9,13 +9,13 @@ public:
     }
 
     int next(int price) {
-        int less = 1;
+        int lessOrEqual = 1;
         while (stk.size() && price >= stk.top().first) {
-            less += stk.top().second;
+            lessOrEqual += stk.top().second;
             stk.pop();
         }
-        stk.push({price, less});
-        return less;
+        stk.push({price, lessOrEqual});
+        return lessOrEqual;
     }
 };
 
