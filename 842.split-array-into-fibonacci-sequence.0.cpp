@@ -3,8 +3,6 @@ class Solution {
 public:
     vector<int> ans;
     vector<int> aux;
-    bool ok;
-
     string maxString;
 
     vector<int> splitIntoFibonacci(string S) {
@@ -19,14 +17,13 @@ public:
     }
 
     void dfs(string &s, int pos = 0) {
-        if (ok) {
+        if (ans.size()) {
             return;
         }
 
         if (pos == s.size()) {
             if (aux.size() >= 3) {
                 ans = aux;
-                ok = true;
             }
             return;
         }
