@@ -1,34 +1,45 @@
-// CreateTime: 2020-01-02 17:22:02
+// CreateTime: 2020-12-07 11:14:56
 class Solution {
 public:
     vector<int> asteroidCollision(vector<int>& asteroids) {
-        vector<int> res;
+        vector<int> ans;
 
-        int len = asteroids.size();
-        for (int i = 0; i < len; i++) {
-            if (res.size() == 0) {
-                res.push_back(asteroids[i]);
-                continue;
-            }
+        for (int i = 0; i < asteroids.size(); i++) {
+            auto x = asteroids[i];
 
-            if (asteroids[i] < 0) {
-                while (res.size() && res.back() >= 0 && -asteroids[i] > res.back()) {
-                    res.pop_back();
+            ans.push_back(x);
+
+            while (ans.size() >= 2) {
+                if (ans.back() > 0) {
+                    break;
                 }
 
-                if (res.size() && -asteroids[i] == res.back()) {
-                    res.pop_back();
-                    continue;
+                auto x = ans.back();
+                ans.pop_back();
+
+                auto b = ans.back();
+                ans.pop_back();
+
+                if (b < 0 && x < 0) {
+                    ans.push_back(b);
+                    ans.push_back(x);
+                    break;
                 }
 
-                if (res.size() == 0 || res.back() < 0) {
-                    res.push_back(asteroids[i]);
+                if (abs(x) == abs(b)) {
+                    break;
                 }
-            } else if (asteroids[i] >= 0) {
-                res.push_back(asteroids[i]);
+
+                if (abs(x) > abs(b)) {
+                    ans.push_back(x);
+                }
+
+                if (abs(x) < abs(b)) {
+                    ans.push_back(b);
+                }
             }
         }
 
-        return res;
+        return ans;
     }
 };
