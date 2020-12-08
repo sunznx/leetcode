@@ -1,17 +1,24 @@
-// CreateTime: 2019-12-14 07:06:28
+// CreateTime: 2020-12-08 12:17:15
 class Solution {
 public:
     string removeDuplicates(string S) {
-        int k = 0;
-        while (k+1 < S.size()) {
-            if (k+1 < S.size() && S[k] == S[k+1]) {
-                S.erase(S.begin()+k+1);
-                S.erase(S.begin()+k);
-                k = max(0, k-1);
-            } else {
-                k++;
+        string ans;
+
+        for (int i = 0; i < S.size(); i++) {
+            ans.push_back(S[i]);
+
+            while (ans.size() >= 2) {
+                auto c1 = ans[ans.size()-1];
+                auto c2 = ans[ans.size()-2];
+                if (c1 != c2) {
+                    break;
+                }
+
+                ans.pop_back();
+                ans.pop_back();
             }
         }
-        return S;
+
+        return ans;
     }
 };
