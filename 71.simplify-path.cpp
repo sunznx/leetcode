@@ -17,33 +17,37 @@ public:
         return ans;
     }
 
+    string join(vector<string> &arr, char x) {
+        string ans = "";
+        for (int i = 0; i < arr.size(); i++) {
+            if (i == arr.size()-1) {
+                ans = ans + arr[i];
+            } else {
+                ans = ans + arr[i] + x;
+            }
+        }
+        return ans;
+    }
+
     string simplifyPath(string path) {
-        stack<string> stk;
+        vector<string> stk;
         auto pathArr = split(path, '/');
         for (int i = 0; i < pathArr.size(); i++) {
             auto x = pathArr[i];
+
             if (x == "." || x == "") {
                 continue;
-            } else if (x == "..") {
+            }
+            else if (x == "..") {
                 if (stk.size()) {
-                    stk.pop();
+                    stk.pop_back();
                 }
-            } else {
-                stk.push(x);
+            }
+            else {
+                stk.push_back(x);
             }
         }
 
-        string ans = "";
-        while (stk.size()) {
-            auto x = stk.top();
-            stk.pop();
-
-            if (ans == "") {
-                ans = x;
-            } else {
-                ans = x + "/" + ans;
-            }
-        }
-        return "/" + ans;
+        return "/" + join(stk, '/');
     }
 };
