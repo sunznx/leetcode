@@ -1,27 +1,26 @@
-// CreateTime: 2019-12-13 09:38:22
+// CreateTime: 2020-12-08 11:35:15
 class Solution {
 public:
     string removeOuterParentheses(string S) {
+        string ans;
+
+        int l = 0;
+        int r = 0;
         int k = 0;
-        int removed = 0;
-        int left = 0;
-        while (k < S.size()) {
-            if (S[k] == '(' && removed == 0) {
-                S.erase(S.begin() + k);
-                removed++;
-            } else if (S[k] == '(') {
-                k++;
-                left++;
-            } else if (S[k] == ')' && left) {
-                k++;
-                left--;
-            } else if (S[k] == ')' && removed) {
-                S.erase(S.begin() + k);
-                removed--;
+        for (int i = 0; i < S.size(); i++) {
+            if (S[i] == '(') {
+                l++;
             } else {
-                k++;
+                r++;
+            }
+
+            if (l == r) {
+                ans += S.substr(k+1, l+r-2);
+                l = 0;
+                r = 0;
+                k = i+1;
             }
         }
-        return S;
+        return ans;
     }
 };
