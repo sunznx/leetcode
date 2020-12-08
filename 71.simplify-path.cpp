@@ -1,6 +1,28 @@
 // CreateTime: 2020-01-02 16:49:56
 class Solution {
 public:
+    string simplifyPath(string path) {
+        vector<string> stk;
+        auto pathArr = split(path, '/');
+        for (int i = 0; i < pathArr.size(); i++) {
+            auto x = pathArr[i];
+
+            if (x == "." || x == "") {
+                continue;
+            }
+            else if (x == "..") {
+                if (stk.size()) {
+                    stk.pop_back();
+                }
+            }
+            else {
+                stk.push_back(x);
+            }
+        }
+
+        return "/" + join(stk, '/');
+    }
+
     vector<string> split(string &s, char x) {
         vector<string> ans;
         string sub = "";
@@ -27,27 +49,5 @@ public:
             }
         }
         return ans;
-    }
-
-    string simplifyPath(string path) {
-        vector<string> stk;
-        auto pathArr = split(path, '/');
-        for (int i = 0; i < pathArr.size(); i++) {
-            auto x = pathArr[i];
-
-            if (x == "." || x == "") {
-                continue;
-            }
-            else if (x == "..") {
-                if (stk.size()) {
-                    stk.pop_back();
-                }
-            }
-            else {
-                stk.push_back(x);
-            }
-        }
-
-        return "/" + join(stk, '/');
     }
 };
