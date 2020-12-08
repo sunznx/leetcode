@@ -13,19 +13,17 @@ public:
 
             if (isLeft(c)) {
                 stk.push(c);
-                continue;
-            }
+            } else {
+                if (stk.empty()) {
+                    return false;
+                }
 
-            // isRight
-            if (stk.empty()) {
-                return false;
-            }
+                auto x = stk.top();
+                stk.pop();
 
-            char top = stk.top();
-            stk.pop();
-
-            if (!match(top, c)) {
-                return false;
+                if (!match(x, c)) {
+                    return false;
+                }
             }
         }
 
