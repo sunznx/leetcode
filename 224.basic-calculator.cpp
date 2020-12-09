@@ -11,55 +11,100 @@ public:
         return parse();
     }
 
-    string read() {
-        string ans = string(1, exp[pos++]);
-        if (!isNum(ans[0])) {
-            return ans;
+    string peek() {
+        while (!isEnd() && isSpace(exp[pos])) {
+            pos++;
         }
 
-        while (pos != exp.size() && isNum(exp[pos])) {
-            ans.push_back(exp[pos++]);
+        int k = pos;
+
+        if (isLeft(exp[k])) {
+            return "(";
+        }
+
+        if (isRight(exp[k])) {
+            return ")";
+        }
+
+        if (isAddOp(exp[k])) {
+            return "+";
+        }
+
+        if (isSubOp(exp[k])) {
+            return "-";
+        }
+
+        string ans;
+        while (!isEnd(k) && isNum(exp[k])) {
+            ans.push_back(exp[k++]);
         }
         return ans;
     }
 
-    int parse(bool isAdd = true) {
+    string next() {
+        auto r = peek();
+        pos += r.size();
+        return r;
+    }
+
+    int parse() {
         int ans = 0;
         while (!isEnd()) {
-            auto sub = read();
-
-            if (sub == " ") {
-                continue;
-            }
-
-            else if (isLeft(sub)) {
-                auto v = parse();
-                ans += calc(v, isAdd);
-            }
-
-            else if (isRight(sub)) {
-                break;
-            }
-
-            else if (isAddOp(sub)) {
-                isAdd = true;
-            }
-
-            else if (isSubOp(sub)) {
-                isAdd = false;
-            }
-
-            else {
-                auto v = stoi(sub);
-                ans += calc(v, isAdd);
-            }
+            auto r = next();
+            match(r, ans);
         }
 
         return ans;
+    }
+
+    int parseLeft() {
+        int ans = 0;
+
+        while (true) {
+            auto r = next();
+            if (isRight(r)) {
+                break;
+            }
+            match(r, ans);
+        }
+        return ans;
+    }
+
+    void match(string &r, int &ans, bool isAdd = true) {
+        if (isLeft(r)) {
+            auto sub = parseLeft();
+            if (isAdd) {
+                ans += sub;
+            } else {
+                ans -= sub;
+            }
+        }
+
+        if (isNum(r)) {
+            if (isAdd) {
+                ans += stoi(r);
+            } else {
+                ans -= stoi(r);
+            }
+        }
+
+        if (isAddOp(r)) {
+            r = next();
+            match(r, ans, true);
+        }
+
+        if (isSubOp(r)) {
+            r = next();
+            match(r, ans, false);
+        }
     }
 
     bool isEnd() {
-        return pos == exp.size();
+        return isEnd(pos);
+    }
+
+    bool isEnd(int k) {
+        return k == exp.size();
     }
 
     int calc(int &v, bool isAdd) {
@@ -69,23 +114,51 @@ public:
         return -v;
     }
 
+    bool isAddOp(char &c) {
+        return c == '+';
+    }
+
+    bool isSubOp(char &c) {
+        return c == '-';
+    }
+
     bool isAddOp(string &s) {
-        return s == "+";
+        return isAddOp(s[0]);
     }
 
     bool isSubOp(string &s) {
-        return s == "-";
+        return isSubOp(s[0]);
     }
 
     bool isLeft(string &s) {
-        return s == "(";
+        return isLeft(s[0]);
+    }
+
+    bool isLeft(char &c) {
+        return c == '(';
     }
 
     bool isRight(string &s) {
-        return s == ")";
+        return isRight(s[0]);
+    }
+
+    bool isRight(char &c) {
+        return c == ')';
     }
 
     bool isNum(char &c) {
         return '0' <= c && c <= '9';
+    }
+
+    bool isNum(string &s) {
+        return isNum(s[0]);
+    }
+
+    bool isSpace(char &c) {
+        return c == ' ';
+    }
+
+    bool isSpace(string &s) {
+        return isSpace(s[0]);
     }
 };
