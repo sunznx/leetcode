@@ -1,48 +1,39 @@
-// CreateTime: 2019-12-11 14:31:02
+// CreateTime: 2020-12-03 15:05:44
 class Solution {
 public:
-    bool ok = true;
     bool isValidSerialization(string preorder) {
-        auto arr = split(',', preorder);
-        auto tot = walk(0, arr);
-        return ok && tot == arr.size();
-    }
+        auto slots = 1;
+        auto arr = split(preorder, ',');
 
-    int walk(int idx, vector<string> &arr) {
-        if (!ok) {
-            return 0;
-        }
+        for (int i = 0; i < arr.size(); i++) {
+            auto x = arr[i];
+            slots--;
 
-        if (idx == arr.size()-2 || idx == arr.size()-1) {
-            if (arr[idx] != "#") {
-                ok = false;
-                return 0;
-            } else {
-                return 1;
+            if (slots < 0) {
+                return false;
+            }
+
+            if (x != "#") {
+                slots += 2;
             }
         }
-
-        if (arr[idx] != "#" && !(idx+2 <= arr.size()-1)) {
-            ok = false;
-            return 0;
-        }
-
-        if (arr[idx] == "#") {
-            return 1;
-        }
-
-        int l = walk(idx+1, arr);
-        int r = walk(idx+1+l, arr);
-        return l + r + 1;
+        
+        return slots == 0;
     }
 
-    vector<string> split(char delim, const string& s) {
-        stringstream ss(s);
-        string item;
-        vector<string> elems;
-        while (getline(ss, item, delim)) {
-            elems.push_back(item);
+    vector<string> split(string &s, char x) {
+        vector<string> ans;
+        string sub = "";
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] != x) {
+                sub.push_back(s[i]);
+            }
+
+            if (s[i] == x || i == s.size()-1) {
+                ans.push_back(sub);
+                sub = "";
+            }
         }
-        return elems;
+        return ans;
     }
 };
