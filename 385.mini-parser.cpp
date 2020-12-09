@@ -39,54 +39,90 @@ public:
         return parse();
     }
 
-    NestedInteger parse(bool inList = false) {
-        NestedInteger ans;
-        while (!isEnd()) {
-            auto sub = read();
+    NestedInteger parse() {
+        auto r = next();
+        if (isLeft(r)) {
+            return parseLeft();
+        }
 
-            if (sub == " ") {
-                continue;
-            }
-            else if (isRight(sub)) {
+        NestedInteger ans;
+        ans.setInteger(stoi(r));
+        return ans;
+    }
+
+    NestedInteger parseLeft() {
+        NestedInteger ans;
+        while (true) {
+            auto r = next();
+            if (isRight(r)) {
                 break;
             }
-            else if (isComma(sub)) {
-                continue;
-            }
-            else if (isLeft(sub)) {
-                auto v = parse(true);
-                if (inList) {
-                    ans.add(v);
-                } else {
-                    ans = v;
-                }
-            }
-            else {
-                auto v = stoi(sub);
-                if (inList) {
-                    ans.add(NestedInteger(v));
-                } else {
-                    ans.setInteger(v);
-                }
-            }
+            match(r, ans);
         }
         return ans;
+    }
+
+    void match(string &r, NestedInteger &ans) {
+        if (isLeft(r)) {
+            NestedInteger sub = parseLeft();
+            ans.add(sub);
+        }
+
+        else if (isComma(r)) {
+            return;
+        }
+
+        else if (isNum(r)) {
+            if (!ans.isInteger()) {
+                ans.add(stoi(r));
+            } else {
+                ans.setInteger(stoi(r));
+            }
+        }
     }
 
     bool isEnd() {
-        return pos == exp.size();
+        return isEnd(pos);
     }
 
-    string read() {
-        string ans(1, exp[pos++]);
-        if (!isNum(ans[0])) {
-            return ans;
+    bool isEnd(int k) {
+        return k == exp.size();
+    }
+
+    string peak() {
+        while (!isEnd() && (isSpace(exp[pos]))) {
+            pos++;
         }
 
-        while (pos < exp.size() && isNum(exp[pos])) {
-            ans.push_back(exp[pos++]);
+        int k = pos;
+
+        if (isLeft(exp[k])) {
+            return "[";
+        }
+
+        if (isRight(exp[k])) {
+            return "]";
+        }
+
+        if (isComma(exp[k])) {
+            return ",";
+        }
+
+        string ans;
+        while (!isEnd(k) && isNum(exp[k])) {
+            ans.push_back(exp[k++]);
         }
         return ans;
+    }
+
+    string next() {
+        auto r = peak();
+        pos += r.size();
+        return r;
+    }
+
+    bool isNum(string &s) {
+        return isNum(s[0]);
     }
 
     bool isNum(char &c) {
@@ -94,14 +130,34 @@ public:
     }
 
     bool isLeft(string &s) {
-        return s == "[";
+        return isLeft(s[0]);
+    }
+
+    bool isLeft(char &s) {
+        return s == '[';
     }
 
     bool isRight(string &s) {
-        return s == "]";
+        return isRight(s[0]);
+    }
+
+    bool isRight(char &c) {
+        return c == ']';
     }
 
     bool isComma(string &s) {
-        return s == ",";
+        return isComma(s[0]);
+    }
+
+    bool isComma(char &c) {
+        return c == ',';
+    }
+
+    bool isSpace(string &s) {
+        return isSpace(s[0]);
+    }
+
+    bool isSpace(char &c) {
+        return c == ' ';
     }
 };
