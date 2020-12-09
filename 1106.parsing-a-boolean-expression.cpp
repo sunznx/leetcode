@@ -65,9 +65,6 @@ public:
         return ans;
     }
 
-    // 0 &
-    // 1 |
-    // 2 !
     void Op(int &op, bool &ans, bool &sub) {
         if (op == OP_AND) {
             ans = (ans & sub);
