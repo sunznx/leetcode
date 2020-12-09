@@ -11,6 +11,58 @@ public:
         return parse();
     }
 
+    int parse() {
+        int ans = 0;
+        while (!isEnd()) {
+            auto r = next();
+            match(r, ans);
+        }
+
+        return ans;
+    }
+
+    int parseLeft() {
+        int ans = 0;
+
+        while (true) {
+            auto r = next();
+            if (isRight(r)) {
+                break;
+            }
+            match(r, ans);
+        }
+        return ans;
+    }
+
+    void match(string &r, int &ans, bool isAdd = true) {
+        if (isLeft(r)) {
+            auto sub = parseLeft();
+            if (isAdd) {
+                ans += sub;
+            } else {
+                ans -= sub;
+            }
+        }
+
+        else if (isNum(r)) {
+            if (isAdd) {
+                ans += stoi(r);
+            } else {
+                ans -= stoi(r);
+            }
+        }
+
+        else if (isAddOp(r)) {
+            r = next();
+            match(r, ans, true);
+        }
+
+        else if (isSubOp(r)) {
+            r = next();
+            match(r, ans, false);
+        }
+    }
+
     string peek() {
         while (!isEnd() && isSpace(exp[pos])) {
             pos++;
@@ -45,58 +97,6 @@ public:
         auto r = peek();
         pos += r.size();
         return r;
-    }
-
-    int parse() {
-        int ans = 0;
-        while (!isEnd()) {
-            auto r = next();
-            match(r, ans);
-        }
-
-        return ans;
-    }
-
-    int parseLeft() {
-        int ans = 0;
-
-        while (true) {
-            auto r = next();
-            if (isRight(r)) {
-                break;
-            }
-            match(r, ans);
-        }
-        return ans;
-    }
-
-    void match(string &r, int &ans, bool isAdd = true) {
-        if (isLeft(r)) {
-            auto sub = parseLeft();
-            if (isAdd) {
-                ans += sub;
-            } else {
-                ans -= sub;
-            }
-        }
-
-        if (isNum(r)) {
-            if (isAdd) {
-                ans += stoi(r);
-            } else {
-                ans -= stoi(r);
-            }
-        }
-
-        if (isAddOp(r)) {
-            r = next();
-            match(r, ans, true);
-        }
-
-        if (isSubOp(r)) {
-            r = next();
-            match(r, ans, false);
-        }
     }
 
     bool isEnd() {
