@@ -1,19 +1,15 @@
 // CreateTime: 2020-12-05 02:18:51
 class Solution {
 public:
+    typedef pair<int, int> PII;
+
     vector<int> nextGreaterElements(vector<int>& nums) {
         int len = nums.size();
-        for (int i = 0; i < len; i++) {
-            nums.push_back(nums[i]);
-        }
 
-        typedef pair<int, int> PII;
         deque<PII> que;
-
         vector<int> ans(len);
-
         for (int i = 2*len-1; i >= 0; i--) {
-            auto x = nums[i];
+            auto x = nums[i%len];
 
             while (que.size() && (que.back().first-i+1 > len || x >= que.back().second)) {
                 que.pop_back();
