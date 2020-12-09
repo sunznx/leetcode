@@ -147,7 +147,7 @@ public:
     }
 
     bool isAtom(char &x) {
-        return 'a' <= x && x <= 'z' || 'A' <= x && x <= 'Z';
+        return isUpper(x) || isLower(x);
     }
 
     bool isNum(char &x) {
