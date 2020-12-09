@@ -4,36 +4,27 @@ public:
     string smallestSubsequence(string s) {
         int len = s.size();
 
-        vector<int> m(256);
-        vector<bool> in(256);
-
-        deque<char> q;
+        vector<int> pos(256);        // x 最后一次出现的位置
+        vector<bool> seen(256);
 
         for (int i = 0; i < len; i++) {
-            auto c = s[i];
-            m[c]++;
-        }
-
-        for (int i = 0; i < len; i++) {
-            auto c = s[i];
-            m[c]--;
-
-            if (in[c] == false) {
-                while (q.size() && m[q.back()] > 0 && c < q.back()) {
-                    in[q.back()] = false;
-                    q.pop_back();
-                }
-
-                in[c] = true;
-                q.push_back(c);
-            }
+            auto x = s[i];
+            pos[x] = i;
         }
 
         string ans;
-        while (q.size()) {
-            ans.push_back(q.front());
-            q.pop_front();
+        for (int i = 0; i < len; i++) {
+            auto x = s[i];
+            if (!seen[x]) {
+                while (ans.size() && pos[ans.back()] > i && x < ans.back()) {
+                    seen[ans.back()] = false;
+                    ans.pop_back();
+                }
+                seen[x] = true;
+                ans.push_back(x);
+            }
         }
+
         return ans;
     }
 };
