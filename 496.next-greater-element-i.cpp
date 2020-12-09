@@ -8,13 +8,14 @@ public:
         for (int i = nums2.size()-1; i >= 0; i--) {
             auto x = nums2[i];
 
-            m[x] = -1;
-            while (que.size() && x > que.back()) {
+            while (que.size() && x >= que.back()) {
                 que.pop_back();
             }
 
             if (que.size()) {
                 m[x] = que.back();
+            } else {
+                m[x] = -1;
             }
 
             que.push_back(x);
