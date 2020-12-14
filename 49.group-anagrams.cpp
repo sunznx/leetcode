@@ -22,7 +22,7 @@ public:
     }
 
     vector<unsigned int> init() {
-        vector<unsigned int> p(26);
+        vector<unsigned int> p(256);
         int P = 131;
         p[0] = 1;
         for (int i = 1; i < p.size(); i++) {
@@ -34,12 +34,9 @@ public:
     unsigned int calcHash(vector<unsigned int> &p, string &s) {
         unsigned int ans = 0;
         for (int i = 0; i < s.size(); i++) {
-            auto x = s[i]-'a';
+            auto x = s[i];
             ans += p[x];
         }
         return ans;
     }
 };
-
-
-
