@@ -2,13 +2,10 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        int len = strs.size();
-
         auto p = init();
-
         unordered_map<unsigned int, vector<string>> m;
 
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < strs.size(); i++) {
             auto h = calcHash(p, strs[i]);
             m[h].push_back(strs[i]);
         }
@@ -22,9 +19,8 @@ public:
     }
 
     vector<unsigned int> init() {
-        vector<unsigned int> p(256);
         int P = 131;
-        p[0] = 1;
+        vector<unsigned int> p(256, 1);
         for (int i = 1; i < p.size(); i++) {
             p[i] = p[i-1] * P;
         }
