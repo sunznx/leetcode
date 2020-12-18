@@ -1,18 +1,15 @@
+// CreateTime: 2020-12-18 23:50:57
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        int len1 = s.size();
-        int len2 = t.size();
-
-        int res = 0;
-        for (int i = 0; i < len1; i++) {
-            res = (res ^ (s[i] - 'a'));
+        char ans = 0;
+        for (int i = 0; i < s.size(); i++) {
+            ans = (ans ^ s[i]);
         }
 
-        for (int i = 0; i < len2; i++) {
-            res = (res ^ (t[i] - 'a'));
+        for (int i = 0; i < t.size(); i++) {
+            ans = (ans ^ t[i]);
         }
-
-        return (char)(res + 'a');
+        return ans;
     }
 };
