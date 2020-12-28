@@ -1,25 +1,22 @@
 // CreateTime: 2020-01-16 23:33:04
 class Solution {
   public:
-    vector<int> m;
-
     int numTrees(int n) {
-        m.resize(max(3, n+1));
+        vector<int> m(n+1);
         m[0] = 1;
         m[1] = 1;
-        m[2] = 2;
-        return f(n);
+        return f(m, n);
     }
 
-    int f(int n) {
+    int f(vector<int> &m, int n) {
         if (m[n]) {
             return m[n];
         }
 
-        int res = 0;
-        for (int i = 0; i < n; i++) {
-            res += f(i) * f(n-1-i);
+        int ans = 0;
+        for (int i = 0; i <= n-1; i++) {
+            ans += f(m, i) * f(m, n-1-i);
         }
-        return m[n] = res;
+        return m[n] = ans;
     }
 };
