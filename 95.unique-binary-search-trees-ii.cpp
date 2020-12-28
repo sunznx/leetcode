@@ -19,22 +19,20 @@ public:
         return generateTrees(1, n);
     }
 
-    vector<TreeNode*> generateTrees(int l, int r) {
-        if (l > r) {
+    vector<TreeNode*> generateTrees(int start, int end) {
+        if (start > end) {
             return {NULL};
         }
 
         vector<TreeNode*> ans;
-        for (int i = l; i <= r; i++) {
-            auto lx = generateTrees(l, i-1);
-            auto rx = generateTrees(i+1, r);
+        for (int i = start; i <= end; i++) {
+            auto l = generateTrees(start, i-1);
+            auto r = generateTrees(i+1, end);
 
-            for (auto &ll: lx) {
-                for (auto &rr: rx) {
-                    auto node = new TreeNode(i);
-                    node->left = ll;
-                    node->right = rr;
-                    ans.emplace_back(node);
+            for (auto &lx: l) {
+                for (auto &rx: r) {
+                    auto node = new TreeNode(i, lx, rx);
+                    ans.push_back(node);
                 }
             }
         }
