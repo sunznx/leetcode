@@ -34,7 +34,7 @@ public:
                     auto node = new TreeNode(i);
                     node->left = ll;
                     node->right = rr;
-                    ans.push_back(node);
+                    ans.emplace_back(node);
                 }
             }
         }
