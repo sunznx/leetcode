@@ -14,7 +14,10 @@ public:
         vector<int> res;
 
         stack<pair<TreeNode *, bool>> stk;
-        stk.push({root, false});
+
+        if (root) {
+            stk.push({root, false});
+        }
 
         while (stk.size()) {
             auto top = stk.top();
@@ -23,15 +26,17 @@ public:
             auto node = top.first;
             auto marked = top.second;
 
-            if (node == NULL) {
-                continue;
-            }
-
             if (marked) {
                 res.push_back(node->val);
             } else {
-                stk.push({node->right, false});
-                stk.push({node->left, false});
+                if (node->right) {
+                    stk.push({node->right, false});
+                }
+
+                if (node->left) {
+                    stk.push({node->left, false});
+                }
+
                 stk.push({node, true});
             }
         }
