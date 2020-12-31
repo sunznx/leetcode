@@ -12,26 +12,31 @@ class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int> res;
-        
+
         stack<pair<TreeNode *, int>> stk;
-        stk.push({root, false});
+
+        if (root) {
+            stk.push({root, false});
+        }
+
         while (stk.size()) {
             auto top = stk.top();
             stk.pop();
-            
+
             auto node = top.first;
             auto marked = top.second;
-            
-            if (node == NULL) {
-                continue;
-            }
 
             if (marked) {
                 res.push_back(node->val);
             } else {
                 stk.push({node, true});
-                stk.push({node->right, false});
-                stk.push({node->left, false});
+
+                if (node->right) {
+                    stk.push({node->right, false});
+                }
+                if (node->left) {
+                    stk.push({node->left, false});
+                }
             }
         }
 
