@@ -13,7 +13,7 @@ public:
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int> res;
 
-        stack<pair<TreeNode *, int>> stk;
+        stack<pair<TreeNode *, bool>> stk;
 
         if (root) {
             stk.push({root, false});
