@@ -18,27 +18,28 @@ public:
     vector<vector<int>> levelOrder(Node* root) {
         vector<vector<int>> res;
 
-        queue<Node *> q;
+        queue<Node *> que;
         if (root) {
-            q.push(root);
+            que.push(root);
         }
 
-        while (q.size()) {
-            int len = q.size();
+        while (que.size()) {
+            auto k = que.size();
 
-            vector<int> v;
-            for (int i = 0; i < len; i++) {
-                Node *t = q.front();
-                q.pop();
+            vector<int> sub;
+            while (k--) {
+                auto top = que.front();
+                que.pop();
 
-                v.push_back(t->val);
-                for (int j = 0; j < t->children.size(); j++) {
-                    Node *n = t->children[j];
-                    q.push(n);
+                sub.push_back(top->val);
+                for (auto child: top->children) {
+                    if (child) {
+                        que.push(child);
+                    }
                 }
             }
 
-            res.push_back(v);
+            res.push_back(sub);
         }
 
         return res;
