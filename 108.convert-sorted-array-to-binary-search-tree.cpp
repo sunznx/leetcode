@@ -13,7 +13,7 @@ public:
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         return sortedArrayToBST(nums, 0, nums.size()-1);
     }
-    
+
     TreeNode* sortedArrayToBST(vector<int>& nums, int l, int r) {
         if (l > r) {
             return NULL;
