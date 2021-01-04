@@ -37,8 +37,8 @@ public:
         ans = max(ans, root->val+l+r);
 
         int ret = root->val;
-        ret = max(ret, l+root->val);
-        ret = max(ret, r+root->val);
+        ret = max(ret, root->val+l);
+        ret = max(ret, root->val+r);
         return ret;
     }
 };
