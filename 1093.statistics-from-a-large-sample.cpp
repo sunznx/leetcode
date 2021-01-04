@@ -42,24 +42,17 @@ public:
         double midv1 = -1;
         double midv2 = -1;
 
-        cout << sumX << endl;
-        cout << mid1 << " " << mid2 << endl;
-
         int newSumX = 0;
         for (int i = 0; i < count.size(); i++) {
             auto x = count[i];
-            cout << newSumX << " -- " << newSumX + x << endl;
             if (newSumX < mid1 && newSumX+x >= mid2) {
                 midv1 = i;
                 midv2 = i;
-                cout << midv1 << " " << midv2 << endl;
                 break;
             } else if (newSumX < mid1 && newSumX+x >= mid1) {
                 midv1 = i;
-                cout << midv1 << " " << midv2 << endl;
             } else if (newSumX >= mid1 && newSumX+x >= mid2) {
                 midv2 = i;
-                cout << midv1 << " " << midv2 << endl;
                 break;
             }
 
