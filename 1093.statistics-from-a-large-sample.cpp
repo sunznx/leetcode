@@ -2,24 +2,22 @@
 class Solution {
 public:
     vector<double> sampleStats(vector<int>& count) {
-        vector<double> ans;
-
-        double minV = INT_MAX;
-        double maxV = INT_MIN;
+        double minVal = INT_MAX;
+        double maxVal = INT_MIN;
         double midV = 0;
         double multiV = 0;
         double sum = 0;
 
         double maxX = 0;
-        int sumX = 0;
+        int cnt = 0;
 
         for (int i = 0; i < count.size(); i++) {
             auto x = count[i];
-            sumX += x;
+            cnt += x;
 
             if (x > 0) {
-                minV = min(minV, double(i));
-                maxV = max(maxV, double(i));
+                minVal = min(minVal, double(i));
+                maxVal = max(maxVal, double(i));
                 sum += i * x;
             }
 
@@ -29,42 +27,37 @@ public:
             }
         }
 
+        // 计算中位数
         int mid1;
         int mid2;
-        if (sumX % 2 == 0) {
-            mid1 = sumX/2;
-            mid2 = sumX/2+1;
+        if (cnt % 2 == 0) {
+            mid1 = cnt/2;
+            mid2 = cnt/2+1;
         } else {
-            mid1 = sumX/2+1;
-            mid2 = sumX/2+1;
+            mid1 = cnt/2+1;
+            mid2 = cnt/2+1;
         }
 
         double midv1 = -1;
         double midv2 = -1;
 
-        int newSumX = 0;
+        int newCnt = 0;
         for (int i = 0; i < count.size(); i++) {
             auto x = count[i];
-            if (newSumX < mid1 && newSumX+x >= mid2) {
+            if (newCnt < mid1 && newCnt+x >= mid2) {
                 midv1 = i;
                 midv2 = i;
                 break;
-            } else if (newSumX < mid1 && newSumX+x >= mid1) {
+            } else if (newCnt < mid1 && newCnt+x >= mid1) {
                 midv1 = i;
-            } else if (newSumX >= mid1 && newSumX+x >= mid2) {
+            } else if (newCnt >= mid1 && newCnt+x >= mid2) {
                 midv2 = i;
                 break;
             }
 
-            newSumX += x;
+            newCnt += x;
         }
 
-        ans.push_back(minV);
-        ans.push_back(maxV);
-        ans.push_back(sum/sumX);
-        ans.push_back((midv1+midv2)/2);
-        ans.push_back(multiV);
-
-        return ans;
+        return vector<double>{minVal, maxVal, sum/cnt, (midv1+midv2)/2, multiV};
     }
 };
