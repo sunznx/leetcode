@@ -9,25 +9,21 @@ public:
         int ans = 0;
 
         int l = 0;
-        int r = 0;
+        unordered_map<int, int> m;
 
-        int len = A.size();
+        for (int i = 0; i < A.size(); i++) {
+            auto x = A[i];
+            m[x]++;
 
-        unordered_map<int, int> window;
-
-        while (r < len) {
-            int x = A[r++];
-            window[x]++;
-
-            while (window.size() > K) {
+            while (m.size() > K) {
                 auto y = A[l++];
-                window[y]--;
-                if (window[y] == 0) {
-                    window.erase(y);
+                m[y]--;
+                if (m[y] == 0) {
+                    m.erase(y);
                 }
             }
 
-            ans += r-l;
+            ans += i-l+1;
         }
 
         return ans;
