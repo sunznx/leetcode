@@ -1,36 +1,34 @@
+// CreateTime: 2021-01-07 01:47:04
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
 public:
+    int sum = 0;
+
     TreeNode* convertBST(TreeNode* root) {
-        int x = 0;
-        return convertBST(root, x);
-    }
-
-    TreeNode* convertBST(TreeNode* root, int &x) {
-        if (root == NULL) {
-            return root;
-        }
-
-        if (root->right) {
-            root->right = convertBST(root->right, x);
-        }
-
-        int pre = x;
-        x += root->val;
-        root->val += pre;
-
-        if (root->left) {
-            root->left = convertBST(root->left, x);
-        }
-
+        helper(root);
         return root;
+    }
+    
+    void helper(TreeNode *root) {
+        if (root == NULL) {
+            return;
+        }
+
+        helper(root->right);
+        
+        sum += root->val;
+        root->val = sum;
+
+        helper(root->left);
     }
 };
