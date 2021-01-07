@@ -11,8 +11,8 @@ public:
         int l = 0;
         unordered_map<int, int> m;
 
-        for (int i = 0; i < A.size(); i++) {
-            auto x = A[i];
+        for (int r = 0; r < A.size(); r++) {
+            auto x = A[r];
             m[x]++;
 
             while (m.size() > K) {
@@ -23,7 +23,7 @@ public:
                 }
             }
 
-            ans += i-l+1;
+            ans += r-l+1;
         }
 
         return ans;
