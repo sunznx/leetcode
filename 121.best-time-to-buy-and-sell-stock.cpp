@@ -4,12 +4,14 @@ public:
 
     int maxProfit(vector<int>& prices) {
         int ans = 0;
-        int len = prices.size();
         int minv = 0x7fffffff;
-        for (int i = 0; i < len; i++) {
-            ans = max(ans, prices[i] - minv);
+
+        for (int i = 0; i < prices.size(); i++) {
+            auto x = prices[i];
+            ans = max(ans, x - minv);
             minv = min(minv, prices[i]);
         }
+
         return ans;
     }
 };
