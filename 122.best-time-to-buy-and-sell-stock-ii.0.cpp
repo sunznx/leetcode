@@ -2,10 +2,6 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        if (prices.size() == 0) {
-            return 0;
-        }
-
         // dp[x][0] 表示 x 状态下持有股票
         // dp[x][1] 表示 x 状态下没有股票
         vector<vector<int>> dp(prices.size(), vector<int>(2, 0));
