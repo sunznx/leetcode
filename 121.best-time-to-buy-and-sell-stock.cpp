@@ -9,7 +9,7 @@ public:
         for (int i = 0; i < prices.size(); i++) {
             auto x = prices[i];
             ans = max(ans, x - minv);
-            minv = min(minv, prices[i]);
+            minv = min(minv, x);
         }
 
         return ans;
