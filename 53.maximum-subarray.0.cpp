@@ -2,10 +2,6 @@
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        if (nums.size() == 0) {
-            return 0;
-        }
-
         int ans = nums[0];
         int sub = nums[0];
 
