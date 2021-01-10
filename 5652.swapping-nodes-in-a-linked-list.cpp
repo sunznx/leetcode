@@ -1,4 +1,4 @@
-// CreateTime: 2021-01-10 10:38:02
+// CreateTime: 2021-01-10 12:35:36
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -12,30 +12,19 @@
 class Solution {
 public:
     ListNode* swapNodes(ListNode* head, int k) {
-        unordered_map<int, ListNode *> m; 
+        unordered_map<int, ListNode *> m;
 
-        auto p = head;
-        auto p1 = head;
-        auto p2 = head;
-        
         int step = 0;
-
+        auto p = head;
         while (p) {
             step++;
-            if (step == k) {
-                p1 = p;
-            }
-            if (step > k) {
-                p2 = p2->next;
-            }
+            m[step] = p;
             p = p->next;
         }
-        
-        if (p1 == p2) {
-            return head;
-        }
-        
-        swap(p1->val, p2->val);
+
+        int k1 = k;
+        int k2 = m.size()-k+1;
+        swap(m[k1]->val, m[k2]->val);
         return head;
     }
 };
