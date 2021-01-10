@@ -1,3 +1,4 @@
+// CreateTime: 2021-01-10 10:15:38
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -9,43 +10,34 @@
  */
 class Solution {
 public:
+    int ans = 0;
+    deque<TreeNode *> que;
+
+    typedef unsigned long long ULL;
+
     int widthOfBinaryTree(TreeNode* root) {
-        deque<TreeNode *> q;
+        unordered_map<TreeNode *, ULL> m;
         if (root) {
-            q.push_back(root);
+            m[root] = 1;
+            que.push_back(root);
         }
 
-        int ans = 0;
+        while (que.size()) {
+            int d = m[que.back()] - m[que.front()] + 1;
+            ans = max(ans, d);
 
-        while (!q.empty()) {
-            int size = q.size();
-            ans = max(ans, size);
+            int k = que.size();
+            while (k--) {
+                auto top = que.front();
+                que.pop_front();
 
-            for (int i = 0; i < size; i++) {
-                auto t = q.front();
-                q.pop_front();
-
-                if (t == NULL) {
-                    q.push_back(NULL);
-                    q.push_back(NULL);
-                } else {
-                    q.push_back(t->left);
-                    q.push_back(t->right);
+                if (top->left) {
+                    m[top->left] = m[top] * 2;
+                    que.push_back(top->left);
                 }
-            }
-
-            while (!q.empty()) {
-                if (q.front() == NULL) {
-                    q.pop_front();
-                } else {
-                    break;
-                }
-            }
-            while (!q.empty()) {
-                if (q.back() == NULL) {
-                    q.pop_back();
-                } else {
-                    break;
+                if (top->right) {
+                    m[top->right] = m[top] * 2 + 1;
+                    que.push_back(top->right);
                 }
             }
         }
