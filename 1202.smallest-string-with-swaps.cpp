@@ -11,10 +11,13 @@ public:
         return parent[x];
     }
 
-    void merge(int p1, int p2) {
+    void merge(int x, int y) {
+        auto p1 = find(x);
+        auto p2 = find(y);
         if (p1 == p2) {
             return;
         }
+
         parent[p2] = p1;
 
         for (int i = 0; i < 26; i++) {
@@ -36,12 +39,9 @@ public:
         }
 
         for (int i = 0; i < pairs.size(); i++) {
-            int first = pairs[i][0];
-            int second = pairs[i][1];
-
-            int p1 = find(first);
-            int p2 = find(second);
-            merge(p1, p2);
+            int x = pairs[i][0];
+            int y = pairs[i][1];
+            merge(x, y);
         }
 
         string res = s;
