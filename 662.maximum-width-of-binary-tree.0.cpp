@@ -25,7 +25,7 @@ public:
             int d = que.back()->val - que.front()->val + 1;
             ans = max(ans, d);
 
-            int x = que.front()->val;
+            int x = que.back()->val;
 
             int k = que.size();
             while (k--) {
