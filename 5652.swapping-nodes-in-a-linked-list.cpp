@@ -14,18 +14,25 @@ public:
     ListNode* swapNodes(ListNode* head, int k) {
         unordered_map<int, ListNode *> m; 
 
+        ListNode *p1 = head;
+        ListNode *p2 = head;
+        
         int step = 0;
-        auto p = head;
-        while (p) {
+        for (auto p = head; p != NULL; p = p->next) {
             step++;
-            m[step] = p;
-            p = p->next;
+            if (step == k) {
+                p1 = p;
+            }
+            if (step > k) {
+                p2 = p2->next;
+            }
         }
-
-        int k1 = k;
-        int k2 = m.size()-k+1;
-
-        swap(m[k1]->val, m[k2]->val);
+        
+        if (p1 == p2) {
+            return head;
+        }
+        
+        swap(p1->val, p2->val);
         return head;
     }
 };
