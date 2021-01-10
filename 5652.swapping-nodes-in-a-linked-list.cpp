@@ -12,37 +12,20 @@
 class Solution {
 public:
     ListNode* swapNodes(ListNode* head, int k) {
+        unordered_map<int, ListNode *> m; 
+
         int step = 0;
-        int len = 0;
         auto p = head;
         while (p) {
-            len++;
+            step++;
+            m[step] = p;
             p = p->next;
         }
 
         int k1 = k;
-        int k2 = len-k+1;
-        if (k1 == k2) {
-            return head;
-        }
+        int k2 = m.size()-k+1;
 
-        p = head;
-        int *x1;
-        int *x2;
-        while (p) {
-            step++;
-            if (step == k1) {
-                x1 = &(p->val);
-            }
-            if (step == k2) {
-                x2 = &(p->val);
-            }
-            p = p->next;
-        }
-
-        auto t = *x1;
-        *x1 = *x2;
-        *x2 = t;
+        swap(m[k1]->val, m[k2]->val);
         return head;
     }
 };
