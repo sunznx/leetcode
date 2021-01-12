@@ -10,26 +10,18 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (root == NULL) {
-            return NULL;
-        }
-
-        int v1 = p->val;
-        int v2 = q->val;
-
-        if (v1 > v2) {
+        if (p->val > q->val) {
             return lowestCommonAncestor(root, q, p);
         }
 
-        if (root->val > v1 && root->val > v2) {
-            return lowestCommonAncestor(root->left, p, q);
+        if (p->val <= root->val && root->val <= q->val) {
+            return root;
         }
-        if (root->val < v1 && root->val < v2) {
+        if (root->val < p->val) {
             return lowestCommonAncestor(root->right, p, q);
         }
-
-        if (v1 <= root->val && root->val <= v2) {
-            return root;
+        if (root->val > q->val) {
+            return lowestCommonAncestor(root->left, p, q);
         }
         return NULL;
     }
