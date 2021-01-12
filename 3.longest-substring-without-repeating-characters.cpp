@@ -1,21 +1,25 @@
-// CreateTime: 2019-12-05 15:36:20
+// CreateTime: 2021-01-12 16:48:00
 class Solution {
 public:
+    int ans = 0;
+
     int lengthOfLongestSubstring(string s) {
-        vector<int> m(256, -1);
+        int l = 0;
 
-        int res = 0;
-        int len = s.size();
+        vector<int> m(256);
 
-        int last = -1;
-        for (int i = 0; i < len; i++) {
-            if (m[s[i]] >= 0) {
-                last = max(last, m[s[i]]);
+        for (int i = 0; i < s.size(); i++) {
+            auto x = s[i];
+            m[x]++;
+
+            while (m[x] > 1) {
+                auto y = s[l++];
+                m[y]--;
             }
-            m[s[i]] = i;
-            res = max(res, i-last);
+
+            ans = max(ans, i-l+1);
         }
 
-        return res;
+        return ans;
     }
 };
