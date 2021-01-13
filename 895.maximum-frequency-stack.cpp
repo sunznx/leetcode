@@ -12,8 +12,7 @@ public:
     }
 
     void push(int x) {
-        freq[x]++;
-        pq.push({freq[x], {idx++, x}});
+        pq.push({freq[x]++, {idx++, x}});
     }
 
     int pop() {
