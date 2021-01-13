@@ -3,9 +3,9 @@ class FreqStack {
 public:
     typedef pair<int, pair<int, int>> PIII;
 
-    priority_queue<PIII, vector<PIII>, less<PIII>> pq;
-    unordered_map<int, int> freq;
     int idx = 0;
+    unordered_map<int, int> freq;
+    priority_queue<PIII, vector<PIII>, less<PIII>> pq;
 
     FreqStack() {
 
