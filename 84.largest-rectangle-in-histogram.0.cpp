@@ -13,6 +13,7 @@ public:
         stk = stack<int>();
         for (int i = 0; i < len; i++) {
             auto x = heights[i];
+
             while (stk.size() && x <= heights[stk.top()]) {
                 stk.pop();
             }
@@ -29,10 +30,10 @@ public:
         for (int i = len-1; i >= 0; i--) {
             auto x = heights[i];
 
-
             while (stk.size() && x <= heights[stk.top()]) {
                 stk.pop();
             }
+
             if (i != len-1 && stk.size() == 0) {
                 r[i] = len-1-i;
             } else if (i != len-1 && stk.size()) {
