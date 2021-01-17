@@ -14,7 +14,7 @@ public:
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (i == 0 || j == 0) {
-                    f[i][j] = matrix[i][j] - '0';
+                    f[i][j] = matrix[i][j]-'0';
                 } else if (matrix[i][j] == '0') {
                     f[i][j] = 0;
                 } else {
