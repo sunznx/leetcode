@@ -48,7 +48,7 @@ public:
                         que.push(e);
                     }
                 }
-                m.erase(x);
+                m[x].clear();
             }
             ans++;
         }
