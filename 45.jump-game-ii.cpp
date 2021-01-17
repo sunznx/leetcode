@@ -9,10 +9,11 @@ public:
         f[0] = 0;
         int w = 0;
         for (int i = 0; i < nums.size()-1; i++) {
-            for (int j = w; j <= i+nums[i] && j <= W; j++) {
+            auto x = nums[i];
+            for (int j = w; j <= i+x && j <= W; j++) {
                 f[j] = min(f[j], f[i] + 1);
             }
-            w = nums[i] + i;
+            w = x + i;
         }
         return f[W];
     }
