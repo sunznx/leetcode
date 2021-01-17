@@ -8,7 +8,7 @@ public:
 
         f[0] = 0;
         int w = 0;
-        for (int i = 0; i < nums.size()-1; i++) {
+        for (int i = 0; i < nums.size(); i++) {
             auto x = nums[i];
 
             // 更新从 i 能到达的距离，即 i+x
