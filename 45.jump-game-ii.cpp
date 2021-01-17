@@ -10,6 +10,9 @@ public:
         int w = 0;
         for (int i = 0; i < nums.size()-1; i++) {
             auto x = nums[i];
+
+            // 更新从 i 能到达的距离，即 i+x
+            // 这次更新完了之后，标记为 w，下次从 w+1 开始更新
             for (int j = w+1; j <= i+x && j <= len-1; j++) {
                 f[j] = min(f[j], f[i] + 1);
             }
