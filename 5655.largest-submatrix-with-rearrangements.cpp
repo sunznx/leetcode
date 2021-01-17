@@ -9,27 +9,22 @@ public:
 
         auto col = matrix[0].size();
 
-        vector<vector<int>> w(row, vector<int>(col));
-
-        for (int i = 1; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (matrix[i][j]) {
-                    matrix[i][j] += matrix[i-1][j];
-                }
-            }
-        }
-
         int ans = 0;
-        vector<int> counts(col);
+        vector<int> heights(col);
+
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                counts[j] = matrix[i][j];
+                if (matrix[i][j]) {
+                    heights[j] += 1;
+                } else {
+                    heights[j] = 0;
+                }
             }
 
-            sort(counts.begin(), counts.end(), greater<int>());
-
+            auto sortedHeights = heights;
+            sort(sortedHeights.begin(), sortedHeights.end(), greater<int>());
             for (int j = 0; j < col; j++) {
-                ans = max(ans, counts[j] * (j+1));
+                ans = max(ans, sortedHeights[j] * (j+1));
             }
         }
 
