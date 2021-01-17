@@ -1,18 +1,11 @@
-// CreateTime: 2021-01-17 18:24:36
+// CreateTime: 2019-11-23 01:14:37
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
-        int len = nums.size();
-        vector<int> f(len);
-
-        for (int i = 0; i < len-1; i++) {
-            if (i == 0) {
-                f[i] = nums[i];
-            } else {
-                f[i] = max(nums[i], f[i-1]-1);
-            }
-
-            if (f[i] <= 0) {
+        int leaves = 0;
+        for (int i = 0; i < nums.size()-1; i++) {
+            leaves = max(nums[i], leaves-1);
+            if (leaves <= 0) {
                 return false;
             }
         }
