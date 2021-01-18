@@ -1,15 +1,29 @@
 class Solution {
 public:
+    typedef long long LL;
+
     int findDuplicate(vector<int>& nums) {
-        int len = nums.size();
-        for (int i = 0; i < len; i++) {
-            for (int j = i+1; j < len; j++) {
-                if (nums[i] == nums[j]) {
-                    return nums[i];
-                }
+        LL l = 1;
+        LL r = nums.size();
+
+        while (l < r) {
+            int m = (l+r) / 2;
+            if (check(nums, m)) {
+                r = m;
+            } else {
+                l = m+1;
             }
         }
+        return (int)(l);
+    }
 
-        return -1;
+    bool check(vector<int> &nums, int x) {
+        int count = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] <= x) {
+                count++;
+            }
+        }
+        return count > x;
     }
 };
