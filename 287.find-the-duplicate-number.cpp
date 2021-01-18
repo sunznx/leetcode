@@ -1,7 +1,5 @@
 class Solution {
 public:
-    typedef long long LL;
-
     int findDuplicate(vector<int>& nums) {
         int l = 1;
         int r = nums.size();
