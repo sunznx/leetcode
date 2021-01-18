@@ -3,8 +3,8 @@ public:
     typedef long long LL;
 
     int findDuplicate(vector<int>& nums) {
-        LL l = 1;
-        LL r = nums.size();
+        int l = 1;
+        int r = nums.size();
 
         while (l < r) {
             int m = (l+r) / 2;
