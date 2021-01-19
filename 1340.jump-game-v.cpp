@@ -30,17 +30,17 @@ public:
 
         f[x] = 1;
 
-        for (int i = x-1; i >= 0 && x-i <= d && arr[x] > arr[i]; i--) {
+        for (int i = x-1; isValid(i) && x-i <= d && arr[x] > arr[i]; i--) {
             walk(arr, i, d);
             f[x] = max(f[x], f[i]+1);
         }
-        for (int i = x+1; i < len && i-x <= d && arr[x] > arr[i]; i++) {
+        for (int i = x+1; isValid(i) && i-x <= d && arr[x] > arr[i]; i++) {
             walk(arr, i, d);
             f[x] = max(f[x], f[i]+1);
         }
     }
 
-    bool isValid(int x) {
+    inline bool isValid(int x) {
         return 0 <= x && x <= len-1;
     }
 
@@ -49,36 +49,5 @@ public:
         ll.resize(len, -1);
         rr.resize(len, -1);
         f.resize(len, -1);
-        buildLR(arr, d);
-    }
-
-    void buildLR(vector<int> &arr, int d) {
-        que.clear();
-        for (int i = 0; i < len; i++) {
-            auto x = arr[i];
-            while (que.size() && que.front()+d < i) {
-                que.pop_front();
-            }
-
-            while (que.size() && x > arr[que.back()]) {
-                ll[i] = que.back();
-                que.pop_back();
-            }
-            que.push_back(i);
-        }
-
-        que.clear();
-        for (int i = len-1; i >= 0; i--) {
-            auto x = arr[i];
-            while (que.size() && que.front()-d > i) {
-                que.pop_front();
-            }
-
-            while (que.size() && x > arr[que.back()]) {
-                rr[i] = que.back();
-                que.pop_back();
-            }
-            que.push_back(i);
-        }
     }
 };
