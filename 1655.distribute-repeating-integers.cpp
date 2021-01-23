@@ -16,10 +16,10 @@ public:
 
         int m = quantity.size();
         vector<int> sum(1<<m);
-        for (int i = 0; i < (1<<m); i++) {
-            for (int j = 0; j < m; j++) {
-                if ((i & (1<<j)) != 0) {
-                    sum[i] += quantity[j];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < (1<<m); j++) {
+                if ((j & (1<<i)) != 0) {
+                    sum[j] += quantity[i];
                 }
             }
         }
