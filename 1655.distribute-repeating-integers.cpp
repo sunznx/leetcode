@@ -19,18 +19,18 @@ public:
         for (int i = 0; i < (1<<m); i++) {
             for (int j = 0; j < m; j++) {
                 if ((i & (1<<j)) != 0) {
-                    auto x = (i-(1<<j));
-                    sum[i] = sum[x] + quantity[j];
+                    sum[i] += quantity[j];
                 }
             }
         }
 
-        vector<vector<bool>> f(counts.size(), vector<bool>((1<<m)));
-        for (int i = 0; i < counts.size(); i++) {
+        int n = counts.size();
+        vector<vector<bool>> f(n, vector<bool>((1<<m)));
+        for (int i = 0; i < n; i++) {
             f[i][0] = true;
         }
 
-        for (int i = 0; i < counts.size(); i++) {
+        for (int i = 0; i < n; i++) {
             for (int j = 0; j < (1<<m); j++) {
                 if (i > 0 && f[i-1][j] == true) {
                     f[i][j] = true;
@@ -58,6 +58,6 @@ public:
             }
         }
 
-        return f[counts.size()-1][(1<<m)-1];
+        return f[n-1][(1<<m)-1];
     }
 };
