@@ -34,16 +34,11 @@ public:
         f[0] = 0;
 
         for (int j = 0; j < (1<<m); j++) {
-            // for (int s = j; s > 0; s = ((s-1)&j)) {
-            //     if (sum[s] <= x) {
-            //         f[j] = min(f[j], f[j-s]+1);
-            //     }
-            // }
-
-            int rem = ((1 << m) - 1) ^ j;
-            for (int s = rem; s; s = (s - 1) & rem)
-                if (sum[s] <= x)
-                    f[j ^ s] = min(f[j ^ s], f[j] + 1);
+            for (int s = j; s > 0; s = ((s-1)&j)) {
+                if (sum[s] <= x) {
+                    f[j] = min(f[j], f[j-s]+1);
+                }
+            }
         }
 
         return f[(1<<m)-1] <= k;
