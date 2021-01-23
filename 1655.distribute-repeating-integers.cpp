@@ -38,7 +38,7 @@ public:
                 }
 
                 for (int s = j; s > 0; s = ((s-1)&j)) {
-                    auto prev = j-s;
+                    auto prev = j^s;
                     bool prevOk = false;
                     if (i == 0) {
                         prevOk = (prev == 0);
