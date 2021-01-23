@@ -12,11 +12,13 @@ public:
             }
         }
 
+        vector<int> f((1<<m));
+
         auto l = *max_element(jobs.begin(), jobs.end());
         auto r = accumulate(jobs.begin(), jobs.end(), 0);
         while (l < r) {
             int mid = (l+r) / 2;
-            if (check(jobs, sum, k, mid)) {
+            if (check(jobs, sum, f, k, mid)) {
                 r = mid;
             } else {
                 l = mid+1;
@@ -26,10 +28,9 @@ public:
         return l;
     }
 
-    bool check(vector<int> &jobs, vector<int> &sum, int k, int x) {
+    bool check(vector<int> &jobs, vector<int> &sum, vector<int> &f, int k, int x) {
         auto m = jobs.size();
-
-        vector<int> f((1<<m), INT_MAX/2);
+        f.assign((1<<m), INT_MAX/2);
         f[0] = 0;
 
         for (int i = 0; i < (1<<m); i++) {
