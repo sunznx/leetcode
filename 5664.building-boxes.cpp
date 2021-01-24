@@ -2,16 +2,21 @@
 class Solution {
 public:
 
-    /*
-      1
-      1 + 2
-      1 + 2 + 3
-      ...
-      1 + 2 + .. + k
-      
-      剩余部分报团取暖
-      1 + 2 + .. + k = 1/2 * (k * (k + 1))
-    */
+    /**
+     * 1
+     * 1 + 2
+     * 1 + 2 + 3
+     * ...
+     * 1 + 2 + .. + k
+     *
+     * 剩余部分，贴着斜边放置。
+     * 最底层放一个时，上一层无法放置；
+     * 最底层放两个，上一次就可以再放一个；依此递推
+     * 1 => 0
+     * 2 => 1
+     * 3 => 2 => 1
+     * 4 => 3 => 2 => 1
+     */
 
     int minimumBoxes(int n) {
         int sum = 0;
@@ -24,12 +29,15 @@ public:
 
         int bottom = (k-1)*k/2;
 
-        int newBottom = 1;
-        while (sum < n) {
-            sum += newBottom;
-            newBottom++;
-            bottom++;
+        int leaves = n-sum;
+        k = 1;
+        while (leaves > 0) {
+            leaves -= k;
+            k++;
         }
-        return bottom;
+        
+        int newBottom = k-1;
+
+        return bottom+newBottom;
     }
 };
