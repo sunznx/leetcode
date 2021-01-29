@@ -1,9 +1,7 @@
 // CreateTime: 2021-01-29 03:03:09
 class Solution {
 public:
-    // typedef tuple<int, int, int> TIII;
-    typedef pair<int, pair<int, int>> TIII;
-
+    typedef tuple<int, int, int> TIII;
     priority_queue<TIII, vector<TIII>, greater<TIII>> pq;
 
     vector<int> dx = { 0, -1, 0, 1};
@@ -16,16 +14,14 @@ public:
         vector<vector<bool>> seen(row, vector<bool>(col));
         vector<vector<int>> f(row, vector<int>(col, INT_MAX));
 
-        pq.push({0, {0, 0}});
+        pq.push({0, 0, 0});
         f[0][0] = 0;
 
         while (pq.size()) {
             auto top = pq.top();
             pq.pop();
 
-            auto v = top.first;
-            auto x = top.second.first;
-            auto y = top.second.second;
+            auto [v, x, y] = top;
 
             if (seen[x][y]) {
                 continue;
@@ -43,7 +39,7 @@ public:
                 }
 
                 auto newV = abs(heights[newX][newY]-heights[x][y]);
-                pq.push({max(v, newV), {newX, newY}});
+                pq.push({max(v, newV), newX, newY});
             }
         }
 
