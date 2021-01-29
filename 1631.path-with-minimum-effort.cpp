@@ -28,7 +28,6 @@ public:
             }
 
             seen[x][y] = true;
-            f[x][y] = v;
 
             for (int k = 0; k < 4; k++) {
                 auto newX = x + dx[k];
@@ -39,7 +38,8 @@ public:
                 }
 
                 auto newV = abs(heights[newX][newY]-heights[x][y]);
-                pq.push({max(v, newV), newX, newY});
+                f[newX][newY] = min(f[newX][newY], max(v, newV));
+                pq.push({f[newX][newY], newX, newY});
             }
         }
 
