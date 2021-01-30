@@ -1,12 +1,10 @@
 // CreateTime: 2021-01-30 15:48:52
 class Solution {
 public:
-
     typedef tuple<int, int, int> TIII;
 
     vector<int> dx = { 0, -1, 0, 1};
     vector<int> dy = {-1,  0, 1, 0};
-
 
     priority_queue<TIII, vector<TIII>, greater<TIII>> pq;
 
