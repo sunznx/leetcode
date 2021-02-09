@@ -9,11 +9,18 @@ public:
 
             bool ok = true;
             for (int k = 1; k < s.size()/sz; k++) {
-                if (s.substr(0, sz) != s.substr(k*sz, sz)) {
-                    ok = false;
+                for (int j = 0; j < sz; j++) {
+                    if (s[j] != s[k*sz+j]) {
+                        ok = false;
+                        break;
+                    }
+                }
+
+                if (!ok) {
                     break;
                 }
             }
+
             if (ok) {
                 return true;
             }
