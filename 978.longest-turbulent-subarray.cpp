@@ -6,22 +6,22 @@ public:
 
         int ans = 1;
         int sub = 1;
-        int mark = 0;
+        int cmp = 0;
 
         for (int i = 1; i < len; i++) {
-            auto preMark = mark;
+            auto preCmp = cmp;
 
             if (arr[i] > arr[i-1]) {
-                mark = 1;
+                cmp = 1;
             } else if (arr[i] < arr[i-1]) {
-                mark = -1;
+                cmp = -1;
             } else {
-                mark = 0;
+                cmp = 0;
             }
 
-            if (mark == 0) {
+            if (cmp == 0) {
                 sub = 1;
-            } else if ((preMark == 0 && mark != 0) || (preMark == 1 && mark == -1) || (preMark == -1 && mark == 1)) {
+            } else if ((preCmp == 0 && cmp != 0) || (preCmp == 1 && cmp == -1) || (preCmp == -1 && cmp == 1)) {
                 sub++;
             } else {
                 sub = 2;
