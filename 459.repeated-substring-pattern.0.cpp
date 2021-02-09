@@ -9,7 +9,6 @@ public:
 
             bool ok = true;
             for (int k = 1; k < s.size()/sz; k++) {
-                cout << s.substr(0, sz) << " " << s.substr(k*sz, sz) << endl;
                 if (s.substr(0, sz) != s.substr(k*sz, sz)) {
                     ok = false;
                     break;
