@@ -18,6 +18,7 @@ public:
             while (m.size() > K) {
                 auto y = A[l++];
                 m[y]--;
+
                 if (m[y] == 0) {
                     m.erase(y);
                 }
