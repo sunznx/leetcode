@@ -1,40 +1,36 @@
-// CreateTime: 2020-11-22 16:14:20
+// CreateTime: 2021-02-10 10:46:07
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        int len = s2.size();
+        unordered_map<char, int> m1;
+        unordered_map<char, int> m2;
 
-        unordered_map<char, int> need;
-        for (auto &c: s1) {
-            need[c]++;
+        for (auto &x: s1) {
+            m1[x]++;
         }
 
-        unordered_map<char, int> window;
+        int need = m1.size();
+        int cnt = 0;
 
-        int needCount = need.size();
-        int validCount = 0;
+        int l = 0;
+        for (int r = 0; r < s2.size(); r++) {
+            auto x = s2[r];
+            m2[x]++;
 
-        int left = 0;
-        int right = 0;
-
-        while (right < s2.size()) {
-            char c = s2[right++];
-            window[c]++;
-
-            if (need[c] > 0 && window[c] == need[c]) {
-                validCount++;
+            if (m1.find(x) != m1.end() && m1[x] == m2[x]) {
+                cnt++;
             }
 
-            while (right - left >= s1.size()) {
-                if (validCount == needCount) {
+            if (r-l+1 == s1.size()) {
+                if (cnt == need) {
                     return true;
                 }
 
-                char d = s2[left++];
-                if (need[d] && window[d] == need[d]) {
-                    validCount--;
+                auto y = s2[l++];
+                if (m1.find(y) != m1.end() && m1[y] == m2[y]) {
+                    cnt--;
                 }
-                window[d]--;
+                m2[y]--;
             }
         }
 
