@@ -8,8 +8,8 @@ public:
 
         vector<int> m(256);
 
-        for (int i = 0; i < s.size(); i++) {
-            auto x = s[i];
+        for (int r = 0; r < s.size(); r++) {
+            auto x = s[r];
             m[x]++;
 
             while (m[x] > 1) {
@@ -17,7 +17,7 @@ public:
                 m[y]--;
             }
 
-            ans = max(ans, i-l+1);
+            ans = max(ans, r-l+1);
         }
 
         return ans;
