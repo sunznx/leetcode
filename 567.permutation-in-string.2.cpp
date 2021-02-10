@@ -21,7 +21,7 @@ public:
                 cnt++;
             }
 
-            while (r-l+1 == s1.size()) {
+            if (r-l+1 == s1.size()) {
                 if (cnt == need) {
                     return true;
                 }
