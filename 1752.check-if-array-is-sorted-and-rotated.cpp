@@ -8,7 +8,7 @@ public:
         for (int i = 1; i < len*2; i++) {
             auto x = nums[i%len];
             auto pre = nums[(i-1)%len];
-            
+
             if (x >= pre) {
                 sub++;
             } else {
@@ -16,7 +16,7 @@ public:
             }
             maxn = max(maxn, sub);
         }
-        
+
         return maxn >= len;
     }
 };
