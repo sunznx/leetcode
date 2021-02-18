@@ -15,16 +15,7 @@ public:
             k = toggleChar(k);
         }
 
-        k = '1';
-        for (auto &x: s) {
-            if (x != k) {
-                sub2++;
-            }
-
-            k = toggleChar(k);
-        }
-
-        return min(sub1, sub2);
+        return min(sub1, (int)(s.size())-sub1);
     }
 
     char toggleChar(char k) {
