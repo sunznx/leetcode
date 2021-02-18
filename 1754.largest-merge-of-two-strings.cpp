@@ -21,23 +21,10 @@ public:
                 continue;
             }
 
-            auto I = i+same;
-            auto J = j+same;
-
-            if (I == len1) {
-                ans += word2[j++];
-                same = 0;
-            } else if (J == len2) {
+            if (word1.substr(i) > word2.substr(j)) {
                 ans += word1[i++];
-                same = 0;
-            } else if (word1[I] > word2[J]) {
-                ans += word1[i++];
-                same = 0;
-            } else if (word1[I] < word2[J]) {
-                ans += word2[j++];
-                same = 0;
             } else {
-                same++;
+                ans += word2[j++];
             }
         }
 
