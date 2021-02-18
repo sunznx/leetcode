@@ -1,4 +1,4 @@
-// CreateTime: 2021-02-07 02:44:07
+// CreateTime: 2021-02-18 15:25:17
 class Solution {
 public:
     bool check(vector<int>& nums) {
