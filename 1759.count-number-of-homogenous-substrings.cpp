@@ -10,6 +10,7 @@ public:
     int countHomogenous(string s) {
         for (int i = 0; i < s.size(); i++) {
             count++;
+            
             if (i == s.size()-1 || s[i] != s[i+1]) {
                 ans += ((count+1) * count / 2) % MOD;
                 count = 0;
