@@ -9,21 +9,11 @@ public:
 
         auto i = 0;
         auto j = 0;
-        while (true) {
+        while (i < word1.size() || j < word2.size()) {
             if (word1.substr(i) > word2.substr(j)) {
                 ans += word1[i++];
             } else {
                 ans += word2[j++];
-            }
-
-            if (i == len1) {
-                ans = ans + word2.substr(j);
-                break;
-            }
-
-            if (j == len2) {
-                ans = ans + word1.substr(i);
-                break;
             }
         }
 
