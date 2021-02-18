@@ -9,22 +9,21 @@ public:
 
         auto i = 0;
         auto j = 0;
-        auto same = 0;
-        while (ans.size() < len1+len2) {
-            if (i == len1) {
-                ans = ans + word2.substr(j);
-                continue;
-            }
-
-            if (j == len2) {
-                ans = ans + word1.substr(i);
-                continue;
-            }
-
+        while (true) {
             if (word1.substr(i) > word2.substr(j)) {
                 ans += word1[i++];
             } else {
                 ans += word2[j++];
+            }
+
+            if (i == len1) {
+                ans = ans + word2.substr(j);
+                break;
+            }
+
+            if (j == len2) {
+                ans = ans + word1.substr(i);
+                break;
             }
         }
 
