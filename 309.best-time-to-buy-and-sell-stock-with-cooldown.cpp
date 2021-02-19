@@ -1,4 +1,4 @@
-// CreateTime: 2020-12-10 04:23:51
+// CreateTime: 2021-02-19 17:01:52
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -7,17 +7,21 @@ public:
             return 0;
         }
 
-        vector<int> hold(len);     // 在当前状态下持有股票
-        vector<int> sold(len);     // 在当前状态下没有持有股票
-        vector<int> cooldown(len); // 当前状态是 cooldown 状态
+        vector<vector<int>> f(len, vector<int>(3));
 
-        hold[0] = -prices[0];
+        // f[i][0]  表示买入了股票
+        // f[i][1]  表示卖出了股票
+        // f[i][2]  表示处于冷静期
+
+        f[0][0] = -prices[0];
         for (int i = 1; i < len; i++) {
-            hold[i] = max(hold[i-1], cooldown[i-1]-prices[i]);
-            sold[i] = hold[i-1] + prices[i];
-            cooldown[i] = max(cooldown[i-1], sold[i-1]);
+            auto x = prices[i];
+
+            f[i][0] = max(f[i-1][0], f[i-1][2]-x);
+            f[i][1] = f[i-1][0]+x;
+            f[i][2] = max(f[i-1][2], f[i-1][1]);
         }
 
-        return max(hold[len-1], max(sold[len-1], cooldown[len-1]));
+        return max({f[len-1][0], f[len-1][1], f[len-1][2]});
     }
 };
