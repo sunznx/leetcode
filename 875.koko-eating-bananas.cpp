@@ -1,41 +1,34 @@
-// CreateTime: 2020-11-25 12:50:27
+// CreateTime: 2021-02-19 10:35:23
 class Solution {
 public:
     int minEatingSpeed(vector<int>& piles, int H) {
         int l = 1;
-        int r = getMax(piles);
-        
+        int r = *max_element(piles.begin(), piles.end());
+
         while (l < r) {
             int m = (l+r) / 2;
-            
+
             if (check(piles, H, m)) {
                 r = m;
             } else {
                 l = m+1;
             }
         }
+
         return l;
     }
-    
-    int getMax(vector<int>& piles) {
-        int ans = 1;
-        int len = piles.size();
-        for (int i = 0; i < len; i++) {
-            ans = max(ans, piles[i]);
-        }
-        return ans;
-    }
 
-    bool check(vector<int>& piles, int H, int speed) {
-        int len = piles.size();
-        int need = 0;
-        for (int i = 0; i < len; i++) {
-            need += timeOf(piles[i], speed);
+    inline bool check(vector<int>& piles, int H, int k) {
+        int ans = 0;
+
+        for (auto &x: piles) {
+            if (x % k == 0) {
+                ans += x / k;
+            } else {
+                ans += x / k + 1;
+            }
         }
-        return need <= H;
-    }
-    
-    int timeOf(int pile, int speed) {
-        return pile / speed + (int)(pile % speed != 0);
+
+        return ans <= H;
     }
 };
