@@ -18,7 +18,7 @@ public:
             auto x = prices[i];
 
             f[i][0] = max(f[i-1][0], f[i-1][2]-x);
-            f[i][1] = max(f[i-1][1], f[i-1][0]+x);
+            f[i][1] = f[i-1][0]+x;
             f[i][2] = max(f[i-1][2], f[i-1][1]);
         }
 
