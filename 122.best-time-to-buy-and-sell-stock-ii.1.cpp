@@ -12,7 +12,7 @@ public:
         f[0][1] = 0;
 
         for (int i = 1; i < len; i++) {
-            f[i][0] = max(f[i-1][0], f[i-1][1] - prices[i]);
+            f[i][0] = max(f[i-1][0], f[i-1][1]-prices[i]);
             f[i][1] = max(f[i-1][1], f[i-1][0]+prices[i]);
         }
 
