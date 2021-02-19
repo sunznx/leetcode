@@ -1,18 +1,24 @@
-// CreateTime: 2020-12-17 23:25:42
+// CreateTime: 2021-02-19 17:11:34
 class Solution {
 public:
     int maxProfit(vector<int>& prices, int fee) {
-        int ans = 0;
-        int buy = prices[0] + fee;
-        for (int i = 1; i < prices.size(); ++i) {
-            if (prices[i] + fee < buy) {
-                buy = prices[i] + fee;
-            }
-            else if (prices[i] > buy) {
-                ans += prices[i] - buy;
-                buy = prices[i];
-            }
+        int len = prices.size();
+        if (len == 0) {
+            return 0;
         }
-        return ans;
+
+        // f[i][0] 表示持有股票
+        // f[i][1] 表示没有股票
+
+        vector<vector<int>> f(len, vector<int>(2));
+        f[0][0] = -prices[0];
+        for (int i = 1; i < len; i++) {
+            auto x = prices[i];
+
+            f[i][0] = max(f[i-1][0], f[i-1][1]-x);
+            f[i][1] = max(f[i-1][1], f[i-1][0]+x-fee);
+        }
+
+        return max(f[len-1][0], f[len-1][1]);
     }
 };
