@@ -22,11 +22,7 @@ public:
     }
 
     void put(int key, int value) {
-        if (m.find(key) != m.end()) {
-            auto iter = m[key];
-            l.splice(l.begin(), l, iter);
-            iter->second = value;
-        } else {
+        if (m.find(key) == m.end()) {
             if (l.size() == capacity) {
                 auto back = l.back();
                 m.erase(back.first);
@@ -34,6 +30,11 @@ public:
             }
 
             l.push_front({key, value});
+            m[key] = l.begin();
+        } else {
+            auto iter = m[key];
+            iter->second = value;
+            l.splice(l.begin(), l, iter);
             m[key] = l.begin();
         }
     }
