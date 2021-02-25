@@ -1,36 +1,30 @@
-// CreateTime: 2019-12-31 17:51:16
+// CreateTime: 2021-02-25 19:21:24
 class Solution {
 public:
     vector<int> fairCandySwap(vector<int>& A, vector<int>& B) {
-        int sum1 = 0;
-        int sum2 = 0;
-        
-        unordered_set<int> bs;
+        int s1 = accumulate(A.begin(), A.end(), 0);
+        int s2 = accumulate(B.begin(), B.end(), 0);
 
-        for (int i = 0; i < A.size(); i++) {
-            sum1 += A[i];
-        }
-        
-        for (int i = 0; i < B.size(); i++) {
-            sum2 += B[i];
-            bs.insert(B[i]);
-        }
-        
-        int avg = (sum1+sum2)/2;
-        if (sum1 > avg) {
-            for (int i = 0; i < A.size(); i++) {
-                if (bs.find(A[i]-(sum1-avg)) != bs.end()) {
-                    return {A[i], A[i]-(sum1-avg)};
-                }
-            }
-        } else {
-            for (int i = 0; i < A.size(); i++) {
-                if (bs.find(A[i]+(avg-sum1)) != bs.end()) {
-                    return {A[i], A[i]+(avg-sum1)};
+        int avg = (s1+s2) / 2;
+        int k = avg-s1;
+
+        sort(B.begin(), B.end());
+
+        for (auto &x: A) {
+            int l = 0;
+            int r = B.size()-1;
+
+            while (l <= r) {
+                int m = (l+r) / 2;
+                if (B[m]-x == k) {
+                    return {x, B[m]};
+                } else if (B[m]-x > k) {
+                    r = m-1;
+                } else {
+                    l = m+1;
                 }
             }
         }
-
-        return {-1, -1};
+        return {0, 0};
     }
 };
