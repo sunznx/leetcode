@@ -56,10 +56,10 @@ public:
             auto [k, v, f] = *iter;
             freq[f].erase(iter);
             freq[f+1].push_front({key, value, f+1});
+            m[key] = freq[f+1].begin();
             if (f == minfreq && freq[f].size() == 0) {
                 minfreq = f+1;
             }
-            m[key] = freq[f+1].begin();
         }
     }
 };
