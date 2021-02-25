@@ -14,15 +14,17 @@ public:
             int l = 0;
             int r = B.size()-1;
 
-            while (l <= r) {
+            while (l < r) {
                 int m = (l+r) / 2;
-                if (B[m]-x == k) {
-                    return {x, B[m]};
-                } else if (B[m]-x > k) {
-                    r = m-1;
+                if (B[m]-x >= k) {
+                    r = m;
                 } else {
                     l = m+1;
                 }
+            }
+            
+            if (B[l]-x == k) {
+                return {x, B[l]};
             }
         }
         return {0, 0};
