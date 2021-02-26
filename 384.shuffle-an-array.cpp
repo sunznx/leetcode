@@ -7,7 +7,6 @@ public:
     Solution(vector<int>& nums) {
         this->nums = nums;
         len = nums.size();
-        srand(time(NULL));
     }
     
     /** Resets the array to its original configuration and return it. */
