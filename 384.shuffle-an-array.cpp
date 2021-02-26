@@ -20,7 +20,6 @@ public:
         
         for (int i = 0; i < len; i++) {
             int pos = rand() % (len-i);
-            int x = ans[pos];
             swap(ans[pos], ans[len-1-i]);
         }
 
