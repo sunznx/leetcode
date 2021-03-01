@@ -6,8 +6,8 @@ public:
     string longestPalindrome(string s) {
         int len = s.size();
         for (int i = 0; i < len; i++) {
-            tryExpand(s, i, i);
-            tryExpand(s, i, i+1);
+            tryExpand2(s, i, i);
+            tryExpand2(s, i, i+1);
         }
         return ans;
     }
@@ -25,6 +25,18 @@ public:
             } else {
                 break;
             }
+        }
+    }
+
+    void tryExpand2(string &s, int k1, int k2) {
+        int len = s.size();
+        while (k1 >= 0 && k2 < len && s[k1] == s[k2]) {
+            if (k2-k1+1 > ans.size()) {
+                ans = s.substr(k1, k2-k1+1);
+            }
+
+            k1--;
+            k2++;
         }
     }
 };
