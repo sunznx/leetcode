@@ -1,30 +1,27 @@
+// CreateTime: 2021-02-09 10:53:20
 class Solution {
 public:
-    bool repeatedSubstringPattern(string str) {
-        int len = str.size();
-        if (len == 1) {
-            return false;
-        }
-        for (int i = 1; i <= len/2; i++) {  // 长度
-            if (len % i != 0) {
+    bool repeatedSubstringPattern(string s) {
+        for (int sz = 1; sz <= s.size()/2; sz++) {
+            if (s.size()%sz != 0) {
                 continue;
             }
 
-            int segment_num = len/i;
-            int ok = 1;
-            for (int j = 0; j < i; j++) {   //  0-i 是字符串
-                if (ok == 0) {
-                    break;
-                }
-                for (int k = 1; k < segment_num; k++) {
-                    if (str[k*i+j] != str[j]) {
-                        ok = 0;
+            bool ok = true;
+            for (int k = 1; k < s.size()/sz; k++) {
+                for (int j = 0; j < sz; j++) {
+                    if (s[j] != s[k*sz+j]) {
+                        ok = false;
                         break;
                     }
                 }
+
+                if (!ok) {
+                    break;
+                }
             }
 
-            if (ok == 1) {                
+            if (ok) {
                 return true;
             }
         }

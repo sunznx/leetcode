@@ -1,29 +1,24 @@
-// CreateTime: 2020-12-01 03:31:48
+// CreateTime: 2021-02-19 17:33:46
 class Solution {
 public:
     int longestOnes(vector<int>& A, int K) {
         int ans = 0;
-
+        int k = 0;
         int l = 0;
-        int r = 0;
-
-        int usedK = 0;
-
-        for (int i = 0; i < A.size(); i++) {
-            auto x = A[r++];
-
+        for (int r = 0; r < A.size(); r++) {
+            auto x = A[r];
             if (x == 0) {
-                usedK++;
+                k++;
             }
 
-            while (usedK > K) {
+            while (k > K) {
                 auto y = A[l++];
                 if (y == 0) {
-                    usedK--;
+                    k--;
                 }
             }
 
-            ans = max(ans, r-l);
+            ans = max(ans, r-l+1);
         }
 
         return ans;

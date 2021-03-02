@@ -13,11 +13,11 @@ public:
     vector<int> reset() {
         return nums;
     }
-    
+
     /** Returns a random shuffling of the array. */
     vector<int> shuffle() {
         vector<int> ans(nums.begin(), nums.end());
-        
+
         for (int i = 0; i < len; i++) {
             int pos = rand() % (len-i);
             swap(ans[pos], ans[len-1-i]);

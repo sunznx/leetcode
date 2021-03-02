@@ -50,6 +50,7 @@ public:
         auto l = left(pos);
         auto r = right(pos);
 
+        // 没有子节点
         if (m.find(depth+1) == m.end() || (m[depth+1].find(l) == m[depth+1].end() && m[depth+1].find(r) == m[depth+1].end())) {
             ans += cur;
             return;
