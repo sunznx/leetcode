@@ -34,15 +34,15 @@ public:
         int s1 = 0;
         int s2 = 0;
         if (isUpper(c1)) {
-            s1 = c1 - 'A' + 10;
+            s1 = c1 - 'A';
         } else {
-            s1 = c1 - 'a' + 10;
+            s1 = c1 - 'a';
         }
 
         if (isUpper(c2)) {
-            s2 = c2 - 'A' + 10;
+            s2 = c2 - 'A';
         } else {
-            s2 = c2 - 'a' + 10;
+            s2 = c2 - 'a';
         }
         return s1 == s2;
     }
