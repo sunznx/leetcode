@@ -25,19 +25,21 @@ public:
     }
 
     bool isEqual(char c1, char c2) {
+        if (isNum(c1) && isNum(c2)) {
+            return c1 == c2;
+        } else if (isNum(c1) || isNum(c2)) {
+            return false;
+        }
+
         int s1 = 0;
         int s2 = 0;
-        if (isNum(c1)) {
-            s1 = c1 - '0';
-        } else if (isUpper(c1)) {
+        if (isUpper(c1)) {
             s1 = c1 - 'A' + 10;
         } else {
             s1 = c1 - 'a' + 10;
         }
 
-        if (isNum(c2)) {
-            s2 = c2 - '0';
-        } else if (isUpper(c2)) {
+        if (isUpper(c2)) {
             s2 = c2 - 'A' + 10;
         } else {
             s2 = c2 - 'a' + 10;
