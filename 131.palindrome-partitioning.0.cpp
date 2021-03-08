@@ -3,6 +3,7 @@ class Solution {
 public:
     vector<vector<string>> ans;
     vector<vector<bool>> dp;
+    vector<string> sub;
 
     vector<vector<string>> partition(string s) {
         int len = s.size();
@@ -23,12 +24,11 @@ public:
             }
         }
 
-        vector<string> empty;
-        dfs(s, len, 0, empty);
+        dfs(s, len, 0);
         return ans;
     }
 
-    void dfs(string &s, int len, int step, vector<string> &sub) {
+    void dfs(string &s, int len, int step) {
         if (step == len && sub.size()) {
             ans.push_back(sub);
             return;
@@ -37,7 +37,7 @@ public:
         for (int k = step; k <= len-1; k++) {
             if (dp[step][k]) {
                 sub.push_back(s.substr(step, k-step+1));
-                dfs(s, len, k+1, sub);
+                dfs(s, len, k+1);
                 sub.pop_back();
             }
         }
