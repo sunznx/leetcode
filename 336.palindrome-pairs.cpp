@@ -17,12 +17,10 @@ public:
 
             auto arr = calc(word);
             for (auto &sub: arr) {
-                if (m.find(sub.first) != m.end() && m[sub.first] != pos) {
-                    if (sub.second) {
-                        ans.push_back({pos, m[sub.first]});
-                    } else {
-                        ans.push_back({m[sub.first], pos});
-                    }
+                if (sub.second) {
+                    ans.push_back({pos, sub.first});
+                } else {
+                    ans.push_back({sub.first, pos});
                 }
             }
         }
@@ -30,8 +28,8 @@ public:
         return ans;
     }
 
-    vector<pair<string, bool>> calc(string &s) {
-        vector<pair<string, bool>> ans;
+    vector<pair<int, bool>> calc(string &s) {
+        vector<pair<int, bool>> ans;
 
         int len = s.size();
         vector<vector<bool>> dp(len+1, vector<bool>(len+1));
@@ -54,30 +52,24 @@ public:
         for (int l = 0; l < len; l++) {
             string sub = s.substr(0, l);
             string rev = reverseStr(sub);
-            if (m.find(rev) == m.end()) {
-                continue;
-            }
 
-            if (dp[l][len-1]) {
-                ans.push_back({rev, true});
+            if (m.find(rev) != m.end() && dp[l][len-1]) {
+                ans.push_back({m[rev], true});
             }
         }
 
         for (int l = 0; l < len; l++) {
             string sub = s.substr(len-l, l);
             string rev = reverseStr(sub);
-            if (m.find(rev) == m.end()) {
-                continue;
-            }
 
-            if (dp[0][len-1-l]) {
-                ans.push_back({rev, false});
+            if (m.find(rev) != m.end() && dp[0][len-1-l]) {
+                ans.push_back({m[rev], false});
             }
         }
 
         string rev = reverseStr(s);
-        if (rev != s) {
-            ans.push_back({rev, true});
+        if (m.find(rev) != m.end() && rev != s) {
+            ans.push_back({m[rev], true});
         }
 
         return ans;
