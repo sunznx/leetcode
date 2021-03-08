@@ -29,7 +29,7 @@ public:
     }
 
     void dfs(string &s, int len, int step) {
-        if (step == len && sub.size()) {
+        if (step == len) {
             ans.push_back(sub);
             return;
         }
