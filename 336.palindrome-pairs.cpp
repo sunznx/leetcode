@@ -32,28 +32,46 @@ public:
         vector<pair<int, bool>> ans;
 
         int len = s.size();
-        vector<vector<bool>> dp(len+1, vector<bool>(len+1));
+        // vector<vector<bool>> dp(len+1, vector<bool>(len+1));
 
-        for (int i = 0; i < len; i++) {
-            dp[i][i] = true;
-            if (i > 0 && s[i] == s[i-1]) {
-                dp[i-1][i] = true;
-            }
-        }
+        // for (int i = 0; i < len; i++) {
+        //     dp[i][i] = true;
+        //     if (i > 0 && s[i] == s[i-1]) {
+        //         dp[i-1][i] = true;
+        //     }
+        // }
 
-        for (int i = len-1; i >= 0; i--) {
-            for (int j = i+2; j < len; j++) {
-                if (dp[i+1][j-1] && s[i] == s[j]) {
-                    dp[i][j] = true;
-                }
-            }
-        }
+        // for (int i = len-1; i >= 0; i--) {
+        //     for (int j = i+2; j < len; j++) {
+        //         if (dp[i+1][j-1] && s[i] == s[j]) {
+        //             dp[i][j] = true;
+        //         }
+        //     }
+        // }
+
+        // for (int l = 0; l < len; l++) {
+        //     string sub = s.substr(0, l);
+        //     string rev = reverseStr(sub);
+
+        //     if (m.find(rev) != m.end() && dp[l][len-1]) {
+        //         ans.push_back({m[rev], true});
+        //     }
+        // }
+
+        // for (int l = 0; l < len; l++) {
+        //     string sub = s.substr(len-l, l);
+        //     string rev = reverseStr(sub);
+
+        //     if (m.find(rev) != m.end() && dp[0][len-1-l]) {
+        //         ans.push_back({m[rev], false});
+        //     }
+        // }
 
         for (int l = 0; l < len; l++) {
             string sub = s.substr(0, l);
             string rev = reverseStr(sub);
 
-            if (m.find(rev) != m.end() && dp[l][len-1]) {
+            if (m.find(rev) != m.end() && isPalindrome(s+rev)) {
                 ans.push_back({m[rev], true});
             }
         }
@@ -62,7 +80,7 @@ public:
             string sub = s.substr(len-l, l);
             string rev = reverseStr(sub);
 
-            if (m.find(rev) != m.end() && dp[0][len-1-l]) {
+            if (m.find(rev) != m.end() && isPalindrome(rev+s)) {
                 ans.push_back({m[rev], false});
             }
         }
@@ -79,5 +97,20 @@ public:
         string rev = s;
         reverse(rev.begin(), rev.end());
         return rev;
+    }
+
+    bool isPalindrome(string s) {
+        int l = 0;
+        int r = s.size()-1;
+
+        while (l < r) {
+            if (s[l] == s[r]) {
+                l++;
+                r--;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 };
