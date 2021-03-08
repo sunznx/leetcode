@@ -21,21 +21,20 @@ public:
 
     void calc(string &s, int pos) {
         int len = s.size();
-        for (int l = 0; l < len; l++) {
-            string sub = s.substr(0, l);
-            string rev = reverseStr(sub);
 
-            if (m.find(rev) != m.end() && isPalindrome(s+rev)) {
-                ans.push_back({pos, m[rev]});
+        for (int l = 0; l < len; l++) {
+            string sub1 = s.substr(0, l);
+            string rev1 = reverseStr(sub1);
+
+            if (m.find(rev1) != m.end() && isPalindrome(s+rev1)) {
+                ans.push_back({pos, m[rev1]});
             }
-        }
 
-        for (int l = 0; l < len; l++) {
-            string sub = s.substr(len-l, l);
-            string rev = reverseStr(sub);
+            string sub2 = s.substr(len-l, l);
+            string rev2 = reverseStr(sub2);
 
-            if (m.find(rev) != m.end() && isPalindrome(rev+s)) {
-                ans.push_back({m[rev], pos});
+            if (m.find(rev2) != m.end() && isPalindrome(rev2+s)) {
+                ans.push_back({m[rev2], pos});
             }
         }
 
