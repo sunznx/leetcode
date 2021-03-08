@@ -3,12 +3,10 @@ class Solution {
 public:
     vector<vector<string>> ans;
     vector<vector<bool>> dp;
-    vector<vector<int>> m;
 
     vector<vector<string>> partition(string s) {
         int len = s.size();
         dp.resize(len+1, vector<bool>(len+1));
-        m.resize(len+1, vector<int>(len+1, -1));
 
         for (int i = 0; i < len; i++) {
             dp[i][i] = true;
