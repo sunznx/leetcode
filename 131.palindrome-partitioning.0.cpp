@@ -23,20 +23,21 @@ public:
             }
         }
 
-        dfs(s, len, 0, len-1);
+        vector<string> empty;
+        dfs(s, len, 0, empty);
         return ans;
     }
 
-    void dfs(string &s, int len, int i, int j, vector<string> sub = {}) {
-        if (i > j && sub.size()) {
+    void dfs(string &s, int len, int step, vector<string> &sub) {
+        if (step == len && sub.size()) {
             ans.push_back(sub);
             return;
         }
 
-        for (int k = i; k <= j; k++) {
-            if (dp[i][k]) {
-                sub.push_back(s.substr(i, k-i+1));
-                dfs(s, len, k+1, len-1, sub);
+        for (int k = step; k <= len-1; k++) {
+            if (dp[step][k]) {
+                sub.push_back(s.substr(step, k-step+1));
+                dfs(s, len, k+1, sub);
                 sub.pop_back();
             }
         }
