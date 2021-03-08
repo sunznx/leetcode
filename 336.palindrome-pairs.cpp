@@ -2,10 +2,9 @@
 class Solution {
 public:
     unordered_map<string, int> m;
+    vector<vector<int>> ans;
 
     vector<vector<int>> palindromePairs(vector<string>& words) {
-        vector<vector<int>> ans;
-
         for (int i = 0; i < words.size(); i++) {
             auto x = words[i];
             m[x] = i;
@@ -14,23 +13,13 @@ public:
         for (auto &x: m) {
             auto word = x.first;
             auto pos = x.second;
-
-            auto arr = calc(word);
-            for (auto &sub: arr) {
-                if (sub.second) {
-                    ans.push_back({pos, sub.first});
-                } else {
-                    ans.push_back({sub.first, pos});
-                }
-            }
+            calc(word, pos);
         }
 
         return ans;
     }
 
-    vector<pair<int, bool>> calc(string &s) {
-        vector<pair<int, bool>> ans;
-
+    void calc(string &s, int pos) {
         int len = s.size();
         // vector<vector<bool>> dp(len+1, vector<bool>(len+1));
 
@@ -72,7 +61,7 @@ public:
             string rev = reverseStr(sub);
 
             if (m.find(rev) != m.end() && isPalindrome(s+rev)) {
-                ans.push_back({m[rev], true});
+                ans.push_back({pos, m[rev]});
             }
         }
 
@@ -81,16 +70,14 @@ public:
             string rev = reverseStr(sub);
 
             if (m.find(rev) != m.end() && isPalindrome(rev+s)) {
-                ans.push_back({m[rev], false});
+                ans.push_back({m[rev], pos});
             }
         }
 
         string rev = reverseStr(s);
         if (m.find(rev) != m.end() && rev != s) {
-            ans.push_back({m[rev], true});
+            ans.push_back({pos, m[rev]});
         }
-
-        return ans;
     }
 
     string reverseStr(string &s) {
