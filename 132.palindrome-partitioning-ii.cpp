@@ -1,48 +1,30 @@
 // CreateTime: 2021-03-09 08:13:17
 class Solution {
 public:
-    vector<int> m;
-
     int minCut(string s) {
-        m.resize(s.size(), -1);
-        return minCut(s, 0);
-    }
-
-    int minCut(string &s, int step) {
         int len = s.size();
+        vector<vector<bool>> f(len+1, vector<bool>(len+1, true));
 
-        if (step == s.size()) {
-            return 0;
-        }
-
-        if (isPalindrome(s, step, len-1)) {
-            return m[step] = 0;
-        }
-
-        if (m[step] >= 0) {
-            return m[step];
-        }
-
-        m[step] = (len-step)-1;
-
-        for (int i = step; i < len; i++) {
-            if (isPalindrome(s, step, i)) {
-                m[step] = min(m[step], 1+minCut(s, i+1));
+        for (int i = len-1; i >= 0; i--) {
+            for (int j = i+1; j < len; j++) {
+                if (!(s[i] == s[j] && f[i+1][j-1])) {
+                    f[i][j] = false;
+                }
             }
         }
 
-        return m[step];
-    }
-
-    bool isPalindrome(string &s, int i, int j) {
-        while (i < j) {
-            if (s[i] != s[j]) {
-                return false;
+        vector<int> g(len, len-1);
+        for (int i = 0; i < len; i++) {
+            if (f[0][i]) {
+                g[i] = 0;
+            } else {
+                for (int j = 0; j < i; j++) {
+                    if (f[j+1][i]) {
+                        g[i] = min(g[i], g[j]+1);
+                    }
+                }
             }
-
-            i++;
-            j--;
         }
-        return true;
+        return g[len-1];
     }
 };
