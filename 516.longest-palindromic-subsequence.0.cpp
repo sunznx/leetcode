@@ -6,20 +6,13 @@ public:
 
         vector<vector<int>> f(len+1, vector<int>(len+1));
 
-        // for (int i = 0; i < len; i++) {
-        //     f[i][i] = 1;
-        //     if (i > 0 && s[i] == s[i-1]) {
-        //         f[i-1][i] = 2;
-        //     }
-        // }
-
         for (int i = len-1; i >= 0; i--) {
             f[i][i] = 1;
             for (int j = i+1; j < len; j++) {
                 if (s[i] == s[j]) {
                     f[i][j] = max(f[i][j], f[i+1][j-1]+2);
                 } else {
-                    f[i][j] = max({f[i][j], f[i][j-1], f[i+1][j]});
+                    f[i][j] = max(f[i][j-1], f[i+1][j]);
                 }
             }
         }
