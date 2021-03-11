@@ -1,60 +1,57 @@
-// CreateTime: 2019-11-28 11:10:47
+// CreateTime: 2021-03-11 18:18:54
 class Solution {
 public:
+    typedef pair<int, int> PII;
+
+    int step = -1;
+    queue<PII> que;
+
+
+    vector<int> dx = {0, -1, 0, 1};
+    vector<int> dy = {-1, 0, 1, 0};
 
     int orangesRotting(vector<vector<int>>& grid) {
         int row = grid.size();
         int col = grid[0].size();
 
-        queue<pair<int, int>> q;
-
         int leaves = 0;
-        int step = 0;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (grid[i][j] == 2) {
-                    q.push({i, j});
-                }
-                if (grid[i][j] == 1) {
-                    leaves += 1;
+                    que.push({i, j});
+                } else if (grid[i][j] == 1) {
+                    leaves++;
                 }
             }
         }
 
-        int dx[4] = {0, -1, 0, 1};
-        int dy[4] = {-1, 0, 1, 0};
+        while (que.size()) {
+            auto sz = que.size();
+            step++;
 
-        while (leaves > 0 && ! q.empty()) {
-            int len = q.size();
-            step += 1;
-            
-            for (int i = 0; i < len; i++) {
-                auto top = q.front();
-                q.pop();
-                
-                auto x = top.first;
-                auto y = top.second;
-                
+            while (sz--) {
+                auto front = que.front();
+                que.pop();
+
+                auto x = front.first;
+                auto y = front.second;
+
                 for (int k = 0; k < 4; k++) {
                     auto newX = x + dx[k];
                     auto newY = y + dy[k];
-                    
-                    if (newX >= row || newX < 0 || newY >= col || newY < 0) {
-                        continue;
-                    }
-                    
-                    if (grid[newX][newY] == 1) {
+
+                    if (0 <= newX && newX < row && 0 <= newY && newY < col && grid[newX][newY] == 1) {
                         grid[newX][newY] = 2;
-                        q.push({newX, newY});
-                        leaves -= 1;
+                        que.push({newX, newY});
+                        leaves--;
                     }
                 }
             }
         }
-        
+
         if (leaves > 0) {
             return -1;
         }
-        return step;
+        return max(0, step);
     }
 };
