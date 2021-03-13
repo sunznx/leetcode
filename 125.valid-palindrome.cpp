@@ -1,3 +1,4 @@
+// CreateTime: 2021-03-04 10:15:43
 class Solution {
 public:
     bool isPalindrome(string s) {
@@ -5,38 +6,60 @@ public:
         int r = s.size()-1;
 
         while (l < r) {
-            if (!check(s[l])) {
-                l += 1;
-                continue;
+            while (l < r && !isOk(s[l])) {
+                l++;
             }
-            if (!check(s[r])) {
-                r -= 1;
-                continue;
+
+            while (l < r && !isOk(s[r])) {
+                r--;
             }
-            if (tolower(s[l]) == tolower(s[r])) {
-                l += 1;
-                r -= 1;
-            } else {
+
+            if (l < r && !isEqual(s[l], s[r])) {
                 return false;
             }
+            l++;
+            r--;
         }
 
         return true;
     }
 
-    bool check(char c) {
-        if ('a' <= c && c <= 'z') {
-            return true;
+    bool isEqual(char c1, char c2) {
+        if (isNum(c1) && isNum(c2)) {
+            return c1 == c2;
+        } else if (isNum(c1) || isNum(c2)) {
+            return false;
         }
 
-        if ('A' <= c && c <= 'Z') {
-            return true;
+        int s1 = 0;
+        int s2 = 0;
+        if (isUpper(c1)) {
+            s1 = c1 - 'A';
+        } else {
+            s1 = c1 - 'a';
         }
 
-        if ('0' <= c && c <= '9') {
-            return true;
+        if (isUpper(c2)) {
+            s2 = c2 - 'A';
+        } else {
+            s2 = c2 - 'a';
         }
+        return s1 == s2;
+    }
 
-        return false;
+    bool isOk(char c) {
+        return isNum(c) || isLower(c) || isUpper(c);
+    }
+
+    bool isNum(char c) {
+        return '0' <= c && c <= '9';
+    }
+
+    bool isLower(char c) {
+        return 'a' <= c && c <= 'z';
+    }
+
+    bool isUpper(char c) {
+        return 'A' <= c && c <= 'Z';
     }
 };
