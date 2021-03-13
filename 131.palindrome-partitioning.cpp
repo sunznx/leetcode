@@ -1,48 +1,38 @@
-// CreateTime: 2019-12-09 08:33:39
+// CreateTime: 2021-03-08 16:29:18
 class Solution {
 public:
-    vector<vector<string>> res;
-    vector<string> v;
+    vector<vector<string>> ans;
+    vector<vector<bool>> dp;
+    vector<string> sub;
 
     vector<vector<string>> partition(string s) {
-        dfs(s, 0);
-        return res;
+        int len = s.size();
+        dp.resize(len+1, vector<bool>(len+1, true));
+        for (int i = len-1; i >= 0; i--) {
+            for (int j = i+1; j < len; j++) {
+                if (!(s[i] == s[j] && dp[i+1][j-1])) {
+                    dp[i][j] = false;
+                }
+            }
+        }
+
+        dfs(s);
+        return ans;
     }
 
-    void dfs(string &s, int step) {
-        if (step == s.size()) {
-            res.push_back(v);
+    void dfs(string &s, int step = 0) {
+        int len = s.size();
+        if (step == len) {
+            ans.push_back(sub);
             return;
         }
 
-        if (v.size() == 0 || isPalindrome(v[v.size()-1])) {
-            v.push_back(string(1, s[step]));
-            dfs(s, step+1);
-            v.pop_back();
-        }
-
-
-        if (v.size()) {
-            v[v.size()-1].push_back(s[step]);
-            if (step+1 != s.size() || isPalindrome(v[v.size()-1])) {
-                dfs(s, step+1);
-            }
-            v[v.size()-1].pop_back();
-        }
-    }
-
-    bool isPalindrome(string& s) {
-        int l = 0;
-        int r = s.size()-1;
-
-        while (l < r) {
-            if (s[l] == s[r]) {
-                l++;
-                r--;
-            } else {
-                return false;
+        for (int k = step; k <= len-1; k++) {
+            if (dp[step][k]) {
+                sub.push_back(s.substr(step, k-step+1));
+                dfs(s, k+1);
+                sub.pop_back();
             }
         }
-        return true;
     }
 };
