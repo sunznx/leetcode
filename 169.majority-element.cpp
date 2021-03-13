@@ -1,21 +1,22 @@
-// CreateTime: 2019-11-22 13:56:33
+// CreateTime: 2020-01-09 07:56:26
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
+        int times = 0;
+        int res;
+        
         int len = nums.size();
-        int l = 0;
-        int r = len-1;
-
-        stack<int> s;
-
         for (int i = 0; i < len; i++) {
-            if (!s.empty() && s.top() != nums[i]) {
-                s.pop();
+            if (times == 0) {
+                res = nums[i];
+                times++;
+            } else if (res == nums[i]) {
+                times++;
             } else {
-                s.push(nums[i]);
+                times--;
             }
         }
-
-        return s.top();
+        
+        return res;
     }
 };
