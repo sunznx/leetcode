@@ -1,27 +1,19 @@
 // CreateTime: 2021-03-01 16:13:23
 class Solution {
 public:
-    string ans = "";
-
     string longestPalindrome(string s) {
         int len = s.size();
-        vector<vector<int>> f(len+1, vector<int>(len+1, 0));
+        string ans = string(1, s[0]);
+        vector<vector<bool>> f(len+1, vector<bool>(len+1, true));
 
-        for (int sz = 1; sz <= len; sz++) {
-            for (int i = 0; i+sz-1 < len; i++) {
-                int j = i+sz-1;
-
-                if (sz == 1) {
-                    f[i][j] = 1;
-                } else if (sz == 2 && s[i] == s[j]) {
-                    f[i][j] = 2;
-                } else {        // 大于 3 的情况
-                    if (s[i] == s[j] && f[i+1][j-1] > 0) {
-                        f[i][j] = f[i+1][j-1] + 2;
-                    }
+        for (int i = len-1; i >= 0; i--) {
+            for (int j = i+1; j < len; j++) {
+                if (!(s[i] == s[j] && f[i+1][j-1])) {
+                    f[i][j] = false;
                 }
 
-                if (f[i][j] > ans.size()) {
+                auto sz = j-i+1;
+                if (f[i][j] && sz > ans.size()) {
                     ans = s.substr(i, sz);
                 }
             }
