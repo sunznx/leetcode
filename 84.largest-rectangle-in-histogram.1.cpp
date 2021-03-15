@@ -20,8 +20,6 @@ public:
                 l[i] = i-stk.top()-1;
             }
             stk.push(i);
-
-            printf("l[%d] = %d\n", i, l[i]);
         }
 
         stk = stack<int>();
@@ -37,8 +35,6 @@ public:
                 r[i] = stk.top()-i-1;
             }
             stk.push(i);
-
-            printf("r[%d] = %d\n", i, r[i]);
         }
 
         int ans = 0;
