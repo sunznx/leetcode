@@ -35,7 +35,8 @@ public:
 
             auto dist = top.first;
             auto x = top.second;
-            if (seen[x]) {
+
+            if (seen[x] == true) {
                 continue;
             }
 
@@ -45,10 +46,8 @@ public:
                 auto y = e.first;
                 auto w = e.second;
 
-                if (!seen[y]) {
-                    d[y] = min(d[y], d[x]+w);
-                    pq.push({d[y], y});
-                }
+                d[y] = min(d[y], d[x]+w);
+                pq.push({d[y], y});
             }
         }
 
