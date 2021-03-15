@@ -46,6 +46,10 @@ public:
                 auto y = e.first;
                 auto w = e.second;
 
+                if (seen[y]) {
+                    continue;
+                }
+
                 d[y] = min(d[y], d[x]+w);
                 pq.push({d[y], y});
             }
