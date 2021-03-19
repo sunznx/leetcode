@@ -17,13 +17,8 @@ public:
 
         while (p) {
             auto next = p->next;
-            if (newList == NULL) {
-                newList = p;
-                newList->next = NULL;
-            } else {
-                p->next = newList;
-                newList = p;
-            }
+            p->next = newList;
+            newList = p;
             p = next;
         }
 
