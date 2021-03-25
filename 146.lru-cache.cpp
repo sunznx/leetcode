@@ -1,11 +1,11 @@
-// CreateTime: 2021-02-24 23:05:37
+// CreateTime: 2021-03-25 19:15:55
 class LRUCache {
 public:
 
     typedef pair<int, int> PII;
-    unordered_map<int, list<PII>::iterator> m;
-    list<PII> l;
     int capacity;
+    list<PII> ls;
+    unordered_map<int, list<PII>::iterator> m;
 
     LRUCache(int capacity) {
         this->capacity = capacity;
@@ -17,25 +17,24 @@ public:
         }
 
         auto iter = m[key];
-        l.splice(l.begin(), l, iter);
+        ls.splice(ls.begin(), ls, iter);
         return iter->second;
     }
 
     void put(int key, int value) {
         if (m.find(key) == m.end()) {
-            if (l.size() == capacity) {
-                auto back = l.back();
+            if (ls.size() == capacity) {
+                auto back = ls.back();
+                ls.pop_back();
                 m.erase(back.first);
-                l.pop_back();
             }
-
-            l.push_front({key, value});
-            m[key] = l.begin();
+            ls.push_front({key, value});
+            m[key] = ls.begin();
         } else {
             auto iter = m[key];
             iter->second = value;
-            l.splice(l.begin(), l, iter);
-            m[key] = l.begin();
+            ls.splice(ls.begin(), ls, iter);
+            m[key] = ls.begin();
         }
     }
 };
