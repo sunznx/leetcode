@@ -9,8 +9,9 @@ public:
         return ans;
     }
 
+    // pre 表示已经走过，但是还没被放到 que 里面的字符串
     void dfs(string &s, int step, string pre) {
-        if (que.size() > 4) {
+        if (que.size() >= 4) {
             return;
         }
 
