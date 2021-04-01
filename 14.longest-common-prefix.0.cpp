@@ -16,14 +16,13 @@ public:
                 }
             }
 
-            auto c = strs[0][k];
             for (int i = 1; i < strs.size(); i++) {
-                if (strs[i][k] != c) {
+                if (strs[i][k] != strs[0][k]) {
                     return ans;
                 }
             }
-            ans += c;
-            k++;
+
+            ans += strs[0][k++];
         }
 
         return "";
