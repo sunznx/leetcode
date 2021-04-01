@@ -1,36 +1,39 @@
+// CreateTime: 2021-04-01 13:00:15
 class Solution {
 public:
+    vector<int> m1;
+    vector<int> m2;
+
     bool checkInclusion(string s1, string s2) {
-        int len1 = s1.size();
-        int len2 = s2.size();
-        int res1[26];
-        int res2[26];
+        m1.resize(256);
+        m2.resize(256);
 
-        memset(res1, 0, sizeof(res1));
-        memset(res2, 0, sizeof(res2));
-
-        for (int i = 0; i < len1; i++) {
-            res1[s1[i]-'a'] += 1;
+        for (auto &x: s1) {
+            m1[x]++;
         }
-        for (int i = 0; i <= len2-len1; i++) {
-            memset(res2, 0, sizeof(res2));
-            for (int j = i; j < len1+i; j++) {
-                res2[s2[j]-'a'] += 1;
-            }
 
-            bool ok = true;
-            for (int x = 0; x < 26; x++) {
-                if (res1[x] > res2[x]) {
-                    ok = false;
-                    break;
+        int l = 0;
+        for (int r = 0; r < s2.size(); r++) {
+            auto x = s2[r];
+            m2[x]++;
+
+            if (r-l+1 == s1.size()) {
+                if (check()) {
+                    return true;
                 }
+                auto y = s2[l++];
+                m2[y]--;
             }
-            if (ok) {
-                return true;
-            }
-
         }
-
         return false;
+    }
+
+    bool check() {
+        for (char i = 'a'; i <= 'z'; i++) {
+            if (m1[i] != m2[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 };
