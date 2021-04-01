@@ -30,12 +30,7 @@ public:
             return;
         }
 
-        if (pre.size() == 3 && check(pre)) {
-            que.push_back(pre);
-            dfs(s, step+1, string(1, x));
-            que.pop_back();
-            return;
-        } else if (pre.size()) {
+        if (pre.size()) {
             que.push_back(pre);
             dfs(s, step+1, string(1, x));
             que.pop_back();
