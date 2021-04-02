@@ -7,12 +7,18 @@ public:
         vector<int> maxL(len);
         vector<int> maxR(len);
 
-        for (int i = 1; i < len; i++) {
-            maxL[i] = max(maxL[i-1], height[i-1]);
+        int val;
+
+        val = 0;
+        for (int i = 0; i < len; i++) {
+            val = max(val, height[i]);
+            maxL[i] = val;
         }
 
-        for (int i = len-2; i >=0; i--) {
-            maxR[i] = max(maxR[i+1], height[i+1]);
+        val = 0;
+        for (int i = len-1; i >=0; i--) {
+            val = max(val, height[i]);
+            maxR[i] = val;
         }
 
         int ans = 0;
