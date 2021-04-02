@@ -1,33 +1,30 @@
+// CreateTime: 2021-04-02 10:34:44
 class Solution {
 public:
-
-    struct node {
-        int maxL = 0;
-        int maxR = 0;
-    };
-
     int trap(vector<int>& height) {
         int len = height.size();
 
-        vector<node> aux(len);
+        vector<int> maxL(len);
+        vector<int> maxR(len);
 
-        int maxL = 0;
+        int val;
+
+        val = 0;
         for (int i = 0; i < len; i++) {
-            aux[i].maxL = maxL;
-            maxL = max(maxL, height[i]);
+            val = max(val, height[i]);
+            maxL[i] = val;
         }
-        
-        int maxR = 0;
-        for (int i = len-1; i >= 0; i--) {
-            aux[i].maxR = maxR;
-            maxR = max(maxR, height[i]);
+
+        val = 0;
+        for (int i = len-1; i >=0; i--) {
+            val = max(val, height[i]);
+            maxR[i] = val;
         }
-        
+
         int ans = 0;
         for (int i = 0; i < len; i++) {
-            ans += max(0, min(aux[i].maxL, aux[i].maxR) - height[i]);
+            ans += max(0, min(maxL[i], maxR[i]) - height[i]);
         }
-        
         return ans;
     }
 };
