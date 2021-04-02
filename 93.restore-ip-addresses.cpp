@@ -18,15 +18,13 @@ public:
         // 走到末尾了，检查答案是否合法
         if (step == s.size()) {
             if (que.size() == 4) {
-                ans.push_back(que[0] + "." + que[1] + "." + que[2] + "." + que[3]);
+                ans.push_back(que[0] + "." + que[1] + "." + que[2] + "." + que[3]);                
             }
             return;
         }
 
         auto x = s[step];
 
-        // pre 是 0 开头的
-        // 说明 pre 后面不能再和其他字符合并了
         if (que.size() && que.back() == "0") {
             que.push_back(string(1, x));
             dfs(s, step+1);
@@ -39,7 +37,7 @@ public:
             dfs(s, step+1);
             que.back().pop_back();
         }
-        
+
         que.push_back(string(1, x));
         dfs(s, step+1);
         que.pop_back();
