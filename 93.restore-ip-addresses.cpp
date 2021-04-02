@@ -4,7 +4,6 @@ public:
     vector<string> ans;
     vector<string> que;
 
-    // 思路，将 s 分割成 4 个字符串数组
     vector<string> restoreIpAddresses(string s) {
         dfs(s, 0);
         return ans;
@@ -15,7 +14,6 @@ public:
             return;
         }
 
-        // 走到末尾了，检查答案是否合法
         if (step == s.size()) {
             if (que.size() == 4) {
                 ans.push_back(que[0] + "." + que[1] + "." + que[2] + "." + que[3]);                
