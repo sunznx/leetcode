@@ -30,7 +30,7 @@ public:
             return;
         }
 
-        if (que.size() && check(que.back()+x)) {
+        if (que.size() && stoi(que.back()+x) <= 255) {
             que.back().push_back(x);
             dfs(s, step+1);
             que.back().pop_back();
@@ -39,9 +39,5 @@ public:
         que.push_back(string(1, x));
         dfs(s, step+1);
         que.pop_back();
-    }
-
-    bool check(string s) {
-        return stoi(s) <= 255;
     }
 };
