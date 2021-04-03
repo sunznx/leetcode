@@ -9,9 +9,7 @@ public:
         
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
-                if (j > 0 && aux[j] == aux[j-1]) {
-                    dp[i+1][j+1] = max(dp[i+1][j], dp[i][j+1]);
-                } else if (nums[i] == aux[j]) {
+                if (nums[i] == aux[j] && (j == 0 || aux[j] > aux[j-1])) {
                     dp[i+1][j+1] = dp[i][j] + 1;
                 } else {
                     dp[i+1][j+1] = max(dp[i+1][j], dp[i][j+1]);
