@@ -1,15 +1,15 @@
 // CreateTime: 2021-01-17 13:09:37
 class Solution {
 public:
-    int maxSide = 0;
     int maximalSquare(vector<vector<char>>& matrix) {
-        auto row = matrix.size();
-        if (row == 0) {
+        if (matrix.size() == 0 || matrix[0].size() == 0) {
             return 0;
         }
 
+        auto row = matrix.size();
         auto col = matrix[0].size();
 
+        int maxSide = 0;
         vector<vector<int>> f(row, vector<int>(col));
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
