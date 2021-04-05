@@ -6,20 +6,22 @@ public:
 
     const int MOD = 1e9+7;
 
-    vector<PII> d;
+    int maxDiffVal = INT_MIN;
+    int maxDiffIdx = -1;
 
     int minAbsoluteSumDiff(vector<int>& nums1, vector<int>& nums2) {
         int len = nums1.size();
 
-        d.resize(len);
-
         LL S = 0;
         for (int i = 0; i < len; i++) {
-            d[i] = {abs(nums1[i] - nums2[i]), i};
-            S = (S + d[i].first) % MOD;
+            int diff = abs(nums1[i]-nums2[i]);
+            S = (S + diff) % MOD;
+            
+            if (diff > maxDiffVal) {
+                maxDiffVal = diff;
+                maxDiffIdx = i;
+            }
         }
-
-        sort(d.rbegin(), d.rend());
 
         LL l = 0;
         LL r = S;
@@ -36,15 +38,14 @@ public:
     }
 
     bool check(vector<int>& nums1, vector<int>& nums2, LL diff) {
-        int len = nums1.size();
-        if (d[0].first < diff) {
+        if (maxDiffVal < diff || maxDiffIdx == -1) {
             return false;
         }
 
-        auto idx = d[0].second;
+        int len = nums1.size();
 
-        auto to1 = nums2[idx]-(d[0].first-diff);
-        auto to2 = nums2[idx]+(d[0].first-diff);
+        auto to1 = nums2[maxDiffIdx]-(maxDiffVal-diff);
+        auto to2 = nums2[maxDiffIdx]+(maxDiffVal-diff);
 
         for (int i = 0; i < len; i++) {
             if (to1 <= nums1[i] && nums1[i] <= to2) {
