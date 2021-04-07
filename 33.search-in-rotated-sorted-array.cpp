@@ -1,45 +1,39 @@
+// CreateTime: 2021-04-07 20:26:26
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        int len = nums.size();
-        if (len == 0) {
+        return search(nums, 0, nums.size()-1, target);
+    }
+
+    int search(vector<int>& nums, int l, int r, int target) {
+        if (l == r) {
+            if (target == nums[l]) {
+                return l;
+            }
             return -1;
         }
 
-        int idx = findPivot(nums);
-
-        int l = 0;
-        int r = idx;
-
-        if (! (nums[0] <= target && target <= nums[idx])) {
-            l = idx+1;
-            r = len-1;
-        }
-
-        while (l <= r) {
-            int m = (l+r) / 2;
-            if (target == nums[m]) {
-                return m;
-            }
+        int m = (l+r) / 2;
+        if (nums[m] >= nums[l]) {
             if (target > nums[m]) {
-                l = m+1;
+                return search(nums, m+1, r, target);
             }
-            if (target < nums[m]) {
-                r = m-1;
+
+            auto s1 = search(nums, l, m, target);
+            if (s1 != -1) {
+                return s1;
             }
+            return search(nums, m+1, r, target);
         }
 
-        return -1;
-    }
-
-    int findPivot(vector<int>& nums) {
-        int len = nums.size();
-        int res = len-1;
-        for (int i = 1; i < len; i++) {
-            if (nums[i] < nums[i-1]) {
-                return i-1;
+        if (target > nums[m]) {
+            auto s1 = search(nums, l, m, target);
+            if (s1 != -1) {
+                return s1;
             }
+            return search(nums, m+1, r, target);
         }
-        return res;
+
+        return search(nums, l, m, target);
     }
 };
