@@ -17,6 +17,14 @@ class Solution {
             return false;
         }
 
+        int m = (l+r) / 2;
+        if (nums[m] == nums[l]) {
+            return search(nums, l, m, target) || search(nums, m+1, r, target);
+        }
+        if (nums[m] == nums[r]) {
+            return search(nums, l, m-1, target) || search(nums, m, r, target);
+        }
+
         if (nums[l] == nums[r]) {
             if (target == nums[l]) {
                 return true;
@@ -24,21 +32,17 @@ class Solution {
             return search(nums, l+1, r-1, target);
         }
 
-        if (nums[l] > nums[r]) {
-            int m = (l+r) / 2;
-            return search(nums, l, m, target) || search(nums, m+1, r, target);
-        } else {
-            while (l < r) {
-                int m = (l+r) / 2;
-                if (nums[m] < target) {
-                    l = m+1;
-                } else {
-                    r = m;
-                }
+        if (nums[m] > nums[l]) {
+            if (target > nums[m]) {
+                return search(nums, m+1, r, target);
             }
-            return nums[l] == target;
+
+            return search(nums, l, m, target) || search(nums, m+1, r, target);
         }
 
-        return false;
+        if (target > nums[m]) {
+            return search(nums, l, m, target) || search(nums, m+1, r, target);
+        }
+        return search(nums, l, m, target);
     }
 };
