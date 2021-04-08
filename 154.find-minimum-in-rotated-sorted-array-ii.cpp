@@ -11,6 +11,7 @@ public:
         if (l > r) {
             return INT_MAX;
         }
+
         if (l == r) {
             return nums[l];
         }
