@@ -5,52 +5,37 @@ public:
 
     const int MOD = 1e9+7;
 
-    int maxDiffVal = INT_MIN;
-    int maxDiffIdx = -1;
-
     int minAbsoluteSumDiff(vector<int>& nums1, vector<int>& nums2) {
         int len = nums1.size();
 
         LL S = 0;
         for (int i = 0; i < len; i++) {
-            int diff = abs(nums1[i]-nums2[i]);
-            S = (S + diff) % MOD;
-            
-            if (diff > maxDiffVal) {
-                maxDiffVal = diff;
-                maxDiffIdx = i;
-            }
+            S = (S + D(nums1, nums2, i));
         }
 
-        LL l = 0;
-        LL r = S;
-        while (l < r) {
-            LL m = (l+r) / 2;
-            LL diff = abs(S - m);
-            if (check(nums1, nums2, diff)) {
-                r = m;
+        vector<int> SA = nums1;
+        sort(SA.begin(), SA.end());
+
+        int maxDiff = 0;
+        for (int i = 0; i < len; i++) {
+            auto x = nums2[i];
+            auto iter = upper_bound(SA.begin(), SA.end(), x);
+            int k = distance(SA.begin(), iter);
+
+            int d;
+            if (k == 0) {
+                d = D(nums1, nums2, i)-abs(SA[0]-x);
+            } else if (k == len) {
+                d = D(nums1, nums2, i)-abs(SA[len-1]-x);
             } else {
-                l = m+1;
+                d = D(nums1, nums2, i)-min(abs(SA[k]-x), abs(SA[k-1]-x));
             }
+            maxDiff = max(maxDiff, d);
         }
-        return l;
+        return (S-maxDiff) % MOD;
     }
 
-    bool check(vector<int>& nums1, vector<int>& nums2, LL diff) {
-        if (maxDiffVal < diff || maxDiffIdx == -1) {
-            return false;
-        }
-
-        int len = nums1.size();
-
-        auto to1 = nums2[maxDiffIdx]-(maxDiffVal-diff);
-        auto to2 = nums2[maxDiffIdx]+(maxDiffVal-diff);
-
-        for (int i = 0; i < len; i++) {
-            if (to1 <= nums1[i] && nums1[i] <= to2) {
-                return true;
-            }
-        }
-        return false;
+    int D(vector<int>& nums1, vector<int>& nums2, int k) {
+        return abs(nums1[k]-nums2[k]);
     }
 };
