@@ -1,38 +1,40 @@
+// CreateTime: 2021-04-13 01:17:44
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
 public:
-    int res = INT_MAX;
-    TreeNode *prev = NULL;
+    int pre = -1;
+    bool hasPre = false;
+    int ans = INT_MAX;
 
     int minDiffInBST(TreeNode* root) {
-        traversal(root);
-        return res;
+        dfs(root);
+        return ans;
     }
 
-    void traversal(TreeNode *root) {
+    void dfs(TreeNode *root) {
         if (root == NULL) {
             return;
         }
 
-        if (root->left) {
-            traversal(root->left);
+        dfs(root->left);
+
+        if (hasPre) {
+            ans = min(ans, abs(root->val-pre));
         }
 
-        if (prev) {
-            res = min(res, root->val - prev->val);
-        }
-        prev = root;
+        hasPre = true;
+        pre = root->val;
 
-        if (root->right) {
-            traversal(root->right);
-        }
+        dfs(root->right);
     }
 };
