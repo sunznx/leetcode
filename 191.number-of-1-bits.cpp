@@ -11,7 +11,7 @@ public:
         return count;
     }
 
-    int lowbit(int n) {
+    uint32_t lowbit(uint32_t n) {
         return (n & (n -1));
     }
 };
