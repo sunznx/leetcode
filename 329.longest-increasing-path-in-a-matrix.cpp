@@ -1,67 +1,51 @@
-// CreateTime: 2020-01-09 11:59:15
+// CreateTime: 2021-04-13 16:29:37
 class Solution {
 public:
+    vector<int> dx = {0, -1, 0, 1};
+    vector<int> dy = {-1, 0, 1, 0};
+
+    int ans = 0;
+
+    vector<vector<int>> f;
+
     int longestIncreasingPath(vector<vector<int>>& matrix) {
-        if (matrix.size() == 0 || matrix[0].size() == 0) {
+        auto row = matrix.size();
+        auto col = matrix[0].size();
+
+        f.resize(row, vector<int>(col));
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                dfs(matrix, i, j);
+            }
+        }
+        return ans;
+    }
+
+    int dfs(vector<vector<int>>& matrix, int x, int y) {
+        auto row = matrix.size();
+        auto col = matrix[0].size();
+
+        if (0 > x || x >= row && 0 > y || y >= col) {
             return 0;
         }
 
-        int row = matrix.size();
-        int col = matrix[0].size();
+        if (f[x][y]) {
+            return f[x][y];
+        }
 
-        int dx[4] = {0, -1, 0, 1};
-        int dy[4] = {-1, 0, 1, 0};
+        f[x][y] = 1;
+        for (int k = 0; k < 4; k++) {
+            auto newX = x + dx[k];
+            auto newY = y + dy[k];
 
-        queue<pair<int, int>> q;
-
-        for (int x = 0; x < row; x++) {
-            for (int y = 0; y < col; y++) {
-                bool ok = true;
-                for (int k = 0; k < 4; k++) {
-                    auto newX = x + dx[k];
-                    auto newY = y + dy[k];
-                    if (newX < 0 || newX >= row || newY < 0 || newY >= col) {
-                        continue;
-                    }
-
-                    if (matrix[newX][newY] < matrix[x][y]) {
-                        ok = false;
-                        break;
-                    }
-                }
-
-                if (ok) {
-                    q.push({x, y});
+            if (0 <= newX && newX < row && 0 <= newY && newY < col) {
+                if (matrix[newX][newY] > matrix[x][y]) {
+                    f[x][y] = max(f[x][y], dfs(matrix, newX, newY)+1);
                 }
             }
         }
 
-        int res = 0;
-        while (q.size()) {
-            vector<vector<bool>> v(row, vector<bool>(col));
-
-            res++;
-            int len = q.size();
-            for (int i = 0; i < len; i++) {
-                auto top = q.front();
-                q.pop();
-
-                auto x = top.first;
-                auto y = top.second;
-
-                for (int k = 0; k < 4; k++) {
-                    auto newX = x + dx[k];
-                    auto newY = y + dy[k];
-                    if (newX < 0 || newX >= row || newY < 0 || newY >= col || v[newX][newY] || matrix[newX][newY] <= matrix[x][y]) {
-                        continue;
-                    }
-
-                    v[newX][newY] = true;
-                    q.push({newX, newY});
-                }
-            }
-        }
-
-        return res;
+        ans = max(ans, f[x][y]);
+        return f[x][y];
     }
 };
