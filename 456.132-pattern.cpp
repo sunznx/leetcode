@@ -1,36 +1,26 @@
-// CreateTime: 2020-12-04 08:51:28
+// CreateTime: 2021-04-14 00:10:46
 class Solution {
 public:
     bool find132pattern(vector<int>& nums) {
-        int len = nums.size();
-        vector<int> minL(len);
-        vector<int> maxR(len);
+        bool hasK2 = false;
+        int k2;
 
-        for (int i = 0; i < len; i++) {
-            if (i == 0) {
-                minL[i] = nums[i];
-            } else {
-                minL[i] = min(minL[i-1], nums[i]);
-            }
-        }
+        stack<int> stk;
 
-        deque<int> que;
-        for (int i = len-1; i >= 0; i--) {
+        for (int i = nums.size()-1; i >= 0; i--) {
             auto x = nums[i];
-            
-            maxR[i] = x;
-            while (que.size() && que.back() < x) {
-                maxR[i] = que.back();
-                que.pop_back();
-            }
-            que.push_back(x);
-        }
 
-        for (int i = 0; i < len; i++) {
-            auto x = nums[i];
-            if (minL[i] < maxR[i] && maxR[i] < x) {
+            if (hasK2 && x < k2) {
                 return true;
             }
+
+            while (stk.size() && x > stk.top()) {
+                k2 = stk.top();
+                stk.pop();
+                hasK2 = true;
+            }
+
+            stk.push(x);
         }
 
         return false;
