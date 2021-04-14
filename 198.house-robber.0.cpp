@@ -10,7 +10,7 @@ public:
             return nums[0];
         }
 
-        vector<vector<int>> dp(2*len, vector<int>(2));
+        vector<vector<int>> dp(len, vector<int>(2));
 
         // dp[x][0] 表示选择 x 的时候，最大是多少
         // dp[x][1] 表示不选择 x 的时候，最大是多少
@@ -19,8 +19,8 @@ public:
         dp[1][0] = nums[1];
         dp[1][1] = nums[0];
 
-        for (int i = 2; i < 2*len; i++) {
-            auto x = nums[i%len];
+        for (int i = 2; i < len; i++) {
+            auto x = nums[i];
             dp[i][0] = x + max({dp[i-2][0], dp[i-2][1], dp[i-1][1]});
             dp[i][1] = max({dp[i-2][0], dp[i-2][1], dp[i-1][0], dp[i-1][1]});
         }
