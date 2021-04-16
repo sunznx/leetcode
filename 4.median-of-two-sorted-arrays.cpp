@@ -21,28 +21,17 @@ public:
         int i = 0;
         int j = 0;
 
-        int a;
-        int b;
         int res;
 
         for (int t = 0; t <= k; t++) {
             if (i == len1) {
-                a = 0x3fffffff;
+                res = nums2[j++];
+            } else if (j == len2) {
+                res = nums1[i++];
+            } else if (nums1[i] <= nums2[j]) {
+                res = nums1[i++];
             } else {
-                a = nums1[i];
-            }
-            if (j == len2) {
-                b = 0x3fffffff;
-            } else {
-                b = nums2[j];
-            }
-
-            if (a < b) {
-                res = a;
-                i++;
-            } else {
-                res = b;
-                j++;
+                res = nums2[j++];
             }
         }
         return res;
