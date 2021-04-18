@@ -6,6 +6,10 @@ public:
     }
 
     int search(vector<int>& nums, int l, int r, int target) {
+        if (l > r) {
+            return -1;
+        }
+
         if (l == r) {
             if (target == nums[l]) {
                 return l;
