@@ -14,9 +14,10 @@ public:
 
     void tryExpand(string &s, int k1, int k2) {
         int len = s.size();
-        while (k1 >= 0 && k2 < len && s[k1] == s[k2]) {
-            if (k2-k1+1 > ans.size()) {
-                ans = s.substr(k1, k2-k1+1);
+        while (0 <= k1 && k1 <= s.size()-1 && 0 <= k2 && k2 <= s.size()-1 && s[k1] == s[k2]) {
+            int sz = k2-k1+1;
+            if (sz > ans.size()) {
+                ans = s.substr(k1, sz);
             }
 
             k1--;
