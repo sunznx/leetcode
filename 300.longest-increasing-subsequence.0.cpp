@@ -6,7 +6,7 @@ public:
 
         int len = nums.size();
         vector<vector<int>> dp(len+1, vector<int>(len+1, 0));
-        
+
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
                 if (nums[i] == aux[j] && (j == 0 || aux[j] > aux[j-1])) {
