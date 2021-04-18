@@ -1,33 +1,23 @@
+// CreateTime: 2021-03-15 20:03:50
 class Solution {
 public:
     int countSubstrings(string s) {
         int len = s.size();
-        vector<vector<int>> dp(len+1, vector<int>(len+1, 0));
-        vector<vector<int>> isPalindromic(len+1, vector<int>(len+1, 0));
+        vector<vector<bool>> f(len+1, vector<bool>(len+1, true));
 
-        int ans = len;
-        for (int i = 0; i < len; i++) {
-            isPalindromic[i][i] = 1;
-        }
+        int ans = 0;
+        for (int i = len-1; i >= 0; i--) {
+            ans++;
+            for (int j = i+1; j < len; j++) {
+                if (!(s[i] == s[j] && f[i+1][j-1])) {
+                    f[i][j] = false;
+                }
 
-        for (int l = 2; l <= len; l++) {
-            for (int i = len-l; i >= 0; i--) {
-                int j = i+l-1;
-
-                if (s[i] == s[j]) {
-                    if (l == 2) {
-                        ans += 1;
-                        isPalindromic[i][j] = 1;
-                    } else {
-                        if (isPalindromic[i+1][j-1]) {
-                            ans += 1;
-                            isPalindromic[i][j] = 1;
-                        }
-                    }
+                if (f[i][j]) {
+                    ans++;
                 }
             }
         }
-
         return ans;
     }
 };
