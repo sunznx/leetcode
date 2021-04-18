@@ -1,3 +1,4 @@
+// CreateTime: 2021-04-13 01:29:26
 class Solution {
 public:
     int hammingWeight(uint32_t n) {
@@ -11,7 +12,7 @@ public:
         return count;
     }
 
-    int lowbit(int n) {
+    uint32_t lowbit(uint32_t n) {
         return (n & (n -1));
     }
 };
