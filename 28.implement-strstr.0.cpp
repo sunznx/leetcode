@@ -6,7 +6,7 @@ public:
         int len2 = needle.size();
         for (int i = 0; i <= len1-len2; i++) {
             int k = 0;
-            while (i+k < len1 && k < len2 && haystack[i+k] == needle[k]) {
+            while (k < len2 && haystack[i+k] == needle[k]) {
                 k++;
             }
             if (k == len2) {
