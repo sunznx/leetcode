@@ -1,32 +1,42 @@
-// CreateTime: 2019-12-05 22:12:05
+// CreateTime: 2021-04-21 00:29:26
 class Solution {
 public:
-    int res;
+    int ans = 0;
+    char prev = 'x';
+    vector<vector<int>> m;
 
     int numDecodings(string s) {
-        res = 0;
-        int len = s.size();
-        dfs(s, 0);
-        return res;
+        m.resize(2, vector<int>(s.size()+1, -1));
+        return dfs(s);
     }
-    
-    void dfs(string &s, int step) {
+
+    int dfs(string &s, int step = 0) {
         if (step == s.size()) {
-            res += 1;
-            return;
+            return 1;
         }
 
-        int v = s[step]-'0';
-        if (v == 0) {
-            return;
+        int state = 0;
+        if (prev != 'x') {
+            state = 1;
         }
 
-        if (step+1 <= s.size()-1) {
-            int n = s[step+1]-'0';
-            if (v*10 + n <= 26) {
-                dfs(s, step+2);
-            }
+        auto &k = m[state][step];
+
+        if (k >= 0) {
+            return k;
         }
-        dfs(s, step+1);
+
+        k = 0;
+        if ((prev == '1') || (prev == '2' && '0' <= s[step] && s[step] <= '6')) {
+            prev = 'x';
+            k += dfs(s, step+1);
+        }
+
+        if (s[step] != '0') {
+            prev = s[step];
+            k += dfs(s, step+1);
+        }
+
+        return k;
     }
 };
