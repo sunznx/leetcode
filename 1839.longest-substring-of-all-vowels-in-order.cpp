@@ -16,14 +16,14 @@ public:
             auto x = word[r];
             m[x]++;
 
-            if (ok(m)) {
+            if (check(m)) {
                 ans = max(ans, r-l+1);
             }
         }
         return ans;
     }
 
-    bool ok(vector<int> &m) {
+    bool check(vector<int> &m) {
         bool a = m['a'] > 0;
         bool e = m['e'] > 0;
         bool i = m['i'] > 0;
