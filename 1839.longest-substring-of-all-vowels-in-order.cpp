@@ -1,12 +1,10 @@
 // CreateTime: 2021-04-25 10:40:50
 class Solution {
 public:
-    vector<int> m;
-
     int longestBeautifulSubstring(string word) {
         int ans = 0;
 
-        m.resize(256);
+        vector<int> m(256);
         int len = word.size();
         int l = 0;
         for (int r = 0; r < len; r++) {
@@ -18,44 +16,14 @@ public:
             auto x = word[r];
             m[x]++;
 
-            while (check() == false) {
-                auto y = word[l++];
-                m[y]--;
-            }
-
-            if (ok()) {
+            if (ok(m)) {
                 ans = max(ans, r-l+1);
             }
         }
         return ans;
     }
 
-    bool check() {
-        bool a = m['a'] > 0;
-        bool e = m['e'] > 0;
-        bool i = m['i'] > 0;
-        bool o = m['o'] > 0;
-        bool u = m['u'] > 0;
-
-        if (u && (!a || !e || !i || !o)) {
-            return false;
-        }
-
-        if (o && (!a || !e || !i)) {
-            return false;
-        }
-
-        if (i && (!a || !e)) {
-            return false;
-        }
-
-        if (e && (!a)) {
-            return false;
-        }
-        return true;
-    }
-
-    bool ok() {
+    bool ok(vector<int> &m) {
         bool a = m['a'] > 0;
         bool e = m['e'] > 0;
         bool i = m['i'] > 0;
