@@ -4,10 +4,9 @@ public:
     int longestBeautifulSubstring(string word) {
         int ans = 0;
 
-        vector<int> m(256);
-        int len = word.size();
         int l = 0;
-        for (int r = 0; r < len; r++) {
+        vector<int> m(256);
+        for (int r = 0; r < word.size(); r++) {
             if (r > 0 && word[r] < word[r-1]) {
                 fill(m.begin(), m.end(), 0);
                 l = r;
