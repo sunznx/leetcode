@@ -1,7 +1,10 @@
 class Solution {
 public:
+
+    typedef long long LL;
+
     bool judgeSquareSum(int c) {
-        for (int i = 0; i*i <= c/2; i++) {
+        for (LL i = 0; i*i <= c; i++) {
             int target = c - i * i;
             if (check(target)) {
                 return true;
@@ -16,9 +19,9 @@ public:
             return true;
         }
 
-        int i1 = (int)sqrt(n);
-        int i2 = i1 - 1;
-        int i3 = i1 + 1;
+        LL i1 = (LL)sqrt(n);
+        LL i2 = i1 - 1;
+        LL i3 = i1 + 1;
 
         if (i1 * i1 == n) {
             return true;
