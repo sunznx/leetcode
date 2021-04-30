@@ -1,23 +1,23 @@
+// CreateTime: 2021-04-30 10:52:00
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        map<int, int> m;
-        int len = nums.size();
-        int res = 0;
-        for (int i = 0; i < len; i++) {
-            if (m.find(nums[i]) == m.end()) {
-                m[nums[i]] = 1;
-            } else {
-                m[nums[i]] += 1;                
+        vector<int> m(32);
+
+        for (auto &x: nums) {
+            for (int i = 0; i < 32; i++) {
+                if ((x & (1<<i)) != 0) {
+                    m[i]++;
+                }
             }
         }
-        
-        for (auto iter = m.begin(); iter != m.end(); iter++) {
-            if (iter->second == 1) {
-                return iter->first;
+
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            if (m[i] % 3 != 0) {
+                ans += (1<<i);
             }
         }
-        
-        return 0;
+        return ans;
     }
 };
