@@ -1,16 +1,32 @@
-// CreateTime: 2021-02-24 23:47:01
+// CreateTime: 2021-07-18 23:40:48
 class LFUCache {
-    typedef tuple<int, int, int> PII;
-
-    int minfreq;
-    int capacity;
-    unordered_map<int, list<PII>::iterator> m;
-    unordered_map<int, list<PII>> freq;
-
 public:
+    struct Node {
+        int key;
+        int value;
+        int idx;
+        int freq;
+
+        Node(int key, int value) {
+            this->key = key;
+            this->value = value;
+            this->idx = 0;
+            this->freq = 0;
+        }
+
+        bool operator< (const struct Node &node) const {
+            return freq < node.freq || (freq == node.freq && idx < node.idx);
+        }
+    };
+
+    int idx;
+    int capacity;
+    unordered_map<int, Node> m;
+    set<Node> S;
+
     LFUCache(int capacity) {
-        this->minfreq = INT_MAX;
         this->capacity = capacity;
+        this->idx = 0;
     }
 
     int get(int key) {
@@ -18,22 +34,19 @@ public:
             return -1;
         }
 
-        if (m.find(key) == m.end()) {
+        auto iter = m.find(key);
+        if (iter == m.end()) {
             return -1;
         }
 
-        auto iter = m[key];
-        auto [k, v, f] = *iter;
+        auto node = iter->second;
+        S.erase(node);
 
-        freq[f].erase(iter);
-        freq[f+1].push_front({k, v, f+1});
-        m[key] = freq[f+1].begin();
-
-        if (f == minfreq && freq[f].size() == 0) {
-            minfreq = f+1;
-        }
-
-        return v;
+        node.freq++;
+        node.idx = idx++;
+        S.insert(node);
+        iter->second = node;
+        return node.value;
     }
 
     void put(int key, int value) {
@@ -41,26 +54,30 @@ public:
             return;
         }
 
-        if (m.find(key) == m.end()) {
-            if (m.size() == capacity) {
-                auto [k, v, f] = freq[minfreq].back();
-                freq[minfreq].pop_back();
-                m.erase(k);
+        auto iter = m.find(key);
+        if (iter == m.end()) {
+            if (S.size() == capacity) {
+                auto begin = S.begin();
+                m.erase(begin->key);
+                S.erase(begin);
             }
 
-            freq[1].push_front({key, value, 1});
-            minfreq = 1;
-            m[key] = freq[1].begin();
-        } else {
-            auto iter = m[key];
-            auto [k, v, f] = *iter;
-            freq[f].erase(iter);
-            freq[f+1].push_front({key, value, f+1});
-            m[key] = freq[f+1].begin();
-            if (f == minfreq && freq[f].size() == 0) {
-                minfreq = f+1;
-            }
+            auto node = Node(key, value);
+            node.freq++;
+            node.idx = idx++;
+            S.insert(node);
+            m.insert({key, node});
+            return;
         }
+
+        auto node = iter->second;
+        S.erase(node);
+
+        node.freq++;
+        node.idx = idx++;
+        node.value = value;
+        S.insert(node);
+        iter->second = node;
     }
 };
 
