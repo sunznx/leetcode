@@ -40,12 +40,13 @@ public:
         }
 
         auto node = iter->second;
+        m.erase(node.key);
         S.erase(node);
 
         node.freq++;
         node.idx = idx++;
         S.insert(node);
-        iter->second = node;
+        m.insert({key, node});
         return node.value;
     }
 
@@ -71,13 +72,14 @@ public:
         }
 
         auto node = iter->second;
+        m.erase(node.key);
         S.erase(node);
 
         node.freq++;
         node.idx = idx++;
         node.value = value;
         S.insert(node);
-        iter->second = node;
+        m.insert({key, node});
     }
 };
 
