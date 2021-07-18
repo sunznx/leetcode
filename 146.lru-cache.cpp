@@ -1,41 +1,49 @@
-// CreateTime: 2021-03-25 19:15:55
+// CreateTime: 2021-07-18 23:16:00
 class LRUCache {
 public:
+    struct KV{
+        int key;
+        int value;
+        KV(int key, int value) {
+            this->key = key;
+            this->value = value;
+        }
+    };
 
-    typedef pair<int, int> PII;
     int capacity;
-    list<PII> ls;
-    unordered_map<int, list<PII>::iterator> m;
+    list<KV> l;
+    unordered_map<int, list<KV>::iterator> m;
 
     LRUCache(int capacity) {
         this->capacity = capacity;
     }
 
     int get(int key) {
-        if (m.find(key) == m.end()) {
+        auto iter = m.find(key);
+        if (iter == m.end()) {
             return -1;
         }
 
-        auto iter = m[key];
-        ls.splice(ls.begin(), ls, iter);
-        return iter->second;
+        l.splice(l.begin(), l, iter->second);
+        return iter->second->value;
     }
 
     void put(int key, int value) {
-        if (m.find(key) == m.end()) {
-            if (ls.size() == capacity) {
-                auto back = ls.back();
-                ls.pop_back();
-                m.erase(back.first);
+        auto iter = m.find(key);
+        if (iter == m.end()) {
+            if (l.size() == capacity) {
+                auto back = l.back();
+                m.erase(back.key);
+                l.pop_back();
             }
-            ls.push_front({key, value});
-            m[key] = ls.begin();
-        } else {
-            auto iter = m[key];
-            iter->second = value;
-            ls.splice(ls.begin(), ls, iter);
-            m[key] = ls.begin();
+            l.push_front({key, value});
+            m[key] = l.begin();
+            return;
         }
+
+        iter->second->value = value;
+        l.splice(l.begin(), l, iter->second);
+        m[key] = l.begin();
     }
 };
 
